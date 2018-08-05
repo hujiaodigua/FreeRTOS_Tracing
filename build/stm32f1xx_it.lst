@@ -1,0 +1,404 @@
+ARM GAS  /tmp/ccJoBekO.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"stm32f1xx_it.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.NMI_Handler,"ax",%progbits
+  20              		.align	2
+  21              		.global	NMI_Handler
+  22              		.thumb
+  23              		.thumb_func
+  25              	NMI_Handler:
+  26              	.LFB69:
+  27              		.file 1 "Src/stm32f1xx_it.c"
+   1:Src/stm32f1xx_it.c **** /**
+   2:Src/stm32f1xx_it.c ****   ******************************************************************************
+   3:Src/stm32f1xx_it.c ****   * @file    stm32f1xx_it.c
+   4:Src/stm32f1xx_it.c ****   * @brief   Interrupt Service Routines.
+   5:Src/stm32f1xx_it.c ****   ******************************************************************************
+   6:Src/stm32f1xx_it.c ****   *
+   7:Src/stm32f1xx_it.c ****   * COPYRIGHT(c) 2018 STMicroelectronics
+   8:Src/stm32f1xx_it.c ****   *
+   9:Src/stm32f1xx_it.c ****   * Redistribution and use in source and binary forms, with or without modification,
+  10:Src/stm32f1xx_it.c ****   * are permitted provided that the following conditions are met:
+  11:Src/stm32f1xx_it.c ****   *   1. Redistributions of source code must retain the above copyright notice,
+  12:Src/stm32f1xx_it.c ****   *      this list of conditions and the following disclaimer.
+  13:Src/stm32f1xx_it.c ****   *   2. Redistributions in binary form must reproduce the above copyright notice,
+  14:Src/stm32f1xx_it.c ****   *      this list of conditions and the following disclaimer in the documentation
+  15:Src/stm32f1xx_it.c ****   *      and/or other materials provided with the distribution.
+  16:Src/stm32f1xx_it.c ****   *   3. Neither the name of STMicroelectronics nor the names of its contributors
+  17:Src/stm32f1xx_it.c ****   *      may be used to endorse or promote products derived from this software
+  18:Src/stm32f1xx_it.c ****   *      without specific prior written permission.
+  19:Src/stm32f1xx_it.c ****   *
+  20:Src/stm32f1xx_it.c ****   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  21:Src/stm32f1xx_it.c ****   * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  22:Src/stm32f1xx_it.c ****   * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  23:Src/stm32f1xx_it.c ****   * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  24:Src/stm32f1xx_it.c ****   * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  25:Src/stm32f1xx_it.c ****   * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  26:Src/stm32f1xx_it.c ****   * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  27:Src/stm32f1xx_it.c ****   * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  28:Src/stm32f1xx_it.c ****   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  29:Src/stm32f1xx_it.c ****   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  30:Src/stm32f1xx_it.c ****   *
+  31:Src/stm32f1xx_it.c ****   ******************************************************************************
+ARM GAS  /tmp/ccJoBekO.s 			page 2
+
+
+  32:Src/stm32f1xx_it.c ****   */
+  33:Src/stm32f1xx_it.c **** /* Includes ------------------------------------------------------------------*/
+  34:Src/stm32f1xx_it.c **** #include "stm32f1xx_hal.h"
+  35:Src/stm32f1xx_it.c **** #include "stm32f1xx.h"
+  36:Src/stm32f1xx_it.c **** #include "stm32f1xx_it.h"
+  37:Src/stm32f1xx_it.c **** #include "cmsis_os.h"
+  38:Src/stm32f1xx_it.c **** 
+  39:Src/stm32f1xx_it.c **** /* USER CODE BEGIN 0 */
+  40:Src/stm32f1xx_it.c **** 
+  41:Src/stm32f1xx_it.c **** /* USER CODE END 0 */
+  42:Src/stm32f1xx_it.c **** 
+  43:Src/stm32f1xx_it.c **** /* External variables --------------------------------------------------------*/
+  44:Src/stm32f1xx_it.c **** 
+  45:Src/stm32f1xx_it.c **** extern TIM_HandleTypeDef htim4;
+  46:Src/stm32f1xx_it.c **** 
+  47:Src/stm32f1xx_it.c **** /******************************************************************************/
+  48:Src/stm32f1xx_it.c **** /*            Cortex-M3 Processor Interruption and Exception Handlers         */ 
+  49:Src/stm32f1xx_it.c **** /******************************************************************************/
+  50:Src/stm32f1xx_it.c **** 
+  51:Src/stm32f1xx_it.c **** /**
+  52:Src/stm32f1xx_it.c **** * @brief This function handles Non maskable interrupt.
+  53:Src/stm32f1xx_it.c **** */
+  54:Src/stm32f1xx_it.c **** void NMI_Handler(void)
+  55:Src/stm32f1xx_it.c **** {
+  28              		.loc 1 55 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 7047     		bx	lr
+  34              		.cfi_endproc
+  35              	.LFE69:
+  37 0002 00BF     		.section	.text.HardFault_Handler,"ax",%progbits
+  38              		.align	2
+  39              		.global	HardFault_Handler
+  40              		.thumb
+  41              		.thumb_func
+  43              	HardFault_Handler:
+  44              	.LFB70:
+  56:Src/stm32f1xx_it.c ****   /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
+  57:Src/stm32f1xx_it.c **** 
+  58:Src/stm32f1xx_it.c ****   /* USER CODE END NonMaskableInt_IRQn 0 */
+  59:Src/stm32f1xx_it.c ****   /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
+  60:Src/stm32f1xx_it.c **** 
+  61:Src/stm32f1xx_it.c ****   /* USER CODE END NonMaskableInt_IRQn 1 */
+  62:Src/stm32f1xx_it.c **** }
+  63:Src/stm32f1xx_it.c **** 
+  64:Src/stm32f1xx_it.c **** /**
+  65:Src/stm32f1xx_it.c **** * @brief This function handles Hard fault interrupt.
+  66:Src/stm32f1xx_it.c **** */
+  67:Src/stm32f1xx_it.c **** void HardFault_Handler(void)
+  68:Src/stm32f1xx_it.c **** {
+  45              		.loc 1 68 0
+  46              		.cfi_startproc
+  47              		@ Volatile: function does not return.
+  48              		@ args = 0, pretend = 0, frame = 0
+  49              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/ccJoBekO.s 			page 3
+
+
+  50              		@ link register save eliminated.
+  51              	.L3:
+  52 0000 FEE7     		b	.L3
+  53              		.cfi_endproc
+  54              	.LFE70:
+  56 0002 00BF     		.section	.text.MemManage_Handler,"ax",%progbits
+  57              		.align	2
+  58              		.global	MemManage_Handler
+  59              		.thumb
+  60              		.thumb_func
+  62              	MemManage_Handler:
+  63              	.LFB71:
+  69:Src/stm32f1xx_it.c ****   /* USER CODE BEGIN HardFault_IRQn 0 */
+  70:Src/stm32f1xx_it.c **** 
+  71:Src/stm32f1xx_it.c ****   /* USER CODE END HardFault_IRQn 0 */
+  72:Src/stm32f1xx_it.c ****   while (1)
+  73:Src/stm32f1xx_it.c ****   {
+  74:Src/stm32f1xx_it.c ****     /* USER CODE BEGIN W1_HardFault_IRQn 0 */
+  75:Src/stm32f1xx_it.c ****     /* USER CODE END W1_HardFault_IRQn 0 */
+  76:Src/stm32f1xx_it.c ****   }
+  77:Src/stm32f1xx_it.c ****   /* USER CODE BEGIN HardFault_IRQn 1 */
+  78:Src/stm32f1xx_it.c **** 
+  79:Src/stm32f1xx_it.c ****   /* USER CODE END HardFault_IRQn 1 */
+  80:Src/stm32f1xx_it.c **** }
+  81:Src/stm32f1xx_it.c **** 
+  82:Src/stm32f1xx_it.c **** /**
+  83:Src/stm32f1xx_it.c **** * @brief This function handles Memory management fault.
+  84:Src/stm32f1xx_it.c **** */
+  85:Src/stm32f1xx_it.c **** void MemManage_Handler(void)
+  86:Src/stm32f1xx_it.c **** {
+  64              		.loc 1 86 0
+  65              		.cfi_startproc
+  66              		@ Volatile: function does not return.
+  67              		@ args = 0, pretend = 0, frame = 0
+  68              		@ frame_needed = 0, uses_anonymous_args = 0
+  69              		@ link register save eliminated.
+  70              	.L5:
+  71 0000 FEE7     		b	.L5
+  72              		.cfi_endproc
+  73              	.LFE71:
+  75 0002 00BF     		.section	.text.BusFault_Handler,"ax",%progbits
+  76              		.align	2
+  77              		.global	BusFault_Handler
+  78              		.thumb
+  79              		.thumb_func
+  81              	BusFault_Handler:
+  82              	.LFB72:
+  87:Src/stm32f1xx_it.c ****   /* USER CODE BEGIN MemoryManagement_IRQn 0 */
+  88:Src/stm32f1xx_it.c **** 
+  89:Src/stm32f1xx_it.c ****   /* USER CODE END MemoryManagement_IRQn 0 */
+  90:Src/stm32f1xx_it.c ****   while (1)
+  91:Src/stm32f1xx_it.c ****   {
+  92:Src/stm32f1xx_it.c ****     /* USER CODE BEGIN W1_MemoryManagement_IRQn 0 */
+  93:Src/stm32f1xx_it.c ****     /* USER CODE END W1_MemoryManagement_IRQn 0 */
+  94:Src/stm32f1xx_it.c ****   }
+  95:Src/stm32f1xx_it.c ****   /* USER CODE BEGIN MemoryManagement_IRQn 1 */
+  96:Src/stm32f1xx_it.c **** 
+ARM GAS  /tmp/ccJoBekO.s 			page 4
+
+
+  97:Src/stm32f1xx_it.c ****   /* USER CODE END MemoryManagement_IRQn 1 */
+  98:Src/stm32f1xx_it.c **** }
+  99:Src/stm32f1xx_it.c **** 
+ 100:Src/stm32f1xx_it.c **** /**
+ 101:Src/stm32f1xx_it.c **** * @brief This function handles Prefetch fault, memory access fault.
+ 102:Src/stm32f1xx_it.c **** */
+ 103:Src/stm32f1xx_it.c **** void BusFault_Handler(void)
+ 104:Src/stm32f1xx_it.c **** {
+  83              		.loc 1 104 0
+  84              		.cfi_startproc
+  85              		@ Volatile: function does not return.
+  86              		@ args = 0, pretend = 0, frame = 0
+  87              		@ frame_needed = 0, uses_anonymous_args = 0
+  88              		@ link register save eliminated.
+  89              	.L7:
+  90 0000 FEE7     		b	.L7
+  91              		.cfi_endproc
+  92              	.LFE72:
+  94 0002 00BF     		.section	.text.UsageFault_Handler,"ax",%progbits
+  95              		.align	2
+  96              		.global	UsageFault_Handler
+  97              		.thumb
+  98              		.thumb_func
+ 100              	UsageFault_Handler:
+ 101              	.LFB73:
+ 105:Src/stm32f1xx_it.c ****   /* USER CODE BEGIN BusFault_IRQn 0 */
+ 106:Src/stm32f1xx_it.c **** 
+ 107:Src/stm32f1xx_it.c ****   /* USER CODE END BusFault_IRQn 0 */
+ 108:Src/stm32f1xx_it.c ****   while (1)
+ 109:Src/stm32f1xx_it.c ****   {
+ 110:Src/stm32f1xx_it.c ****     /* USER CODE BEGIN W1_BusFault_IRQn 0 */
+ 111:Src/stm32f1xx_it.c ****     /* USER CODE END W1_BusFault_IRQn 0 */
+ 112:Src/stm32f1xx_it.c ****   }
+ 113:Src/stm32f1xx_it.c ****   /* USER CODE BEGIN BusFault_IRQn 1 */
+ 114:Src/stm32f1xx_it.c **** 
+ 115:Src/stm32f1xx_it.c ****   /* USER CODE END BusFault_IRQn 1 */
+ 116:Src/stm32f1xx_it.c **** }
+ 117:Src/stm32f1xx_it.c **** 
+ 118:Src/stm32f1xx_it.c **** /**
+ 119:Src/stm32f1xx_it.c **** * @brief This function handles Undefined instruction or illegal state.
+ 120:Src/stm32f1xx_it.c **** */
+ 121:Src/stm32f1xx_it.c **** void UsageFault_Handler(void)
+ 122:Src/stm32f1xx_it.c **** {
+ 102              		.loc 1 122 0
+ 103              		.cfi_startproc
+ 104              		@ Volatile: function does not return.
+ 105              		@ args = 0, pretend = 0, frame = 0
+ 106              		@ frame_needed = 0, uses_anonymous_args = 0
+ 107              		@ link register save eliminated.
+ 108              	.L9:
+ 109 0000 FEE7     		b	.L9
+ 110              		.cfi_endproc
+ 111              	.LFE73:
+ 113 0002 00BF     		.section	.text.DebugMon_Handler,"ax",%progbits
+ 114              		.align	2
+ 115              		.global	DebugMon_Handler
+ 116              		.thumb
+ARM GAS  /tmp/ccJoBekO.s 			page 5
+
+
+ 117              		.thumb_func
+ 119              	DebugMon_Handler:
+ 120              	.LFB74:
+ 123:Src/stm32f1xx_it.c ****   /* USER CODE BEGIN UsageFault_IRQn 0 */
+ 124:Src/stm32f1xx_it.c **** 
+ 125:Src/stm32f1xx_it.c ****   /* USER CODE END UsageFault_IRQn 0 */
+ 126:Src/stm32f1xx_it.c ****   while (1)
+ 127:Src/stm32f1xx_it.c ****   {
+ 128:Src/stm32f1xx_it.c ****     /* USER CODE BEGIN W1_UsageFault_IRQn 0 */
+ 129:Src/stm32f1xx_it.c ****     /* USER CODE END W1_UsageFault_IRQn 0 */
+ 130:Src/stm32f1xx_it.c ****   }
+ 131:Src/stm32f1xx_it.c ****   /* USER CODE BEGIN UsageFault_IRQn 1 */
+ 132:Src/stm32f1xx_it.c **** 
+ 133:Src/stm32f1xx_it.c ****   /* USER CODE END UsageFault_IRQn 1 */
+ 134:Src/stm32f1xx_it.c **** }
+ 135:Src/stm32f1xx_it.c **** 
+ 136:Src/stm32f1xx_it.c **** /**
+ 137:Src/stm32f1xx_it.c **** * @brief This function handles Debug monitor.
+ 138:Src/stm32f1xx_it.c **** */
+ 139:Src/stm32f1xx_it.c **** void DebugMon_Handler(void)
+ 140:Src/stm32f1xx_it.c **** {
+ 121              		.loc 1 140 0
+ 122              		.cfi_startproc
+ 123              		@ args = 0, pretend = 0, frame = 0
+ 124              		@ frame_needed = 0, uses_anonymous_args = 0
+ 125              		@ link register save eliminated.
+ 126 0000 7047     		bx	lr
+ 127              		.cfi_endproc
+ 128              	.LFE74:
+ 130 0002 00BF     		.section	.text.SysTick_Handler,"ax",%progbits
+ 131              		.align	2
+ 132              		.global	SysTick_Handler
+ 133              		.thumb
+ 134              		.thumb_func
+ 136              	SysTick_Handler:
+ 137              	.LFB75:
+ 141:Src/stm32f1xx_it.c ****   /* USER CODE BEGIN DebugMonitor_IRQn 0 */
+ 142:Src/stm32f1xx_it.c **** 
+ 143:Src/stm32f1xx_it.c ****   /* USER CODE END DebugMonitor_IRQn 0 */
+ 144:Src/stm32f1xx_it.c ****   /* USER CODE BEGIN DebugMonitor_IRQn 1 */
+ 145:Src/stm32f1xx_it.c **** 
+ 146:Src/stm32f1xx_it.c ****   /* USER CODE END DebugMonitor_IRQn 1 */
+ 147:Src/stm32f1xx_it.c **** }
+ 148:Src/stm32f1xx_it.c **** 
+ 149:Src/stm32f1xx_it.c **** /**
+ 150:Src/stm32f1xx_it.c **** * @brief This function handles System tick timer.
+ 151:Src/stm32f1xx_it.c **** */
+ 152:Src/stm32f1xx_it.c **** void SysTick_Handler(void)
+ 153:Src/stm32f1xx_it.c **** {
+ 138              		.loc 1 153 0
+ 139              		.cfi_startproc
+ 140              		@ args = 0, pretend = 0, frame = 0
+ 141              		@ frame_needed = 0, uses_anonymous_args = 0
+ 142              		.loc 1 153 0
+ 143 0000 08B5     		push	{r3, lr}
+ 144              	.LCFI0:
+ 145              		.cfi_def_cfa_offset 8
+ARM GAS  /tmp/ccJoBekO.s 			page 6
+
+
+ 146              		.cfi_offset 3, -8
+ 147              		.cfi_offset 14, -4
+ 154:Src/stm32f1xx_it.c ****   /* USER CODE BEGIN SysTick_IRQn 0 */
+ 155:Src/stm32f1xx_it.c **** 
+ 156:Src/stm32f1xx_it.c ****   /* USER CODE END SysTick_IRQn 0 */
+ 157:Src/stm32f1xx_it.c ****   osSystickHandler();
+ 148              		.loc 1 157 0
+ 149 0002 FFF7FEFF 		bl	osSystickHandler
+ 150              	.LVL0:
+ 151 0006 08BD     		pop	{r3, pc}
+ 152              		.cfi_endproc
+ 153              	.LFE75:
+ 155              		.section	.text.TIM4_IRQHandler,"ax",%progbits
+ 156              		.align	2
+ 157              		.global	TIM4_IRQHandler
+ 158              		.thumb
+ 159              		.thumb_func
+ 161              	TIM4_IRQHandler:
+ 162              	.LFB76:
+ 158:Src/stm32f1xx_it.c ****   /* USER CODE BEGIN SysTick_IRQn 1 */
+ 159:Src/stm32f1xx_it.c **** 
+ 160:Src/stm32f1xx_it.c ****   /* USER CODE END SysTick_IRQn 1 */
+ 161:Src/stm32f1xx_it.c **** }
+ 162:Src/stm32f1xx_it.c **** 
+ 163:Src/stm32f1xx_it.c **** /******************************************************************************/
+ 164:Src/stm32f1xx_it.c **** /* STM32F1xx Peripheral Interrupt Handlers                                    */
+ 165:Src/stm32f1xx_it.c **** /* Add here the Interrupt Handlers for the used peripherals.                  */
+ 166:Src/stm32f1xx_it.c **** /* For the available peripheral interrupt handler names,                      */
+ 167:Src/stm32f1xx_it.c **** /* please refer to the startup file (startup_stm32f1xx.s).                    */
+ 168:Src/stm32f1xx_it.c **** /******************************************************************************/
+ 169:Src/stm32f1xx_it.c **** 
+ 170:Src/stm32f1xx_it.c **** /**
+ 171:Src/stm32f1xx_it.c **** * @brief This function handles TIM4 global interrupt.
+ 172:Src/stm32f1xx_it.c **** */
+ 173:Src/stm32f1xx_it.c **** void TIM4_IRQHandler(void)
+ 174:Src/stm32f1xx_it.c **** {
+ 163              		.loc 1 174 0
+ 164              		.cfi_startproc
+ 165              		@ args = 0, pretend = 0, frame = 0
+ 166              		@ frame_needed = 0, uses_anonymous_args = 0
+ 167 0000 08B5     		push	{r3, lr}
+ 168              	.LCFI1:
+ 169              		.cfi_def_cfa_offset 8
+ 170              		.cfi_offset 3, -8
+ 171              		.cfi_offset 14, -4
+ 175:Src/stm32f1xx_it.c ****   /* USER CODE BEGIN TIM4_IRQn 0 */
+ 176:Src/stm32f1xx_it.c **** 
+ 177:Src/stm32f1xx_it.c ****   /* USER CODE END TIM4_IRQn 0 */
+ 178:Src/stm32f1xx_it.c ****   HAL_TIM_IRQHandler(&htim4);
+ 172              		.loc 1 178 0
+ 173 0002 0248     		ldr	r0, .L15
+ 174 0004 FFF7FEFF 		bl	HAL_TIM_IRQHandler
+ 175              	.LVL1:
+ 176 0008 08BD     		pop	{r3, pc}
+ 177              	.L16:
+ 178 000a 00BF     		.align	2
+ 179              	.L15:
+ARM GAS  /tmp/ccJoBekO.s 			page 7
+
+
+ 180 000c 00000000 		.word	htim4
+ 181              		.cfi_endproc
+ 182              	.LFE76:
+ 184              		.text
+ 185              	.Letext0:
+ 186              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ 187              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+ 188              		.file 4 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
+ 189              		.file 5 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 190              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 191              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 192              		.file 8 "Drivers/CMSIS/Include/core_cm3.h"
+ 193              		.file 9 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h"
+ARM GAS  /tmp/ccJoBekO.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f1xx_it.c
+     /tmp/ccJoBekO.s:20     .text.NMI_Handler:00000000 $t
+     /tmp/ccJoBekO.s:25     .text.NMI_Handler:00000000 NMI_Handler
+     /tmp/ccJoBekO.s:38     .text.HardFault_Handler:00000000 $t
+     /tmp/ccJoBekO.s:43     .text.HardFault_Handler:00000000 HardFault_Handler
+     /tmp/ccJoBekO.s:57     .text.MemManage_Handler:00000000 $t
+     /tmp/ccJoBekO.s:62     .text.MemManage_Handler:00000000 MemManage_Handler
+     /tmp/ccJoBekO.s:76     .text.BusFault_Handler:00000000 $t
+     /tmp/ccJoBekO.s:81     .text.BusFault_Handler:00000000 BusFault_Handler
+     /tmp/ccJoBekO.s:95     .text.UsageFault_Handler:00000000 $t
+     /tmp/ccJoBekO.s:100    .text.UsageFault_Handler:00000000 UsageFault_Handler
+     /tmp/ccJoBekO.s:114    .text.DebugMon_Handler:00000000 $t
+     /tmp/ccJoBekO.s:119    .text.DebugMon_Handler:00000000 DebugMon_Handler
+     /tmp/ccJoBekO.s:131    .text.SysTick_Handler:00000000 $t
+     /tmp/ccJoBekO.s:136    .text.SysTick_Handler:00000000 SysTick_Handler
+     /tmp/ccJoBekO.s:156    .text.TIM4_IRQHandler:00000000 $t
+     /tmp/ccJoBekO.s:161    .text.TIM4_IRQHandler:00000000 TIM4_IRQHandler
+     /tmp/ccJoBekO.s:180    .text.TIM4_IRQHandler:0000000c $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+osSystickHandler
+HAL_TIM_IRQHandler
+htim4

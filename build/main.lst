@@ -1,0 +1,1531 @@
+ARM GAS  /tmp/cc4qE3ME.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.MX_GPIO_Init,"ax",%progbits
+  20              		.align	2
+  21              		.thumb
+  22              		.thumb_func
+  24              	MX_GPIO_Init:
+  25              	.LFB76:
+  26              		.file 1 "Src/main.c"
+   1:Src/main.c    **** 
+   2:Src/main.c    **** /**
+   3:Src/main.c    ****   ******************************************************************************
+   4:Src/main.c    ****   * @file           : main.c
+   5:Src/main.c    ****   * @brief          : Main program body
+   6:Src/main.c    ****   ******************************************************************************
+   7:Src/main.c    ****   * This notice applies to any and all portions of this file
+   8:Src/main.c    ****   * that are not between comment pairs USER CODE BEGIN and
+   9:Src/main.c    ****   * USER CODE END. Other portions of this file, whether 
+  10:Src/main.c    ****   * inserted by the user or by software development tools
+  11:Src/main.c    ****   * are owned by their respective copyright owners.
+  12:Src/main.c    ****   *
+  13:Src/main.c    ****   * Copyright (c) 2018 STMicroelectronics International N.V. 
+  14:Src/main.c    ****   * All rights reserved.
+  15:Src/main.c    ****   *
+  16:Src/main.c    ****   * Redistribution and use in source and binary forms, with or without 
+  17:Src/main.c    ****   * modification, are permitted, provided that the following conditions are met:
+  18:Src/main.c    ****   *
+  19:Src/main.c    ****   * 1. Redistribution of source code must retain the above copyright notice, 
+  20:Src/main.c    ****   *    this list of conditions and the following disclaimer.
+  21:Src/main.c    ****   * 2. Redistributions in binary form must reproduce the above copyright notice,
+  22:Src/main.c    ****   *    this list of conditions and the following disclaimer in the documentation
+  23:Src/main.c    ****   *    and/or other materials provided with the distribution.
+  24:Src/main.c    ****   * 3. Neither the name of STMicroelectronics nor the names of other 
+  25:Src/main.c    ****   *    contributors to this software may be used to endorse or promote products 
+  26:Src/main.c    ****   *    derived from this software without specific written permission.
+  27:Src/main.c    ****   * 4. This software, including modifications and/or derivative works of this 
+  28:Src/main.c    ****   *    software, must execute solely and exclusively on microcontroller or
+  29:Src/main.c    ****   *    microprocessor devices manufactured by or for STMicroelectronics.
+  30:Src/main.c    ****   * 5. Redistribution and use of this software other than as permitted under 
+  31:Src/main.c    ****   *    this license is void and will automatically terminate your rights under 
+  32:Src/main.c    ****   *    this license. 
+ARM GAS  /tmp/cc4qE3ME.s 			page 2
+
+
+  33:Src/main.c    ****   *
+  34:Src/main.c    ****   * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  35:Src/main.c    ****   * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  36:Src/main.c    ****   * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+  37:Src/main.c    ****   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
+  38:Src/main.c    ****   * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
+  39:Src/main.c    ****   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+  40:Src/main.c    ****   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  41:Src/main.c    ****   * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  42:Src/main.c    ****   * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  43:Src/main.c    ****   * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+  44:Src/main.c    ****   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+  45:Src/main.c    ****   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  46:Src/main.c    ****   *
+  47:Src/main.c    ****   ******************************************************************************
+  48:Src/main.c    ****   */
+  49:Src/main.c    **** /* Includes ------------------------------------------------------------------*/
+  50:Src/main.c    **** #include "main.h"
+  51:Src/main.c    **** #include "stm32f1xx_hal.h"
+  52:Src/main.c    **** #include "cmsis_os.h"
+  53:Src/main.c    **** 
+  54:Src/main.c    **** #include "arm_etm.h"
+  55:Src/main.c    **** 
+  56:Src/main.c    **** /* USER CODE BEGIN Includes */
+  57:Src/main.c    **** 
+  58:Src/main.c    **** /* USER CODE END Includes */
+  59:Src/main.c    **** 
+  60:Src/main.c    **** /* Private variables ---------------------------------------------------------*/
+  61:Src/main.c    **** osThreadId Task_LED0Handle;
+  62:Src/main.c    **** osThreadId Task_LED1Handle;
+  63:Src/main.c    **** 
+  64:Src/main.c    **** /* USER CODE BEGIN PV */
+  65:Src/main.c    **** int globalCounter = 0;//int类型最大值是255可以追踪1-255个入口地址
+  66:Src/main.c    ****                       //0x0A表示Func_LED0,0x0B表示Func_LED1
+  67:Src/main.c    ****                       //0x0B表示ITM_Print，0x0C表示bubble_sort
+  68:Src/main.c    **** /* Private variables ---------------------------------------------------------*/
+  69:Src/main.c    **** 
+  70:Src/main.c    **** /* USER CODE END PV */
+  71:Src/main.c    **** 
+  72:Src/main.c    **** /* Private function prototypes -----------------------------------------------*/
+  73:Src/main.c    **** void SystemClock_Config(void);
+  74:Src/main.c    **** static void MX_GPIO_Init(void);
+  75:Src/main.c    **** void Func_LED0(void const * argument);
+  76:Src/main.c    **** void Func_LED1(void const * argument);
+  77:Src/main.c    **** 
+  78:Src/main.c    **** /* USER CODE BEGIN PFP */
+  79:Src/main.c    **** 
+  80:Src/main.c    **** void configure_tracing()
+  81:Src/main.c    **** {
+  82:Src/main.c    ****     /* STM32 specific configuration to enable the TRACESWO IO pin */
+  83:Src/main.c    ****     RCC->APB2ENR |= RCC_APB2ENR_AFIOEN;
+  84:Src/main.c    ****     AFIO->MAPR |= (2 << 24); // Disable JTAG to release TRACESWO
+  85:Src/main.c    ****     DBGMCU->CR |= DBGMCU_CR_TRACE_IOEN; // Enable IO trace pins
+  86:Src/main.c    ****     
+  87:Src/main.c    ****     if (!(DBGMCU->CR & DBGMCU_CR_TRACE_IOEN))
+  88:Src/main.c    ****     {
+  89:Src/main.c    ****         // Some (all?) STM32s don't allow writes to DBGMCU register until
+ARM GAS  /tmp/cc4qE3ME.s 			page 3
+
+
+  90:Src/main.c    ****         // C_DEBUGEN in CoreDebug->DHCSR is set. This cannot be set by the
+  91:Src/main.c    ****         // CPU itself, so in practice you need to connect to the CPU with
+  92:Src/main.c    ****         // a debugger once before resetting it.
+  93:Src/main.c    ****         return;
+  94:Src/main.c    ****     }
+  95:Src/main.c    ****     
+  96:Src/main.c    ****     /* Configure Trace Port Interface Unit */
+  97:Src/main.c    ****     CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk; // Enable access to registers
+  98:Src/main.c    ****     TPI->ACPR = 8; // Trace clock = HCLK/(x+1) = 8MHz    这里HCLK是处理器时钟,这个值的�
+  99:Src/main.c    ****     TPI->SPPR = 2; // Pin protocol = NRZ/USART
+ 100:Src/main.c    ****     
+ 101:Src/main.c    ****     TPI->FFCR = 0x102;
+ 102:Src/main.c    ****     //TPI->FFCR = 0x100; //为什么设置102开启ETM后，ITM输出就不对了？？,在博客ht
+ 103:Src/main.c    ****     		       // TPIU packet framing enabled when bit 2 is set.
+ 104:Src/main.c    ****     		       // You can use 0x102 if you need both DWT/ITM and ETM.
+ 105:Src/main.c    ****                        // You can use 0x100 if you only need DWT/ITM and not ETM.
+ 106:Src/main.c    ****    
+ 107:Src/main.c    ****     /* Configure PC sampling and exception trace  */
+ 108:Src/main.c    ****     DWT->CTRL = (1 << DWT_CTRL_CYCTAP_Pos) // Prescaler for PC sampling
+ 109:Src/main.c    ****                                            // 0 = x32, 1 = x512  //
+ 110:Src/main.c    ****                     //bits[6]就是DWT_CYCCNT寄存器的0到5bit，那么节拍就是32记录一�
+ 111:Src/main.c    ****               | (0 << DWT_CTRL_POSTPRESET_Pos) // Postscaler for PC sampling
+ 112:Src/main.c    ****                                                 // Divider = value + 1
+ 113:Src/main.c    ****               | (1 << DWT_CTRL_PCSAMPLENA_Pos) // Enable PC sampling
+ 114:Src/main.c    ****               | (2 << DWT_CTRL_SYNCTAP_Pos)    // Sync packet interval
+ 115:Src/main.c    ****                                                // 0 = Off, 1 = Every 2^23 cycles,
+ 116:Src/main.c    ****                                                // 2 = Every 2^25, 3 = Every 2^27
+ 117:Src/main.c    ****               | (1 << DWT_CTRL_EXCTRCENA_Pos)  // Enable exception trace
+ 118:Src/main.c    ****               | (1 << DWT_CTRL_CYCCNTENA_Pos); // Enable cycle counter
+ 119:Src/main.c    ****     
+ 120:Src/main.c    ****     /* Configure instrumentation trace macroblock */
+ 121:Src/main.c    ****     ITM->LAR = 0xC5ACCE55;
+ 122:Src/main.c    ****     ITM->TCR = (1 << ITM_TCR_TraceBusID_Pos) // Trace bus ID for TPIU
+ 123:Src/main.c    ****              | (1 << ITM_TCR_DWTENA_Pos) // Enable events from DWT
+ 124:Src/main.c    ****              | (1 << ITM_TCR_SYNCENA_Pos) // Enable sync packets
+ 125:Src/main.c    ****              | (1 << ITM_TCR_ITMENA_Pos); // Main enable for ITM
+ 126:Src/main.c    ****     ITM->TER = 0xFFFFFFFF; // Enable all stimulus ports
+ 127:Src/main.c    **** 
+ 128:Src/main.c    **** 
+ 129:Src/main.c    ****     //ETM_Lock_Access = 0xC5ACCE55;
+ 130:Src/main.c    ****     //ETM_Control = 0x00001D1E;
+ 131:Src/main.c    ****     //ETM_Trigger_Event = 0x0000406F;
+ 132:Src/main.c    ****     //ETM_Trace_Enable_Event = 0x0000006F;
+ 133:Src/main.c    ****     //ETM_Trace_Start_Stop = 0x00000001;
+ 134:Src/main.c    **** 
+ 135:Src/main.c    **** 
+ 136:Src/main.c    ****    /* Configure embedded trace macroblock */
+ 137:Src/main.c    ****     ETM->LAR = 0xC5ACCE55;
+ 138:Src/main.c    ****     ETM_SetupMode();
+ 139:Src/main.c    ****     ETM->CR = ETM_CR_ETMEN // Enable ETM output port
+ 140:Src/main.c    ****             | ETM_CR_STALL_PROCESSOR // Stall processor when fifo is full
+ 141:Src/main.c    ****             | ETM_CR_BRANCH_OUTPUT // Report all branches
+ 142:Src/main.c    ****             | (1 << 4);//port_size位21,6,5,4是0001表示8bit，这里目前认为复位值都是0
+ 143:Src/main.c    ****     ETM->TRACEIDR = 2; // Trace bus ID for TPIU
+ 144:Src/main.c    ****     ETM->TECR1 = ETM_TECR1_EXCLUDE; // Trace always enabled
+ 145:Src/main.c    ****     ETM->FFRR = ETM_FFRR_EXCLUDE; // Stalling always enabled
+ 146:Src/main.c    ****     ETM->FFLR = 24; // Stall when less than N bytes free in FIFO (range 1..24)
+ARM GAS  /tmp/cc4qE3ME.s 			page 4
+
+
+ 147:Src/main.c    ****                     // Larger values mean less latency in trace, but more stalls.
+ 148:Src/main.c    ****     // Note: we do not enable ETM trace yet, only for specific parts of code.
+ 149:Src/main.c    ****     
+ 150:Src/main.c    ****     ETM->TRIGGER = 0x0000406F;
+ 151:Src/main.c    ****     ETM->TEEVR = 0x0000006F;
+ 152:Src/main.c    ****     //ETM->TSSCR = 0x00000001;
+ 153:Src/main.c    **** 
+ 154:Src/main.c    **** }
+ 155:Src/main.c    **** 
+ 156:Src/main.c    **** void configure_watchpoint()
+ 157:Src/main.c    **** {
+ 158:Src/main.c    ****     /* This is an example of how to configure DWT to monitor a watchpoint.
+ 159:Src/main.c    ****        The data value is reported when the watchpoint is hit. */
+ 160:Src/main.c    ****     
+ 161:Src/main.c    ****     /* Monitor all accesses to GPIOC (range length 32 bytes) */
+ 162:Src/main.c    ****     //DWT->COMP0 = (uint32_t)bubble_sort;                      //改为了比GPIOC
+ 163:Src/main.c    **** //    DWT->COMP0 = (uint32_t)GPIOC;                      //改为了比较GPIOC
+ 164:Src/main.c    **** //    DWT->MASK0 = 8;							 //屏蔽掉数据地址的后5位，目前DWT->COMP0的值是GPIOA的�
+ 165:Src/main.c    **** //											//可能是出于加快比较速度的原因吧，那为什么不把MASK[3:0]
+ 166:Src/main.c    **** //										        //设置为8,反正0x40010800最后八位都是0
+ 167:Src/main.c    **** //										        
+ 168:Src/main.c    **** //    DWT->FUNCTION0 = (2 << DWT_FUNCTION_FUNCTION_Pos) // Report data and addr on watchpoint hit
+ 169:Src/main.c    **** //                   | (1 << DWT_FUNCTION_EMITRANGE_Pos);
+ 170:Src/main.c    **** //                   //| (1 << DWT_FUNCTION_CYCMATCH_Pos);
+ 171:Src/main.c    ****     
+ 172:Src/main.c    ****     /* Monitor all accesses to globalCounter (range length 4 bytes) */
+ 173:Src/main.c    ****     DWT->COMP1 = (uint32_t)&globalCounter;
+ 174:Src/main.c    ****     DWT->MASK1 = 2;
+ 175:Src/main.c    ****     DWT->FUNCTION1 = (3 << DWT_FUNCTION_FUNCTION_Pos); // Report data and PC on watchpoint hit
+ 176:Src/main.c    **** }
+ 177:Src/main.c    **** 
+ 178:Src/main.c    **** void ITM_Print(int port, const char *p)
+ 179:Src/main.c    **** {
+ 180:Src/main.c    ****     globalCounter = 0x0C;
+ 181:Src/main.c    ****     if ((ITM->TCR & ITM_TCR_ITMENA_Msk) && (ITM->TER & (1UL << port)))
+ 182:Src/main.c    ****     {
+ 183:Src/main.c    ****         while (*p)
+ 184:Src/main.c    ****         {
+ 185:Src/main.c    ****             while (ITM->PORT[port].u32 == 0);//时间片下多进程使用一个查询函数在这�
+ 186:Src/main.c    ****             ITM->PORT[port].u8 = *p++;
+ 187:Src/main.c    ****         }   
+ 188:Src/main.c    ****     }
+ 189:Src/main.c    **** }
+ 190:Src/main.c    **** 
+ 191:Src/main.c    **** void ITM_SendValue (int port, uint32_t value)
+ 192:Src/main.c    **** {
+ 193:Src/main.c    ****     if ((ITM->TCR & ITM_TCR_ITMENA_Msk) && (ITM->TER & (1UL << port)))
+ 194:Src/main.c    ****     {
+ 195:Src/main.c    ****         while (ITM->PORT[port].u32 == 0);
+ 196:Src/main.c    ****         ITM->PORT[port].u32 = value;
+ 197:Src/main.c    ****     }
+ 198:Src/main.c    **** }
+ 199:Src/main.c    **** 
+ 200:Src/main.c    **** void bubble_sort (int *a, int n) 
+ 201:Src/main.c    **** {
+ 202:Src/main.c    ****     globalCounter = 0x0D;
+ 203:Src/main.c    ****     int i, t, s = 1;
+ARM GAS  /tmp/cc4qE3ME.s 			page 5
+
+
+ 204:Src/main.c    ****     while (s) 
+ 205:Src/main.c    ****     {
+ 206:Src/main.c    ****         s = 0;
+ 207:Src/main.c    ****         for (i = 1; i < n; i++) 
+ 208:Src/main.c    ****         {
+ 209:Src/main.c    ****             if (a[i] < a[i - 1]) 
+ 210:Src/main.c    ****             {
+ 211:Src/main.c    ****                 t = a[i];
+ 212:Src/main.c    ****                 a[i] = a[i - 1];
+ 213:Src/main.c    ****                 a[i - 1] = t;
+ 214:Src/main.c    ****                 s = 1;            
+ 215:Src/main.c    ****             }
+ 216:Src/main.c    ****         }
+ 217:Src/main.c    ****     }
+ 218:Src/main.c    **** }
+ 219:Src/main.c    **** 
+ 220:Src/main.c    **** 
+ 221:Src/main.c    **** /* Private function prototypes -----------------------------------------------*/
+ 222:Src/main.c    **** 
+ 223:Src/main.c    **** /* USER CODE END PFP */
+ 224:Src/main.c    **** 
+ 225:Src/main.c    **** /* USER CODE BEGIN 0 */
+ 226:Src/main.c    **** 
+ 227:Src/main.c    **** /* USER CODE END 0 */
+ 228:Src/main.c    **** 
+ 229:Src/main.c    **** /**
+ 230:Src/main.c    ****   * @brief  The application entry point.
+ 231:Src/main.c    ****   *
+ 232:Src/main.c    ****   * @retval None
+ 233:Src/main.c    ****   */
+ 234:Src/main.c    **** int main(void)
+ 235:Src/main.c    **** {
+ 236:Src/main.c    ****   /* USER CODE BEGIN 1 */
+ 237:Src/main.c    **** 
+ 238:Src/main.c    ****   /* USER CODE END 1 */
+ 239:Src/main.c    **** 
+ 240:Src/main.c    ****   /* MCU Configuration----------------------------------------------------------*/
+ 241:Src/main.c    **** 
+ 242:Src/main.c    ****   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+ 243:Src/main.c    ****   HAL_Init();
+ 244:Src/main.c    **** 
+ 245:Src/main.c    ****   /* USER CODE BEGIN Init */
+ 246:Src/main.c    **** 
+ 247:Src/main.c    ****   /* USER CODE END Init */
+ 248:Src/main.c    **** 
+ 249:Src/main.c    ****   /* Configure the system clock */
+ 250:Src/main.c    ****   SystemClock_Config();
+ 251:Src/main.c    **** 
+ 252:Src/main.c    ****   /* USER CODE BEGIN SysInit */
+ 253:Src/main.c    **** 
+ 254:Src/main.c    ****   /* USER CODE END SysInit */
+ 255:Src/main.c    **** 
+ 256:Src/main.c    ****   /* Initialize all configured peripherals */
+ 257:Src/main.c    ****   MX_GPIO_Init();
+ 258:Src/main.c    ****   /* USER CODE BEGIN 2 */
+ 259:Src/main.c    **** 
+ 260:Src/main.c    ****   configure_tracing(); 
+ARM GAS  /tmp/cc4qE3ME.s 			page 6
+
+
+ 261:Src/main.c    ****   configure_watchpoint();
+ 262:Src/main.c    **** 
+ 263:Src/main.c    ****   /* USER CODE END 2 */
+ 264:Src/main.c    **** 
+ 265:Src/main.c    ****   /* USER CODE BEGIN RTOS_MUTEX */
+ 266:Src/main.c    ****   /* add mutexes, ... */
+ 267:Src/main.c    ****   /* USER CODE END RTOS_MUTEX */
+ 268:Src/main.c    **** 
+ 269:Src/main.c    ****   /* USER CODE BEGIN RTOS_SEMAPHORES */
+ 270:Src/main.c    ****   /* add semaphores, ... */
+ 271:Src/main.c    ****   /* USER CODE END RTOS_SEMAPHORES */
+ 272:Src/main.c    **** 
+ 273:Src/main.c    ****   /* USER CODE BEGIN RTOS_TIMERS */
+ 274:Src/main.c    ****   /* start timers, add new ones, ... */
+ 275:Src/main.c    ****   /* USER CODE END RTOS_TIMERS */
+ 276:Src/main.c    **** 
+ 277:Src/main.c    ****   /* Create the thread(s) */
+ 278:Src/main.c    ****   /* definition and creation of Task_LED0 */
+ 279:Src/main.c    ****   osThreadDef(Task_LED0, Func_LED0, osPriorityNormal, 0, 128);
+ 280:Src/main.c    ****   Task_LED0Handle = osThreadCreate(osThread(Task_LED0), NULL);
+ 281:Src/main.c    **** 
+ 282:Src/main.c    ****   /* definition and creation of Task_LED1 */
+ 283:Src/main.c    ****   osThreadDef(Task_LED1, Func_LED1, osPriorityNormal, 0, 128);
+ 284:Src/main.c    ****   Task_LED1Handle = osThreadCreate(osThread(Task_LED1), NULL);
+ 285:Src/main.c    **** 
+ 286:Src/main.c    ****   /* USER CODE BEGIN RTOS_THREADS */
+ 287:Src/main.c    ****   /* add threads, ... */
+ 288:Src/main.c    ****   /* USER CODE END RTOS_THREADS */
+ 289:Src/main.c    **** 
+ 290:Src/main.c    ****   /* USER CODE BEGIN RTOS_QUEUES */
+ 291:Src/main.c    ****   /* add queues, ... */
+ 292:Src/main.c    ****   /* USER CODE END RTOS_QUEUES */
+ 293:Src/main.c    ****  
+ 294:Src/main.c    **** 
+ 295:Src/main.c    ****   /* Start scheduler */
+ 296:Src/main.c    ****   osKernelStart();
+ 297:Src/main.c    ****   
+ 298:Src/main.c    ****   /* We should never get here as control is now taken by the scheduler */
+ 299:Src/main.c    **** 
+ 300:Src/main.c    ****   /* Infinite loop */
+ 301:Src/main.c    ****   /* USER CODE BEGIN WHILE */
+ 302:Src/main.c    ****   while (1)
+ 303:Src/main.c    ****   {
+ 304:Src/main.c    **** 
+ 305:Src/main.c    ****   /* USER CODE END WHILE */
+ 306:Src/main.c    **** 
+ 307:Src/main.c    ****   /* USER CODE BEGIN 3 */
+ 308:Src/main.c    **** 
+ 309:Src/main.c    ****   }
+ 310:Src/main.c    ****   /* USER CODE END 3 */
+ 311:Src/main.c    **** 
+ 312:Src/main.c    **** }
+ 313:Src/main.c    **** 
+ 314:Src/main.c    **** /**
+ 315:Src/main.c    ****   * @brief System Clock Configuration
+ 316:Src/main.c    ****   * @retval None
+ 317:Src/main.c    ****   */
+ARM GAS  /tmp/cc4qE3ME.s 			page 7
+
+
+ 318:Src/main.c    **** void SystemClock_Config(void)
+ 319:Src/main.c    **** {
+ 320:Src/main.c    **** 
+ 321:Src/main.c    ****   RCC_OscInitTypeDef RCC_OscInitStruct;
+ 322:Src/main.c    ****   RCC_ClkInitTypeDef RCC_ClkInitStruct;
+ 323:Src/main.c    **** 
+ 324:Src/main.c    ****     /**Initializes the CPU, AHB and APB busses clocks 
+ 325:Src/main.c    ****     */
+ 326:Src/main.c    ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+ 327:Src/main.c    ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+ 328:Src/main.c    ****   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+ 329:Src/main.c    ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+ 330:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+ 331:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+ 332:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
+ 333:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 334:Src/main.c    ****   {
+ 335:Src/main.c    ****     _Error_Handler(__FILE__, __LINE__);
+ 336:Src/main.c    ****   }
+ 337:Src/main.c    **** 
+ 338:Src/main.c    ****     /**Initializes the CPU, AHB and APB busses clocks 
+ 339:Src/main.c    ****     */
+ 340:Src/main.c    ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+ 341:Src/main.c    ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+ 342:Src/main.c    ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+ 343:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 344:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+ 345:Src/main.c    ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 346:Src/main.c    **** 
+ 347:Src/main.c    ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+ 348:Src/main.c    ****   {
+ 349:Src/main.c    ****     _Error_Handler(__FILE__, __LINE__);
+ 350:Src/main.c    ****   }
+ 351:Src/main.c    **** 
+ 352:Src/main.c    ****     /**Configure the Systick interrupt time 
+ 353:Src/main.c    ****     */
+ 354:Src/main.c    ****   HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
+ 355:Src/main.c    **** 
+ 356:Src/main.c    ****     /**Configure the Systick 
+ 357:Src/main.c    ****     */
+ 358:Src/main.c    ****   HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
+ 359:Src/main.c    **** 
+ 360:Src/main.c    ****   /* SysTick_IRQn interrupt configuration */
+ 361:Src/main.c    ****   HAL_NVIC_SetPriority(SysTick_IRQn, 15, 0);
+ 362:Src/main.c    **** }
+ 363:Src/main.c    **** 
+ 364:Src/main.c    **** /** Configure pins as 
+ 365:Src/main.c    ****         * Analog 
+ 366:Src/main.c    ****         * Input 
+ 367:Src/main.c    ****         * Output
+ 368:Src/main.c    ****         * EVENT_OUT
+ 369:Src/main.c    ****         * EXTI
+ 370:Src/main.c    **** */
+ 371:Src/main.c    **** static void MX_GPIO_Init(void)
+ 372:Src/main.c    **** {
+  27              		.loc 1 372 0
+  28              		.cfi_startproc
+ARM GAS  /tmp/cc4qE3ME.s 			page 8
+
+
+  29              		@ args = 0, pretend = 0, frame = 24
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 10B5     		push	{r4, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 4, -8
+  35              		.cfi_offset 14, -4
+  36 0002 86B0     		sub	sp, sp, #24
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 32
+  39              	.LBB2:
+ 373:Src/main.c    **** 
+ 374:Src/main.c    ****   GPIO_InitTypeDef GPIO_InitStruct;
+ 375:Src/main.c    **** 
+ 376:Src/main.c    ****   /* GPIO Ports Clock Enable */
+ 377:Src/main.c    ****   __HAL_RCC_GPIOC_CLK_ENABLE();
+  40              		.loc 1 377 0
+  41 0004 134B     		ldr	r3, .L3
+  42 0006 9A69     		ldr	r2, [r3, #24]
+  43 0008 42F01002 		orr	r2, r2, #16
+  44 000c 9A61     		str	r2, [r3, #24]
+  45 000e 9A69     		ldr	r2, [r3, #24]
+  46 0010 02F01002 		and	r2, r2, #16
+  47 0014 0092     		str	r2, [sp]
+  48 0016 009A     		ldr	r2, [sp]
+  49              	.LBE2:
+  50              	.LBB3:
+ 378:Src/main.c    ****   __HAL_RCC_GPIOA_CLK_ENABLE();
+  51              		.loc 1 378 0
+  52 0018 9A69     		ldr	r2, [r3, #24]
+  53 001a 42F00402 		orr	r2, r2, #4
+  54 001e 9A61     		str	r2, [r3, #24]
+  55 0020 9B69     		ldr	r3, [r3, #24]
+  56 0022 03F00403 		and	r3, r3, #4
+  57 0026 0193     		str	r3, [sp, #4]
+  58 0028 019B     		ldr	r3, [sp, #4]
+  59              	.LBE3:
+ 379:Src/main.c    **** 
+ 380:Src/main.c    ****   /*Configure GPIO pin Output Level */
+ 381:Src/main.c    ****   HAL_GPIO_WritePin(GPIOC, LED0_Pin|LED1_Pin|LED2_Pin|LED3_Pin, GPIO_PIN_RESET);
+  60              		.loc 1 381 0
+  61 002a 0B4C     		ldr	r4, .L3+4
+  62 002c 0022     		movs	r2, #0
+  63 002e D821     		movs	r1, #216
+  64 0030 2046     		mov	r0, r4
+  65 0032 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  66              	.LVL0:
+ 382:Src/main.c    **** 
+ 383:Src/main.c    ****   /*Configure GPIO pins : LED0_Pin LED1_Pin LED2_Pin LED3_Pin */
+ 384:Src/main.c    ****   GPIO_InitStruct.Pin = LED0_Pin|LED1_Pin|LED2_Pin|LED3_Pin;
+  67              		.loc 1 384 0
+  68 0036 D823     		movs	r3, #216
+  69 0038 0293     		str	r3, [sp, #8]
+ 385:Src/main.c    ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  70              		.loc 1 385 0
+  71 003a 0123     		movs	r3, #1
+  72 003c 0393     		str	r3, [sp, #12]
+ARM GAS  /tmp/cc4qE3ME.s 			page 9
+
+
+ 386:Src/main.c    ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
+  73              		.loc 1 386 0
+  74 003e 0023     		movs	r3, #0
+  75 0040 0493     		str	r3, [sp, #16]
+ 387:Src/main.c    ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  76              		.loc 1 387 0
+  77 0042 0223     		movs	r3, #2
+  78 0044 0593     		str	r3, [sp, #20]
+ 388:Src/main.c    ****   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+  79              		.loc 1 388 0
+  80 0046 02A9     		add	r1, sp, #8
+  81 0048 2046     		mov	r0, r4
+  82 004a FFF7FEFF 		bl	HAL_GPIO_Init
+  83              	.LVL1:
+ 389:Src/main.c    **** 
+ 390:Src/main.c    **** }
+  84              		.loc 1 390 0
+  85 004e 06B0     		add	sp, sp, #24
+  86              	.LCFI2:
+  87              		.cfi_def_cfa_offset 8
+  88              		@ sp needed
+  89 0050 10BD     		pop	{r4, pc}
+  90              	.L4:
+  91 0052 00BF     		.align	2
+  92              	.L3:
+  93 0054 00100240 		.word	1073876992
+  94 0058 00100140 		.word	1073811456
+  95              		.cfi_endproc
+  96              	.LFE76:
+  98              		.section	.text.configure_tracing,"ax",%progbits
+  99              		.align	2
+ 100              		.global	configure_tracing
+ 101              		.thumb
+ 102              		.thumb_func
+ 104              	configure_tracing:
+ 105              	.LFB69:
+  81:Src/main.c    ****     /* STM32 specific configuration to enable the TRACESWO IO pin */
+ 106              		.loc 1 81 0
+ 107              		.cfi_startproc
+ 108              		@ args = 0, pretend = 0, frame = 0
+ 109              		@ frame_needed = 0, uses_anonymous_args = 0
+ 110              		@ link register save eliminated.
+  83:Src/main.c    ****     AFIO->MAPR |= (2 << 24); // Disable JTAG to release TRACESWO
+ 111              		.loc 1 83 0
+ 112 0000 284A     		ldr	r2, .L7
+ 113 0002 9369     		ldr	r3, [r2, #24]
+ 114 0004 43F00103 		orr	r3, r3, #1
+ 115 0008 9361     		str	r3, [r2, #24]
+  84:Src/main.c    ****     DBGMCU->CR |= DBGMCU_CR_TRACE_IOEN; // Enable IO trace pins
+ 116              		.loc 1 84 0
+ 117 000a A2F58832 		sub	r2, r2, #69632
+ 118 000e 5368     		ldr	r3, [r2, #4]
+ 119 0010 43F00073 		orr	r3, r3, #33554432
+ 120 0014 5360     		str	r3, [r2, #4]
+  85:Src/main.c    ****     
+ 121              		.loc 1 85 0
+ 122 0016 244B     		ldr	r3, .L7+4
+ARM GAS  /tmp/cc4qE3ME.s 			page 10
+
+
+ 123 0018 5A68     		ldr	r2, [r3, #4]
+ 124 001a 42F02002 		orr	r2, r2, #32
+ 125 001e 5A60     		str	r2, [r3, #4]
+  87:Src/main.c    ****     {
+ 126              		.loc 1 87 0
+ 127 0020 5B68     		ldr	r3, [r3, #4]
+ 128 0022 13F0200F 		tst	r3, #32
+ 129 0026 3BD0     		beq	.L5
+  97:Src/main.c    ****     TPI->ACPR = 8; // Trace clock = HCLK/(x+1) = 8MHz    这里HCLK是处理器时钟,这个值的�
+ 130              		.loc 1 97 0
+ 131 0028 204A     		ldr	r2, .L7+8
+ 132 002a D368     		ldr	r3, [r2, #12]
+ 133 002c 43F08073 		orr	r3, r3, #16777216
+ 134 0030 D360     		str	r3, [r2, #12]
+  98:Src/main.c    ****     TPI->SPPR = 2; // Pin protocol = NRZ/USART
+ 135              		.loc 1 98 0
+ 136 0032 1F4B     		ldr	r3, .L7+12
+ 137 0034 0822     		movs	r2, #8
+ 138 0036 1A61     		str	r2, [r3, #16]
+  99:Src/main.c    ****     
+ 139              		.loc 1 99 0
+ 140 0038 0221     		movs	r1, #2
+ 141 003a C3F8F010 		str	r1, [r3, #240]
+ 101:Src/main.c    ****     //TPI->FFCR = 0x100; //为什么设置102开启ETM后，ITM输出就不对了？？,在博客ht
+ 142              		.loc 1 101 0
+ 143 003e 4FF48172 		mov	r2, #258
+ 144 0042 C3F80423 		str	r2, [r3, #772]
+ 108:Src/main.c    ****                                            // 0 = x32, 1 = x512  //
+ 145              		.loc 1 108 0
+ 146 0046 1B4A     		ldr	r2, .L7+16
+ 147 0048 A3F57C33 		sub	r3, r3, #258048
+ 148 004c 1A60     		str	r2, [r3]
+ 121:Src/main.c    ****     ITM->TCR = (1 << ITM_TCR_TraceBusID_Pos) // Trace bus ID for TPIU
+ 149              		.loc 1 121 0
+ 150 004e 4FF06043 		mov	r3, #-536870912
+ 151 0052 A2F16952 		sub	r2, r2, #977272832
+ 152 0056 A2F5A212 		sub	r2, r2, #1327104
+ 153 005a A2F6AC32 		subw	r2, r2, #2988
+ 154 005e C3F8B02F 		str	r2, [r3, #4016]
+ 122:Src/main.c    ****              | (1 << ITM_TCR_DWTENA_Pos) // Enable events from DWT
+ 155              		.loc 1 122 0
+ 156 0062 1548     		ldr	r0, .L7+20
+ 157 0064 C3F8800E 		str	r0, [r3, #3712]
+ 126:Src/main.c    **** 
+ 158              		.loc 1 126 0
+ 159 0068 4FF0FF30 		mov	r0, #-1
+ 160 006c C3F8000E 		str	r0, [r3, #3584]
+ 137:Src/main.c    ****     ETM_SetupMode();
+ 161              		.loc 1 137 0
+ 162 0070 03F58223 		add	r3, r3, #266240
+ 163 0074 C3F8B02F 		str	r2, [r3, #4016]
+ 138:Src/main.c    ****     ETM->CR = ETM_CR_ETMEN // Enable ETM output port
+ 164              		.loc 1 138 0
+ 165 0078 1A68     		ldr	r2, [r3]
+ 166 007a 42F48062 		orr	r2, r2, #1024
+ 167 007e 1A60     		str	r2, [r3]
+ 139:Src/main.c    ****             | ETM_CR_STALL_PROCESSOR // Stall processor when fifo is full
+ARM GAS  /tmp/cc4qE3ME.s 			page 11
+
+
+ 168              		.loc 1 139 0
+ 169 0080 4FF41962 		mov	r2, #2448
+ 170 0084 1A60     		str	r2, [r3]
+ 143:Src/main.c    ****     ETM->TECR1 = ETM_TECR1_EXCLUDE; // Trace always enabled
+ 171              		.loc 1 143 0
+ 172 0086 C3F80012 		str	r1, [r3, #512]
+ 144:Src/main.c    ****     ETM->FFRR = ETM_FFRR_EXCLUDE; // Stalling always enabled
+ 173              		.loc 1 144 0
+ 174 008a 4FF08072 		mov	r2, #16777216
+ 175 008e 5A62     		str	r2, [r3, #36]
+ 145:Src/main.c    ****     ETM->FFLR = 24; // Stall when less than N bytes free in FIFO (range 1..24)
+ 176              		.loc 1 145 0
+ 177 0090 9A62     		str	r2, [r3, #40]
+ 146:Src/main.c    ****                     // Larger values mean less latency in trace, but more stalls.
+ 178              		.loc 1 146 0
+ 179 0092 1822     		movs	r2, #24
+ 180 0094 DA62     		str	r2, [r3, #44]
+ 150:Src/main.c    ****     ETM->TEEVR = 0x0000006F;
+ 181              		.loc 1 150 0
+ 182 0096 44F26F02 		movw	r2, #16495
+ 183 009a 9A60     		str	r2, [r3, #8]
+ 151:Src/main.c    ****     //ETM->TSSCR = 0x00000001;
+ 184              		.loc 1 151 0
+ 185 009c 6F22     		movs	r2, #111
+ 186 009e 1A62     		str	r2, [r3, #32]
+ 187              	.L5:
+ 188 00a0 7047     		bx	lr
+ 189              	.L8:
+ 190 00a2 00BF     		.align	2
+ 191              	.L7:
+ 192 00a4 00100240 		.word	1073876992
+ 193 00a8 002004E0 		.word	-536600576
+ 194 00ac F0ED00E0 		.word	-536810000
+ 195 00b0 000004E0 		.word	-536608768
+ 196 00b4 011A0100 		.word	72193
+ 197 00b8 0D000100 		.word	65549
+ 198              		.cfi_endproc
+ 199              	.LFE69:
+ 201              		.section	.text.configure_watchpoint,"ax",%progbits
+ 202              		.align	2
+ 203              		.global	configure_watchpoint
+ 204              		.thumb
+ 205              		.thumb_func
+ 207              	configure_watchpoint:
+ 208              	.LFB70:
+ 157:Src/main.c    ****     /* This is an example of how to configure DWT to monitor a watchpoint.
+ 209              		.loc 1 157 0
+ 210              		.cfi_startproc
+ 211              		@ args = 0, pretend = 0, frame = 0
+ 212              		@ frame_needed = 0, uses_anonymous_args = 0
+ 213              		@ link register save eliminated.
+ 173:Src/main.c    ****     DWT->MASK1 = 2;
+ 214              		.loc 1 173 0
+ 215 0000 034B     		ldr	r3, .L10
+ 216 0002 044A     		ldr	r2, .L10+4
+ 217 0004 1A63     		str	r2, [r3, #48]
+ 174:Src/main.c    ****     DWT->FUNCTION1 = (3 << DWT_FUNCTION_FUNCTION_Pos); // Report data and PC on watchpoint hit
+ARM GAS  /tmp/cc4qE3ME.s 			page 12
+
+
+ 218              		.loc 1 174 0
+ 219 0006 0222     		movs	r2, #2
+ 220 0008 5A63     		str	r2, [r3, #52]
+ 175:Src/main.c    **** }
+ 221              		.loc 1 175 0
+ 222 000a 0322     		movs	r2, #3
+ 223 000c 9A63     		str	r2, [r3, #56]
+ 224 000e 7047     		bx	lr
+ 225              	.L11:
+ 226              		.align	2
+ 227              	.L10:
+ 228 0010 001000E0 		.word	-536866816
+ 229 0014 00000000 		.word	.LANCHOR0
+ 230              		.cfi_endproc
+ 231              	.LFE70:
+ 233              		.section	.text.ITM_Print,"ax",%progbits
+ 234              		.align	2
+ 235              		.global	ITM_Print
+ 236              		.thumb
+ 237              		.thumb_func
+ 239              	ITM_Print:
+ 240              	.LFB71:
+ 179:Src/main.c    ****     globalCounter = 0x0C;
+ 241              		.loc 1 179 0
+ 242              		.cfi_startproc
+ 243              		@ args = 0, pretend = 0, frame = 0
+ 244              		@ frame_needed = 0, uses_anonymous_args = 0
+ 245              		@ link register save eliminated.
+ 246              	.LVL2:
+ 180:Src/main.c    ****     if ((ITM->TCR & ITM_TCR_ITMENA_Msk) && (ITM->TER & (1UL << port)))
+ 247              		.loc 1 180 0
+ 248 0000 0C22     		movs	r2, #12
+ 249 0002 104B     		ldr	r3, .L16
+ 250 0004 1A60     		str	r2, [r3]
+ 181:Src/main.c    ****     {
+ 251              		.loc 1 181 0
+ 252 0006 4FF06043 		mov	r3, #-536870912
+ 253 000a D3F8803E 		ldr	r3, [r3, #3712]
+ 254 000e 13F0010F 		tst	r3, #1
+ 255 0012 16D0     		beq	.L12
+ 181:Src/main.c    ****     {
+ 256              		.loc 1 181 0 is_stmt 0 discriminator 1
+ 257 0014 4FF06043 		mov	r3, #-536870912
+ 258 0018 D3F8003E 		ldr	r3, [r3, #3584]
+ 259 001c C340     		lsrs	r3, r3, r0
+ 260 001e 13F0010F 		tst	r3, #1
+ 261 0022 0BD1     		bne	.L14
+ 262 0024 7047     		bx	lr
+ 263              	.L15:
+ 185:Src/main.c    ****             ITM->PORT[port].u8 = *p++;
+ 264              		.loc 1 185 0 is_stmt 1 discriminator 1
+ 265 0026 4FF06043 		mov	r3, #-536870912
+ 266 002a 53F82030 		ldr	r3, [r3, r0, lsl #2]
+ 267 002e 002B     		cmp	r3, #0
+ 268 0030 F9D0     		beq	.L15
+ 186:Src/main.c    ****         }   
+ 269              		.loc 1 186 0
+ARM GAS  /tmp/cc4qE3ME.s 			page 13
+
+
+ 270 0032 0131     		adds	r1, r1, #1
+ 271              	.LVL3:
+ 272 0034 4FF06043 		mov	r3, #-536870912
+ 273 0038 03F82020 		strb	r2, [r3, r0, lsl #2]
+ 274              	.L14:
+ 183:Src/main.c    ****         {
+ 275              		.loc 1 183 0
+ 276 003c 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 277 003e 002A     		cmp	r2, #0
+ 278 0040 F1D1     		bne	.L15
+ 279              	.L12:
+ 280 0042 7047     		bx	lr
+ 281              	.L17:
+ 282              		.align	2
+ 283              	.L16:
+ 284 0044 00000000 		.word	.LANCHOR0
+ 285              		.cfi_endproc
+ 286              	.LFE71:
+ 288              		.section	.text.Func_LED0,"ax",%progbits
+ 289              		.align	2
+ 290              		.global	Func_LED0
+ 291              		.thumb
+ 292              		.thumb_func
+ 294              	Func_LED0:
+ 295              	.LFB77:
+ 391:Src/main.c    **** 
+ 392:Src/main.c    **** /* USER CODE BEGIN 4 */
+ 393:Src/main.c    **** 
+ 394:Src/main.c    **** /* USER CODE END 4 */
+ 395:Src/main.c    **** 
+ 396:Src/main.c    **** /* Func_LED0 function */
+ 397:Src/main.c    **** void Func_LED0(void const * argument)
+ 398:Src/main.c    **** {
+ 296              		.loc 1 398 0
+ 297              		.cfi_startproc
+ 298              		@ Volatile: function does not return.
+ 299              		@ args = 0, pretend = 0, frame = 0
+ 300              		@ frame_needed = 0, uses_anonymous_args = 0
+ 301              	.LVL4:
+ 302 0000 08B5     		push	{r3, lr}
+ 303              	.LCFI3:
+ 304              		.cfi_def_cfa_offset 8
+ 305              		.cfi_offset 3, -8
+ 306              		.cfi_offset 14, -4
+ 307              	.LVL5:
+ 308              	.L19:
+ 399:Src/main.c    **** 
+ 400:Src/main.c    ****   /* USER CODE BEGIN 5 */
+ 401:Src/main.c    ****   /* Infinite loop */
+ 402:Src/main.c    ****   for(;;)
+ 403:Src/main.c    ****   {
+ 404:Src/main.c    ****     //globalCounter = 0x0A;//0x0A表示Func_LED0
+ 405:Src/main.c    ****     osDelay(15);
+ 309              		.loc 1 405 0 discriminator 1
+ 310 0002 0F20     		movs	r0, #15
+ 311 0004 FFF7FEFF 		bl	osDelay
+ 312              	.LVL6:
+ARM GAS  /tmp/cc4qE3ME.s 			page 14
+
+
+ 406:Src/main.c    ****     HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_RESET);
+ 313              		.loc 1 406 0 discriminator 1
+ 314 0008 0E4C     		ldr	r4, .L21
+ 315 000a 0022     		movs	r2, #0
+ 316 000c 0821     		movs	r1, #8
+ 317 000e 2046     		mov	r0, r4
+ 318 0010 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 319              	.LVL7:
+ 407:Src/main.c    ****     osDelay(15);
+ 320              		.loc 1 407 0 discriminator 1
+ 321 0014 0F20     		movs	r0, #15
+ 322 0016 FFF7FEFF 		bl	osDelay
+ 323              	.LVL8:
+ 408:Src/main.c    ****     HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_SET);
+ 324              		.loc 1 408 0 discriminator 1
+ 325 001a 0122     		movs	r2, #1
+ 326 001c 0821     		movs	r1, #8
+ 327 001e 2046     		mov	r0, r4
+ 328 0020 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 329              	.LVL9:
+ 409:Src/main.c    **** 
+ 410:Src/main.c    ****     //用来测量运行时间的PC6翻转，抓取这一次翻转到下一次翻转的时间
+ 411:Src/main.c    ****     HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_RESET);
+ 330              		.loc 1 411 0 discriminator 1
+ 331 0024 0022     		movs	r2, #0
+ 332 0026 4021     		movs	r1, #64
+ 333 0028 2046     		mov	r0, r4
+ 334 002a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 335              	.LVL10:
+ 412:Src/main.c    ****     //osDelay(10);
+ 413:Src/main.c    ****     HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_SET);
+ 336              		.loc 1 413 0 discriminator 1
+ 337 002e 0122     		movs	r2, #1
+ 338 0030 4021     		movs	r1, #64
+ 339 0032 2046     		mov	r0, r4
+ 340 0034 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 341              	.LVL11:
+ 414:Src/main.c    **** 
+ 415:Src/main.c    ****     ITM_Print(0,"LED0");
+ 342              		.loc 1 415 0 discriminator 1
+ 343 0038 0349     		ldr	r1, .L21+4
+ 344 003a 0020     		movs	r0, #0
+ 345 003c FFF7FEFF 		bl	ITM_Print
+ 346              	.LVL12:
+ 347 0040 DFE7     		b	.L19
+ 348              	.L22:
+ 349 0042 00BF     		.align	2
+ 350              	.L21:
+ 351 0044 00100140 		.word	1073811456
+ 352 0048 00000000 		.word	.LC5
+ 353              		.cfi_endproc
+ 354              	.LFE77:
+ 356              		.section	.text.ITM_SendValue,"ax",%progbits
+ 357              		.align	2
+ 358              		.global	ITM_SendValue
+ 359              		.thumb
+ 360              		.thumb_func
+ARM GAS  /tmp/cc4qE3ME.s 			page 15
+
+
+ 362              	ITM_SendValue:
+ 363              	.LFB72:
+ 192:Src/main.c    ****     if ((ITM->TCR & ITM_TCR_ITMENA_Msk) && (ITM->TER & (1UL << port)))
+ 364              		.loc 1 192 0
+ 365              		.cfi_startproc
+ 366              		@ args = 0, pretend = 0, frame = 0
+ 367              		@ frame_needed = 0, uses_anonymous_args = 0
+ 368              		@ link register save eliminated.
+ 369              	.LVL13:
+ 193:Src/main.c    ****     {
+ 370              		.loc 1 193 0
+ 371 0000 4FF06043 		mov	r3, #-536870912
+ 372 0004 D3F8803E 		ldr	r3, [r3, #3712]
+ 373 0008 13F0010F 		tst	r3, #1
+ 374 000c 11D0     		beq	.L23
+ 193:Src/main.c    ****     {
+ 375              		.loc 1 193 0 is_stmt 0 discriminator 1
+ 376 000e 4FF06043 		mov	r3, #-536870912
+ 377 0012 D3F8003E 		ldr	r3, [r3, #3584]
+ 378 0016 C340     		lsrs	r3, r3, r0
+ 379 0018 13F0010F 		tst	r3, #1
+ 380 001c 09D0     		beq	.L23
+ 381              	.L25:
+ 195:Src/main.c    ****         ITM->PORT[port].u32 = value;
+ 382              		.loc 1 195 0 is_stmt 1 discriminator 1
+ 383 001e 4FF06043 		mov	r3, #-536870912
+ 384 0022 53F82030 		ldr	r3, [r3, r0, lsl #2]
+ 385 0026 002B     		cmp	r3, #0
+ 386 0028 F9D0     		beq	.L25
+ 196:Src/main.c    ****     }
+ 387              		.loc 1 196 0
+ 388 002a 4FF06043 		mov	r3, #-536870912
+ 389 002e 43F82010 		str	r1, [r3, r0, lsl #2]
+ 390              	.L23:
+ 391 0032 7047     		bx	lr
+ 392              		.cfi_endproc
+ 393              	.LFE72:
+ 395              		.section	.text.bubble_sort,"ax",%progbits
+ 396              		.align	2
+ 397              		.global	bubble_sort
+ 398              		.thumb
+ 399              		.thumb_func
+ 401              	bubble_sort:
+ 402              	.LFB73:
+ 201:Src/main.c    ****     globalCounter = 0x0D;
+ 403              		.loc 1 201 0
+ 404              		.cfi_startproc
+ 405              		@ args = 0, pretend = 0, frame = 0
+ 406              		@ frame_needed = 0, uses_anonymous_args = 0
+ 407              		@ link register save eliminated.
+ 408              	.LVL14:
+ 409 0000 70B4     		push	{r4, r5, r6}
+ 410              	.LCFI4:
+ 411              		.cfi_def_cfa_offset 12
+ 412              		.cfi_offset 4, -12
+ 413              		.cfi_offset 5, -8
+ 414              		.cfi_offset 6, -4
+ARM GAS  /tmp/cc4qE3ME.s 			page 16
+
+
+ 202:Src/main.c    ****     int i, t, s = 1;
+ 415              		.loc 1 202 0
+ 416 0002 0D22     		movs	r2, #13
+ 417 0004 0D4B     		ldr	r3, .L33
+ 418 0006 1A60     		str	r2, [r3]
+ 419              	.LVL15:
+ 203:Src/main.c    ****     while (s) 
+ 420              		.loc 1 203 0
+ 421 0008 0126     		movs	r6, #1
+ 204:Src/main.c    ****     {
+ 422              		.loc 1 204 0
+ 423 000a 13E0     		b	.L27
+ 424              	.LVL16:
+ 425              	.L29:
+ 209:Src/main.c    ****             {
+ 426              		.loc 1 209 0
+ 427 000c 50F82340 		ldr	r4, [r0, r3, lsl #2]
+ 428 0010 03F18042 		add	r2, r3, #1073741824
+ 429 0014 013A     		subs	r2, r2, #1
+ 430 0016 50F82250 		ldr	r5, [r0, r2, lsl #2]
+ 431 001a AC42     		cmp	r4, r5
+ 432 001c 04DA     		bge	.L28
+ 433              	.LVL17:
+ 212:Src/main.c    ****                 a[i - 1] = t;
+ 434              		.loc 1 212 0
+ 435 001e 40F82350 		str	r5, [r0, r3, lsl #2]
+ 213:Src/main.c    ****                 s = 1;            
+ 436              		.loc 1 213 0
+ 437 0022 40F82240 		str	r4, [r0, r2, lsl #2]
+ 438              	.LVL18:
+ 214:Src/main.c    ****             }
+ 439              		.loc 1 214 0
+ 440 0026 0126     		movs	r6, #1
+ 441              	.LVL19:
+ 442              	.L28:
+ 207:Src/main.c    ****         {
+ 443              		.loc 1 207 0 discriminator 2
+ 444 0028 0133     		adds	r3, r3, #1
+ 445              	.LVL20:
+ 446 002a 01E0     		b	.L30
+ 447              	.LVL21:
+ 448              	.L31:
+ 449 002c 0026     		movs	r6, #0
+ 450              	.LVL22:
+ 451 002e 0123     		movs	r3, #1
+ 452              	.L30:
+ 453              	.LVL23:
+ 207:Src/main.c    ****         {
+ 454              		.loc 1 207 0 is_stmt 0 discriminator 1
+ 455 0030 8B42     		cmp	r3, r1
+ 456 0032 EBDB     		blt	.L29
+ 457              	.LVL24:
+ 458              	.L27:
+ 204:Src/main.c    ****     {
+ 459              		.loc 1 204 0 is_stmt 1
+ 460 0034 002E     		cmp	r6, #0
+ 461 0036 F9D1     		bne	.L31
+ARM GAS  /tmp/cc4qE3ME.s 			page 17
+
+
+ 218:Src/main.c    **** 
+ 462              		.loc 1 218 0
+ 463 0038 70BC     		pop	{r4, r5, r6}
+ 464              	.LCFI5:
+ 465              		.cfi_restore 6
+ 466              		.cfi_restore 5
+ 467              		.cfi_restore 4
+ 468              		.cfi_def_cfa_offset 0
+ 469              	.LVL25:
+ 470 003a 7047     		bx	lr
+ 471              	.L34:
+ 472              		.align	2
+ 473              	.L33:
+ 474 003c 00000000 		.word	.LANCHOR0
+ 475              		.cfi_endproc
+ 476              	.LFE73:
+ 478              		.section	.text.Func_LED1,"ax",%progbits
+ 479              		.align	2
+ 480              		.global	Func_LED1
+ 481              		.thumb
+ 482              		.thumb_func
+ 484              	Func_LED1:
+ 485              	.LFB78:
+ 416:Src/main.c    ****   }
+ 417:Src/main.c    ****   /* USER CODE END 5 */ 
+ 418:Src/main.c    **** }
+ 419:Src/main.c    **** 
+ 420:Src/main.c    **** /* Func_LED1 function */
+ 421:Src/main.c    **** void Func_LED1(void const * argument)
+ 422:Src/main.c    **** {
+ 486              		.loc 1 422 0
+ 487              		.cfi_startproc
+ 488              		@ args = 0, pretend = 0, frame = 24
+ 489              		@ frame_needed = 0, uses_anonymous_args = 0
+ 490              	.LVL26:
+ 491 0000 30B5     		push	{r4, r5, lr}
+ 492              	.LCFI6:
+ 493              		.cfi_def_cfa_offset 12
+ 494              		.cfi_offset 4, -12
+ 495              		.cfi_offset 5, -8
+ 496              		.cfi_offset 14, -4
+ 497 0002 87B0     		sub	sp, sp, #28
+ 498              	.LCFI7:
+ 499              		.cfi_def_cfa_offset 40
+ 423:Src/main.c    ****   /* USER CODE BEGIN Func_LED1 */
+ 424:Src/main.c    ****   int values[5] = {35,2,235,11,2};
+ 500              		.loc 1 424 0
+ 501 0004 01AC     		add	r4, sp, #4
+ 502 0006 124D     		ldr	r5, .L38
+ 503 0008 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 504              	.LVL27:
+ 505 000a 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 506 000c 2B68     		ldr	r3, [r5]
+ 507 000e 2360     		str	r3, [r4]
+ 508              	.L36:
+ 425:Src/main.c    ****   /* Infinite loop */
+ 426:Src/main.c    ****   for(;;)
+ARM GAS  /tmp/cc4qE3ME.s 			page 18
+
+
+ 427:Src/main.c    ****   {
+ 428:Src/main.c    ****     //globalCounter = 0x0B;//0x0B表示Func_LED1
+ 429:Src/main.c    ****     osDelay(10);
+ 509              		.loc 1 429 0 discriminator 1
+ 510 0010 0A20     		movs	r0, #10
+ 511 0012 FFF7FEFF 		bl	osDelay
+ 512              	.LVL28:
+ 430:Src/main.c    ****     HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
+ 513              		.loc 1 430 0 discriminator 1
+ 514 0016 0F4C     		ldr	r4, .L38+4
+ 515 0018 0022     		movs	r2, #0
+ 516 001a 1021     		movs	r1, #16
+ 517 001c 2046     		mov	r0, r4
+ 518 001e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 519              	.LVL29:
+ 431:Src/main.c    ****     osDelay(10);
+ 520              		.loc 1 431 0 discriminator 1
+ 521 0022 0A20     		movs	r0, #10
+ 522 0024 FFF7FEFF 		bl	osDelay
+ 523              	.LVL30:
+ 432:Src/main.c    ****     HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
+ 524              		.loc 1 432 0 discriminator 1
+ 525 0028 0122     		movs	r2, #1
+ 526 002a 1021     		movs	r1, #16
+ 527 002c 2046     		mov	r0, r4
+ 528 002e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 529              	.LVL31:
+ 433:Src/main.c    ****     //ITM_Print(0,"LED1");
+ 434:Src/main.c    ****     ETM_TraceMode();
+ 530              		.loc 1 434 0 discriminator 1
+ 531 0032 094C     		ldr	r4, .L38+8
+ 532 0034 2368     		ldr	r3, [r4]
+ 533 0036 23F48063 		bic	r3, r3, #1024
+ 534 003a 2360     		str	r3, [r4]
+ 435:Src/main.c    ****     bubble_sort(values, 5);
+ 535              		.loc 1 435 0 discriminator 1
+ 536 003c 0521     		movs	r1, #5
+ 537 003e 01A8     		add	r0, sp, #4
+ 538 0040 FFF7FEFF 		bl	bubble_sort
+ 539              	.LVL32:
+ 436:Src/main.c    ****     ETM_SetupMode();
+ 540              		.loc 1 436 0 discriminator 1
+ 541 0044 2368     		ldr	r3, [r4]
+ 542 0046 43F48063 		orr	r3, r3, #1024
+ 543 004a 2360     		str	r3, [r4]
+ 544 004c E0E7     		b	.L36
+ 545              	.L39:
+ 546 004e 00BF     		.align	2
+ 547              	.L38:
+ 548 0050 00000000 		.word	.LANCHOR1
+ 549 0054 00100140 		.word	1073811456
+ 550 0058 001004E0 		.word	-536604672
+ 551              		.cfi_endproc
+ 552              	.LFE78:
+ 554              		.section	.text.HAL_TIM_PeriodElapsedCallback,"ax",%progbits
+ 555              		.align	2
+ 556              		.global	HAL_TIM_PeriodElapsedCallback
+ARM GAS  /tmp/cc4qE3ME.s 			page 19
+
+
+ 557              		.thumb
+ 558              		.thumb_func
+ 560              	HAL_TIM_PeriodElapsedCallback:
+ 561              	.LFB79:
+ 437:Src/main.c    **** 
+ 438:Src/main.c    ****   }
+ 439:Src/main.c    ****   /* USER CODE END Func_LED1 */
+ 440:Src/main.c    **** }
+ 441:Src/main.c    **** 
+ 442:Src/main.c    **** /**
+ 443:Src/main.c    ****   * @brief  Period elapsed callback in non blocking mode
+ 444:Src/main.c    ****   * @note   This function is called  when TIM4 interrupt took place, inside
+ 445:Src/main.c    ****   * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+ 446:Src/main.c    ****   * a global variable "uwTick" used as application time base.
+ 447:Src/main.c    ****   * @param  htim : TIM handle
+ 448:Src/main.c    ****   * @retval None
+ 449:Src/main.c    ****   */
+ 450:Src/main.c    **** void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+ 451:Src/main.c    **** {
+ 562              		.loc 1 451 0
+ 563              		.cfi_startproc
+ 564              		@ args = 0, pretend = 0, frame = 0
+ 565              		@ frame_needed = 0, uses_anonymous_args = 0
+ 566              	.LVL33:
+ 567 0000 08B5     		push	{r3, lr}
+ 568              	.LCFI8:
+ 569              		.cfi_def_cfa_offset 8
+ 570              		.cfi_offset 3, -8
+ 571              		.cfi_offset 14, -4
+ 452:Src/main.c    ****   /* USER CODE BEGIN Callback 0 */
+ 453:Src/main.c    **** 
+ 454:Src/main.c    ****   /* USER CODE END Callback 0 */
+ 455:Src/main.c    ****   if (htim->Instance == TIM4) {
+ 572              		.loc 1 455 0
+ 573 0002 0268     		ldr	r2, [r0]
+ 574 0004 024B     		ldr	r3, .L43
+ 575 0006 9A42     		cmp	r2, r3
+ 576 0008 01D1     		bne	.L40
+ 456:Src/main.c    ****     HAL_IncTick();
+ 577              		.loc 1 456 0
+ 578 000a FFF7FEFF 		bl	HAL_IncTick
+ 579              	.LVL34:
+ 580              	.L40:
+ 581 000e 08BD     		pop	{r3, pc}
+ 582              	.L44:
+ 583              		.align	2
+ 584              	.L43:
+ 585 0010 00080040 		.word	1073743872
+ 586              		.cfi_endproc
+ 587              	.LFE79:
+ 589              		.section	.text._Error_Handler,"ax",%progbits
+ 590              		.align	2
+ 591              		.global	_Error_Handler
+ 592              		.thumb
+ 593              		.thumb_func
+ 595              	_Error_Handler:
+ 596              	.LFB80:
+ARM GAS  /tmp/cc4qE3ME.s 			page 20
+
+
+ 457:Src/main.c    ****   }
+ 458:Src/main.c    ****   /* USER CODE BEGIN Callback 1 */
+ 459:Src/main.c    **** 
+ 460:Src/main.c    ****   /* USER CODE END Callback 1 */
+ 461:Src/main.c    **** }
+ 462:Src/main.c    **** 
+ 463:Src/main.c    **** /**
+ 464:Src/main.c    ****   * @brief  This function is executed in case of error occurrence.
+ 465:Src/main.c    ****   * @param  file: The file name as string.
+ 466:Src/main.c    ****   * @param  line: The line in file as a number.
+ 467:Src/main.c    ****   * @retval None
+ 468:Src/main.c    ****   */
+ 469:Src/main.c    **** void _Error_Handler(char *file, int line)
+ 470:Src/main.c    **** {
+ 597              		.loc 1 470 0
+ 598              		.cfi_startproc
+ 599              		@ Volatile: function does not return.
+ 600              		@ args = 0, pretend = 0, frame = 0
+ 601              		@ frame_needed = 0, uses_anonymous_args = 0
+ 602              		@ link register save eliminated.
+ 603              	.LVL35:
+ 604              	.L46:
+ 605 0000 FEE7     		b	.L46
+ 606              		.cfi_endproc
+ 607              	.LFE80:
+ 609 0002 00BF     		.section	.text.SystemClock_Config,"ax",%progbits
+ 610              		.align	2
+ 611              		.global	SystemClock_Config
+ 612              		.thumb
+ 613              		.thumb_func
+ 615              	SystemClock_Config:
+ 616              	.LFB75:
+ 319:Src/main.c    **** 
+ 617              		.loc 1 319 0
+ 618              		.cfi_startproc
+ 619              		@ args = 0, pretend = 0, frame = 64
+ 620              		@ frame_needed = 0, uses_anonymous_args = 0
+ 319:Src/main.c    **** 
+ 621              		.loc 1 319 0
+ 622 0000 00B5     		push	{lr}
+ 623              	.LCFI9:
+ 624              		.cfi_def_cfa_offset 4
+ 625              		.cfi_offset 14, -4
+ 626 0002 91B0     		sub	sp, sp, #68
+ 627              	.LCFI10:
+ 628              		.cfi_def_cfa_offset 72
+ 326:Src/main.c    ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+ 629              		.loc 1 326 0
+ 630 0004 0122     		movs	r2, #1
+ 631 0006 0692     		str	r2, [sp, #24]
+ 327:Src/main.c    ****   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+ 632              		.loc 1 327 0
+ 633 0008 4FF48033 		mov	r3, #65536
+ 634 000c 0793     		str	r3, [sp, #28]
+ 328:Src/main.c    ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+ 635              		.loc 1 328 0
+ 636 000e 0021     		movs	r1, #0
+ARM GAS  /tmp/cc4qE3ME.s 			page 21
+
+
+ 637 0010 0891     		str	r1, [sp, #32]
+ 329:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+ 638              		.loc 1 329 0
+ 639 0012 0A92     		str	r2, [sp, #40]
+ 330:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+ 640              		.loc 1 330 0
+ 641 0014 0222     		movs	r2, #2
+ 642 0016 0D92     		str	r2, [sp, #52]
+ 331:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
+ 643              		.loc 1 331 0
+ 644 0018 0E93     		str	r3, [sp, #56]
+ 332:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 645              		.loc 1 332 0
+ 646 001a 4FF4E013 		mov	r3, #1835008
+ 647 001e 0F93     		str	r3, [sp, #60]
+ 333:Src/main.c    ****   {
+ 648              		.loc 1 333 0
+ 649 0020 06A8     		add	r0, sp, #24
+ 650 0022 FFF7FEFF 		bl	HAL_RCC_OscConfig
+ 651              	.LVL36:
+ 652 0026 20B1     		cbz	r0, .L48
+ 335:Src/main.c    ****   }
+ 653              		.loc 1 335 0
+ 654 0028 40F24F11 		movw	r1, #335
+ 655 002c 1448     		ldr	r0, .L51
+ 656 002e FFF7FEFF 		bl	_Error_Handler
+ 657              	.LVL37:
+ 658              	.L48:
+ 340:Src/main.c    ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+ 659              		.loc 1 340 0
+ 660 0032 0F23     		movs	r3, #15
+ 661 0034 0193     		str	r3, [sp, #4]
+ 342:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 662              		.loc 1 342 0
+ 663 0036 0221     		movs	r1, #2
+ 664 0038 0291     		str	r1, [sp, #8]
+ 343:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+ 665              		.loc 1 343 0
+ 666 003a 0023     		movs	r3, #0
+ 667 003c 0393     		str	r3, [sp, #12]
+ 344:Src/main.c    ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 668              		.loc 1 344 0
+ 669 003e 4FF48062 		mov	r2, #1024
+ 670 0042 0492     		str	r2, [sp, #16]
+ 345:Src/main.c    **** 
+ 671              		.loc 1 345 0
+ 672 0044 0593     		str	r3, [sp, #20]
+ 347:Src/main.c    ****   {
+ 673              		.loc 1 347 0
+ 674 0046 01A8     		add	r0, sp, #4
+ 675 0048 FFF7FEFF 		bl	HAL_RCC_ClockConfig
+ 676              	.LVL38:
+ 677 004c 20B1     		cbz	r0, .L49
+ 349:Src/main.c    ****   }
+ 678              		.loc 1 349 0
+ 679 004e 40F25D11 		movw	r1, #349
+ 680 0052 0B48     		ldr	r0, .L51
+ARM GAS  /tmp/cc4qE3ME.s 			page 22
+
+
+ 681 0054 FFF7FEFF 		bl	_Error_Handler
+ 682              	.LVL39:
+ 683              	.L49:
+ 354:Src/main.c    **** 
+ 684              		.loc 1 354 0
+ 685 0058 FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
+ 686              	.LVL40:
+ 687 005c 094B     		ldr	r3, .L51+4
+ 688 005e A3FB0030 		umull	r3, r0, r3, r0
+ 689 0062 8009     		lsrs	r0, r0, #6
+ 690 0064 FFF7FEFF 		bl	HAL_SYSTICK_Config
+ 691              	.LVL41:
+ 358:Src/main.c    **** 
+ 692              		.loc 1 358 0
+ 693 0068 0420     		movs	r0, #4
+ 694 006a FFF7FEFF 		bl	HAL_SYSTICK_CLKSourceConfig
+ 695              	.LVL42:
+ 361:Src/main.c    **** }
+ 696              		.loc 1 361 0
+ 697 006e 0022     		movs	r2, #0
+ 698 0070 0F21     		movs	r1, #15
+ 699 0072 4FF0FF30 		mov	r0, #-1
+ 700 0076 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 701              	.LVL43:
+ 362:Src/main.c    **** 
+ 702              		.loc 1 362 0
+ 703 007a 11B0     		add	sp, sp, #68
+ 704              	.LCFI11:
+ 705              		.cfi_def_cfa_offset 4
+ 706              		@ sp needed
+ 707 007c 5DF804FB 		ldr	pc, [sp], #4
+ 708              	.L52:
+ 709              		.align	2
+ 710              	.L51:
+ 711 0080 08000000 		.word	.LC6
+ 712 0084 D34D6210 		.word	274877907
+ 713              		.cfi_endproc
+ 714              	.LFE75:
+ 716              		.section	.text.main,"ax",%progbits
+ 717              		.align	2
+ 718              		.global	main
+ 719              		.thumb
+ 720              		.thumb_func
+ 722              	main:
+ 723              	.LFB74:
+ 235:Src/main.c    ****   /* USER CODE BEGIN 1 */
+ 724              		.loc 1 235 0
+ 725              		.cfi_startproc
+ 726              		@ args = 0, pretend = 0, frame = 40
+ 727              		@ frame_needed = 0, uses_anonymous_args = 0
+ 728 0000 70B5     		push	{r4, r5, r6, lr}
+ 729              	.LCFI12:
+ 730              		.cfi_def_cfa_offset 16
+ 731              		.cfi_offset 4, -16
+ 732              		.cfi_offset 5, -12
+ 733              		.cfi_offset 6, -8
+ 734              		.cfi_offset 14, -4
+ARM GAS  /tmp/cc4qE3ME.s 			page 23
+
+
+ 735 0002 8AB0     		sub	sp, sp, #40
+ 736              	.LCFI13:
+ 737              		.cfi_def_cfa_offset 56
+ 243:Src/main.c    **** 
+ 738              		.loc 1 243 0
+ 739 0004 FFF7FEFF 		bl	HAL_Init
+ 740              	.LVL44:
+ 250:Src/main.c    **** 
+ 741              		.loc 1 250 0
+ 742 0008 FFF7FEFF 		bl	SystemClock_Config
+ 743              	.LVL45:
+ 257:Src/main.c    ****   /* USER CODE BEGIN 2 */
+ 744              		.loc 1 257 0
+ 745 000c FFF7FEFF 		bl	MX_GPIO_Init
+ 746              	.LVL46:
+ 260:Src/main.c    ****   configure_watchpoint();
+ 747              		.loc 1 260 0
+ 748 0010 FFF7FEFF 		bl	configure_tracing
+ 749              	.LVL47:
+ 261:Src/main.c    **** 
+ 750              		.loc 1 261 0
+ 751 0014 FFF7FEFF 		bl	configure_watchpoint
+ 752              	.LVL48:
+ 279:Src/main.c    ****   Task_LED0Handle = osThreadCreate(osThread(Task_LED0), NULL);
+ 753              		.loc 1 279 0
+ 754 0018 0E4C     		ldr	r4, .L56
+ 755 001a 05AD     		add	r5, sp, #20
+ 756 001c 04F11406 		add	r6, r4, #20
+ 757 0020 0FCE     		ldmia	r6!, {r0, r1, r2, r3}
+ 758 0022 0FC5     		stmia	r5!, {r0, r1, r2, r3}
+ 759 0024 3368     		ldr	r3, [r6]
+ 760 0026 2B60     		str	r3, [r5]
+ 280:Src/main.c    **** 
+ 761              		.loc 1 280 0
+ 762 0028 0021     		movs	r1, #0
+ 763 002a 05A8     		add	r0, sp, #20
+ 764 002c FFF7FEFF 		bl	osThreadCreate
+ 765              	.LVL49:
+ 766 0030 094B     		ldr	r3, .L56+4
+ 767 0032 1860     		str	r0, [r3]
+ 283:Src/main.c    ****   Task_LED1Handle = osThreadCreate(osThread(Task_LED1), NULL);
+ 768              		.loc 1 283 0
+ 769 0034 6D46     		mov	r5, sp
+ 770 0036 2834     		adds	r4, r4, #40
+ 771 0038 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
+ 772 003a 0FC5     		stmia	r5!, {r0, r1, r2, r3}
+ 773 003c 2368     		ldr	r3, [r4]
+ 774 003e 2B60     		str	r3, [r5]
+ 284:Src/main.c    **** 
+ 775              		.loc 1 284 0
+ 776 0040 0021     		movs	r1, #0
+ 777 0042 6846     		mov	r0, sp
+ 778 0044 FFF7FEFF 		bl	osThreadCreate
+ 779              	.LVL50:
+ 780 0048 044B     		ldr	r3, .L56+8
+ 781 004a 1860     		str	r0, [r3]
+ 296:Src/main.c    ****   
+ARM GAS  /tmp/cc4qE3ME.s 			page 24
+
+
+ 782              		.loc 1 296 0
+ 783 004c FFF7FEFF 		bl	osKernelStart
+ 784              	.LVL51:
+ 785              	.L54:
+ 786 0050 FEE7     		b	.L54
+ 787              	.L57:
+ 788 0052 00BF     		.align	2
+ 789              	.L56:
+ 790 0054 00000000 		.word	.LANCHOR1
+ 791 0058 00000000 		.word	Task_LED0Handle
+ 792 005c 00000000 		.word	Task_LED1Handle
+ 793              		.cfi_endproc
+ 794              	.LFE74:
+ 796              		.global	globalCounter
+ 797              		.comm	Task_LED1Handle,4,4
+ 798              		.comm	Task_LED0Handle,4,4
+ 799              		.section	.rodata
+ 800              		.align	2
+ 801              		.set	.LANCHOR1,. + 0
+ 802              	.LC4:
+ 803 0000 23000000 		.word	35
+ 804 0004 02000000 		.word	2
+ 805 0008 EB000000 		.word	235
+ 806 000c 0B000000 		.word	11
+ 807 0010 02000000 		.word	2
+ 808              	.LC7:
+ 809 0014 20000000 		.word	.LC0
+ 810 0018 00000000 		.word	Func_LED0
+ 811 001c 0000     		.short	0
+ 812 001e 0000     		.space	2
+ 813 0020 00000000 		.word	0
+ 814 0024 80000000 		.word	128
+ 815              	.LC8:
+ 816 0028 14000000 		.word	.LC2
+ 817 002c 00000000 		.word	Func_LED1
+ 818 0030 0000     		.short	0
+ 819 0032 0000     		.space	2
+ 820 0034 00000000 		.word	0
+ 821 0038 80000000 		.word	128
+ 822              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 823              		.align	2
+ 824              	.LC5:
+ 825 0000 4C454430 		.ascii	"LED0\000"
+ 825      00
+ 826 0005 000000   		.space	3
+ 827              	.LC6:
+ 828 0008 5372632F 		.ascii	"Src/main.c\000"
+ 828      6D61696E 
+ 828      2E6300
+ 829 0013 00       		.space	1
+ 830              	.LC2:
+ 831 0014 5461736B 		.ascii	"Task_LED1\000"
+ 831      5F4C4544 
+ 831      3100
+ 832 001e 0000     		.space	2
+ 833              	.LC0:
+ 834 0020 5461736B 		.ascii	"Task_LED0\000"
+ARM GAS  /tmp/cc4qE3ME.s 			page 25
+
+
+ 834      5F4C4544 
+ 834      3000
+ 835              		.section	.bss.globalCounter,"aw",%nobits
+ 836              		.align	2
+ 837              		.set	.LANCHOR0,. + 0
+ 840              	globalCounter:
+ 841 0000 00000000 		.space	4
+ 842              		.text
+ 843              	.Letext0:
+ 844              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ 845              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+ 846              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 847              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
+ 848              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 849              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
+ 850              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h"
+ 851              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 852              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 853              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 854              		.file 12 "Middlewares/Third_Party/FreeRTOS/Source/include/task.h"
+ 855              		.file 13 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h"
+ 856              		.file 14 "Src/arm_etm.h"
+ 857              		.file 15 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 858              		.file 16 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
+ARM GAS  /tmp/cc4qE3ME.s 			page 26
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+     /tmp/cc4qE3ME.s:20     .text.MX_GPIO_Init:00000000 $t
+     /tmp/cc4qE3ME.s:24     .text.MX_GPIO_Init:00000000 MX_GPIO_Init
+     /tmp/cc4qE3ME.s:93     .text.MX_GPIO_Init:00000054 $d
+     /tmp/cc4qE3ME.s:99     .text.configure_tracing:00000000 $t
+     /tmp/cc4qE3ME.s:104    .text.configure_tracing:00000000 configure_tracing
+     /tmp/cc4qE3ME.s:192    .text.configure_tracing:000000a4 $d
+     /tmp/cc4qE3ME.s:202    .text.configure_watchpoint:00000000 $t
+     /tmp/cc4qE3ME.s:207    .text.configure_watchpoint:00000000 configure_watchpoint
+     /tmp/cc4qE3ME.s:228    .text.configure_watchpoint:00000010 $d
+     /tmp/cc4qE3ME.s:234    .text.ITM_Print:00000000 $t
+     /tmp/cc4qE3ME.s:239    .text.ITM_Print:00000000 ITM_Print
+     /tmp/cc4qE3ME.s:284    .text.ITM_Print:00000044 $d
+     /tmp/cc4qE3ME.s:289    .text.Func_LED0:00000000 $t
+     /tmp/cc4qE3ME.s:294    .text.Func_LED0:00000000 Func_LED0
+     /tmp/cc4qE3ME.s:351    .text.Func_LED0:00000044 $d
+     /tmp/cc4qE3ME.s:357    .text.ITM_SendValue:00000000 $t
+     /tmp/cc4qE3ME.s:362    .text.ITM_SendValue:00000000 ITM_SendValue
+     /tmp/cc4qE3ME.s:396    .text.bubble_sort:00000000 $t
+     /tmp/cc4qE3ME.s:401    .text.bubble_sort:00000000 bubble_sort
+     /tmp/cc4qE3ME.s:474    .text.bubble_sort:0000003c $d
+     /tmp/cc4qE3ME.s:479    .text.Func_LED1:00000000 $t
+     /tmp/cc4qE3ME.s:484    .text.Func_LED1:00000000 Func_LED1
+     /tmp/cc4qE3ME.s:548    .text.Func_LED1:00000050 $d
+     /tmp/cc4qE3ME.s:555    .text.HAL_TIM_PeriodElapsedCallback:00000000 $t
+     /tmp/cc4qE3ME.s:560    .text.HAL_TIM_PeriodElapsedCallback:00000000 HAL_TIM_PeriodElapsedCallback
+     /tmp/cc4qE3ME.s:585    .text.HAL_TIM_PeriodElapsedCallback:00000010 $d
+     /tmp/cc4qE3ME.s:590    .text._Error_Handler:00000000 $t
+     /tmp/cc4qE3ME.s:595    .text._Error_Handler:00000000 _Error_Handler
+     /tmp/cc4qE3ME.s:610    .text.SystemClock_Config:00000000 $t
+     /tmp/cc4qE3ME.s:615    .text.SystemClock_Config:00000000 SystemClock_Config
+     /tmp/cc4qE3ME.s:711    .text.SystemClock_Config:00000080 $d
+     /tmp/cc4qE3ME.s:717    .text.main:00000000 $t
+     /tmp/cc4qE3ME.s:722    .text.main:00000000 main
+     /tmp/cc4qE3ME.s:790    .text.main:00000054 $d
+                            *COM*:00000004 Task_LED0Handle
+                            *COM*:00000004 Task_LED1Handle
+     /tmp/cc4qE3ME.s:840    .bss.globalCounter:00000000 globalCounter
+     /tmp/cc4qE3ME.s:800    .rodata:00000000 $d
+     /tmp/cc4qE3ME.s:823    .rodata.str1.4:00000000 $d
+     /tmp/cc4qE3ME.s:836    .bss.globalCounter:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_WritePin
+HAL_GPIO_Init
+osDelay
+HAL_IncTick
+HAL_RCC_OscConfig
+HAL_RCC_ClockConfig
+HAL_RCC_GetHCLKFreq
+HAL_SYSTICK_Config
+HAL_SYSTICK_CLKSourceConfig
+HAL_NVIC_SetPriority
+HAL_Init
+osThreadCreate
+ARM GAS  /tmp/cc4qE3ME.s 			page 27
+
+
+osKernelStart
