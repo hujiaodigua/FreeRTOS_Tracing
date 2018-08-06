@@ -14,10 +14,10 @@ typedef struct              //定义复数结构体
 complex data[N];            //定义存储单元，原始数据与负数结果均使用之   
 ElemType result[N];         //存储FFT后复数结果的模 
 
-void ChangeSeat(complex *DataInput);
+complex ChangeSeat(complex *DataInput);
 complex XX_complex(complex a, complex b);
-void FFT(void);
-void IFFT(void);
+void FFT(complex data_in);
+void IFFT(complex data_in);
 int FindInsertIndex(int *pDataArray, int iLen, int iData);
 void BinaryInsertSort(int* pDataArray, int iDataNum);
 

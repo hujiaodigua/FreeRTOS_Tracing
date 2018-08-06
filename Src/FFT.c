@@ -1,6 +1,6 @@
 #include "FFT.h"
 
-void ChangeSeat(complex *DataInput)  
+complex ChangeSeat(complex *DataInput)  
 {  
     int nextValue,nextM,i,k,j=0;  
     complex temp;  
@@ -22,7 +22,8 @@ void ChangeSeat(complex *DataInput)
             k=k/2;                  //k/2，比较次高位，依次类推，逐个比较，直到某个位为0  
         }  
         j=j+k;                      //把0改为1  
-    }                                         
+    }
+    return temp;
 }  
 
 //复数乘法   
@@ -37,7 +38,7 @@ complex XX_complex(complex a, complex b)
 }  
   
 //FFT  
-void FFT(void)  
+void FFT(complex data_in)  
 {  
     int L=0,B=0,J=0,K=0;  
     int step=0;  
@@ -45,7 +46,7 @@ void FFT(void)
     complex W,Temp_XX;  
     //ElemType TempResult[N];  
       
-    ChangeSeat(data);  
+    //ChangeSeat(data);  
     for(L=1; L<=M; L++)  
     {  
         B = 1<<(L-1);//B=2^(L-1)  
@@ -68,7 +69,7 @@ void FFT(void)
         }  
     }  
 }  
-void IFFT(void)  
+void IFFT(complex data_in)  
 {  
     int L=0,B=0,J=0,K=0;  
     int step=0;  
@@ -76,7 +77,7 @@ void IFFT(void)
     complex W,Temp_XX;  
     //ElemType TempResult[N];  
       
-    ChangeSeat(data);  
+    //ChangeSeat(data);  
     for(L=1; L<=M; L++)  
     {  
         B = 1<<(L-1);//B=2^(L-1)  

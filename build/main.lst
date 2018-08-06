@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cckrPKnk.s 			page 1
+ARM GAS  /tmp/ccwNXzWM.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cckrPKnk.s 			page 1
   30:Src/main.c    ****   * 5. Redistribution and use of this software other than as permitted under 
   31:Src/main.c    ****   *    this license is void and will automatically terminate your rights under 
   32:Src/main.c    ****   *    this license. 
-ARM GAS  /tmp/cckrPKnk.s 			page 2
+ARM GAS  /tmp/ccwNXzWM.s 			page 2
 
 
   33:Src/main.c    ****   *
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cckrPKnk.s 			page 1
   87:Src/main.c    ****     /* STM32 specific configuration to enable the TRACESWO IO pin */
   88:Src/main.c    ****     RCC->APB2ENR |= RCC_APB2ENR_AFIOEN;
   89:Src/main.c    ****     AFIO->MAPR |= (2 << 24); // Disable JTAG to release TRACESWO
-ARM GAS  /tmp/cckrPKnk.s 			page 3
+ARM GAS  /tmp/ccwNXzWM.s 			page 3
 
 
   90:Src/main.c    ****     DBGMCU->CR |= DBGMCU_CR_TRACE_IOEN; // Enable IO trace pins
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cckrPKnk.s 			page 1
  144:Src/main.c    ****     ETM->CR = ETM_CR_ETMEN // Enable ETM output port
  145:Src/main.c    ****             | ETM_CR_STALL_PROCESSOR // Stall processor when fifo is full
  146:Src/main.c    ****             | ETM_CR_BRANCH_OUTPUT // Report all branches
-ARM GAS  /tmp/cckrPKnk.s 			page 4
+ARM GAS  /tmp/ccwNXzWM.s 			page 4
 
 
  147:Src/main.c    ****             | (1 << 4);//port_size位21,6,5,4是0001表示8bit，这里目前认为复位值都是0
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cckrPKnk.s 			page 1
  201:Src/main.c    ****         ITM->PORT[port].u32 = value;
  202:Src/main.c    ****     }
  203:Src/main.c    **** }
-ARM GAS  /tmp/cckrPKnk.s 			page 5
+ARM GAS  /tmp/ccwNXzWM.s 			page 5
 
 
  204:Src/main.c    **** 
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cckrPKnk.s 			page 1
  258:Src/main.c    **** 
  259:Src/main.c    ****   /* USER CODE END SysInit */
  260:Src/main.c    **** 
-ARM GAS  /tmp/cckrPKnk.s 			page 6
+ARM GAS  /tmp/ccwNXzWM.s 			page 6
 
 
  261:Src/main.c    ****   /* Initialize all configured peripherals */
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cckrPKnk.s 			page 1
  315:Src/main.c    ****   /* USER CODE END 3 */
  316:Src/main.c    **** 
  317:Src/main.c    **** }
-ARM GAS  /tmp/cckrPKnk.s 			page 7
+ARM GAS  /tmp/ccwNXzWM.s 			page 7
 
 
  318:Src/main.c    **** 
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cckrPKnk.s 			page 1
  372:Src/main.c    ****         * Output
  373:Src/main.c    ****         * EVENT_OUT
  374:Src/main.c    ****         * EXTI
-ARM GAS  /tmp/cckrPKnk.s 			page 8
+ARM GAS  /tmp/ccwNXzWM.s 			page 8
 
 
  375:Src/main.c    **** */
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cckrPKnk.s 			page 1
  389:Src/main.c    ****   GPIO_InitStruct.Pin = LED0_Pin|LED1_Pin|LED2_Pin|LED3_Pin;
   67              		.loc 1 389 0
   68 0036 D823     		movs	r3, #216
-ARM GAS  /tmp/cckrPKnk.s 			page 9
+ARM GAS  /tmp/ccwNXzWM.s 			page 9
 
 
   69 0038 0293     		str	r3, [sp, #8]
@@ -515,15 +515,244 @@ ARM GAS  /tmp/cckrPKnk.s 			page 1
   94 0058 00100140 		.word	1073811456
   95              		.cfi_endproc
   96              	.LFE76:
-  98              		.global	__aeabi_i2d
-  99              		.global	__aeabi_dmul
- 100              		.section	.text.Func_LED1,"ax",%progbits
- 101              		.align	2
- 102              		.global	Func_LED1
- 103              		.thumb
- 104              		.thumb_func
- 106              	Func_LED1:
- 107              	.LFB78:
+  98              		.section	.text.configure_tracing,"ax",%progbits
+  99              		.align	2
+ 100              		.global	configure_tracing
+ 101              		.thumb
+ 102              		.thumb_func
+ 104              	configure_tracing:
+ 105              	.LFB69:
+  86:Src/main.c    ****     /* STM32 specific configuration to enable the TRACESWO IO pin */
+ 106              		.loc 1 86 0
+ 107              		.cfi_startproc
+ 108              		@ args = 0, pretend = 0, frame = 0
+ 109              		@ frame_needed = 0, uses_anonymous_args = 0
+ 110              		@ link register save eliminated.
+  88:Src/main.c    ****     AFIO->MAPR |= (2 << 24); // Disable JTAG to release TRACESWO
+ 111              		.loc 1 88 0
+ 112 0000 284A     		ldr	r2, .L7
+ 113 0002 9369     		ldr	r3, [r2, #24]
+ 114 0004 43F00103 		orr	r3, r3, #1
+ 115 0008 9361     		str	r3, [r2, #24]
+  89:Src/main.c    ****     DBGMCU->CR |= DBGMCU_CR_TRACE_IOEN; // Enable IO trace pins
+ 116              		.loc 1 89 0
+ 117 000a A2F58832 		sub	r2, r2, #69632
+ 118 000e 5368     		ldr	r3, [r2, #4]
+ARM GAS  /tmp/ccwNXzWM.s 			page 10
+
+
+ 119 0010 43F00073 		orr	r3, r3, #33554432
+ 120 0014 5360     		str	r3, [r2, #4]
+  90:Src/main.c    ****     
+ 121              		.loc 1 90 0
+ 122 0016 244B     		ldr	r3, .L7+4
+ 123 0018 5A68     		ldr	r2, [r3, #4]
+ 124 001a 42F02002 		orr	r2, r2, #32
+ 125 001e 5A60     		str	r2, [r3, #4]
+  92:Src/main.c    ****     {
+ 126              		.loc 1 92 0
+ 127 0020 5B68     		ldr	r3, [r3, #4]
+ 128 0022 13F0200F 		tst	r3, #32
+ 129 0026 3BD0     		beq	.L5
+ 102:Src/main.c    ****     TPI->ACPR = 8; // Trace clock = HCLK/(x+1) = 8MHz    这里HCLK是处理器时钟,这个值的�
+ 130              		.loc 1 102 0
+ 131 0028 204A     		ldr	r2, .L7+8
+ 132 002a D368     		ldr	r3, [r2, #12]
+ 133 002c 43F08073 		orr	r3, r3, #16777216
+ 134 0030 D360     		str	r3, [r2, #12]
+ 103:Src/main.c    ****     TPI->SPPR = 2; // Pin protocol = NRZ/USART
+ 135              		.loc 1 103 0
+ 136 0032 1F4B     		ldr	r3, .L7+12
+ 137 0034 0822     		movs	r2, #8
+ 138 0036 1A61     		str	r2, [r3, #16]
+ 104:Src/main.c    ****     
+ 139              		.loc 1 104 0
+ 140 0038 0221     		movs	r1, #2
+ 141 003a C3F8F010 		str	r1, [r3, #240]
+ 106:Src/main.c    ****     //TPI->FFCR = 0x100; //为什么设置102开启ETM后，ITM输出就不对了？？,在博客ht
+ 142              		.loc 1 106 0
+ 143 003e 4FF48172 		mov	r2, #258
+ 144 0042 C3F80423 		str	r2, [r3, #772]
+ 113:Src/main.c    ****                                            // 0 = x32, 1 = x512  //
+ 145              		.loc 1 113 0
+ 146 0046 1B4A     		ldr	r2, .L7+16
+ 147 0048 A3F57C33 		sub	r3, r3, #258048
+ 148 004c 1A60     		str	r2, [r3]
+ 126:Src/main.c    ****     ITM->TCR = (1 << ITM_TCR_TraceBusID_Pos) // Trace bus ID for TPIU
+ 149              		.loc 1 126 0
+ 150 004e 4FF06043 		mov	r3, #-536870912
+ 151 0052 A2F16952 		sub	r2, r2, #977272832
+ 152 0056 A2F5A212 		sub	r2, r2, #1327104
+ 153 005a A2F6AC32 		subw	r2, r2, #2988
+ 154 005e C3F8B02F 		str	r2, [r3, #4016]
+ 127:Src/main.c    ****              | (1 << ITM_TCR_DWTENA_Pos) // Enable events from DWT
+ 155              		.loc 1 127 0
+ 156 0062 1548     		ldr	r0, .L7+20
+ 157 0064 C3F8800E 		str	r0, [r3, #3712]
+ 131:Src/main.c    **** 
+ 158              		.loc 1 131 0
+ 159 0068 4FF0FF30 		mov	r0, #-1
+ 160 006c C3F8000E 		str	r0, [r3, #3584]
+ 142:Src/main.c    ****     ETM_SetupMode();
+ 161              		.loc 1 142 0
+ 162 0070 03F58223 		add	r3, r3, #266240
+ 163 0074 C3F8B02F 		str	r2, [r3, #4016]
+ 143:Src/main.c    ****     ETM->CR = ETM_CR_ETMEN // Enable ETM output port
+ARM GAS  /tmp/ccwNXzWM.s 			page 11
+
+
+ 164              		.loc 1 143 0
+ 165 0078 1A68     		ldr	r2, [r3]
+ 166 007a 42F48062 		orr	r2, r2, #1024
+ 167 007e 1A60     		str	r2, [r3]
+ 144:Src/main.c    ****             | ETM_CR_STALL_PROCESSOR // Stall processor when fifo is full
+ 168              		.loc 1 144 0
+ 169 0080 4FF41962 		mov	r2, #2448
+ 170 0084 1A60     		str	r2, [r3]
+ 148:Src/main.c    ****     ETM->TECR1 = ETM_TECR1_EXCLUDE; // Trace always enabled
+ 171              		.loc 1 148 0
+ 172 0086 C3F80012 		str	r1, [r3, #512]
+ 149:Src/main.c    ****     ETM->FFRR = ETM_FFRR_EXCLUDE; // Stalling always enabled
+ 173              		.loc 1 149 0
+ 174 008a 4FF08072 		mov	r2, #16777216
+ 175 008e 5A62     		str	r2, [r3, #36]
+ 150:Src/main.c    ****     ETM->FFLR = 24; // Stall when less than N bytes free in FIFO (range 1..24)
+ 176              		.loc 1 150 0
+ 177 0090 9A62     		str	r2, [r3, #40]
+ 151:Src/main.c    ****                     // Larger values mean less latency in trace, but more stalls.
+ 178              		.loc 1 151 0
+ 179 0092 1822     		movs	r2, #24
+ 180 0094 DA62     		str	r2, [r3, #44]
+ 155:Src/main.c    ****     ETM->TEEVR = 0x0000006F;
+ 181              		.loc 1 155 0
+ 182 0096 44F26F02 		movw	r2, #16495
+ 183 009a 9A60     		str	r2, [r3, #8]
+ 156:Src/main.c    ****     //ETM->TSSCR = 0x00000001;
+ 184              		.loc 1 156 0
+ 185 009c 6F22     		movs	r2, #111
+ 186 009e 1A62     		str	r2, [r3, #32]
+ 187              	.L5:
+ 188 00a0 7047     		bx	lr
+ 189              	.L8:
+ 190 00a2 00BF     		.align	2
+ 191              	.L7:
+ 192 00a4 00100240 		.word	1073876992
+ 193 00a8 002004E0 		.word	-536600576
+ 194 00ac F0ED00E0 		.word	-536810000
+ 195 00b0 000004E0 		.word	-536608768
+ 196 00b4 011A0100 		.word	72193
+ 197 00b8 0D000100 		.word	65549
+ 198              		.cfi_endproc
+ 199              	.LFE69:
+ 201              		.section	.text.configure_watchpoint,"ax",%progbits
+ 202              		.align	2
+ 203              		.global	configure_watchpoint
+ 204              		.thumb
+ 205              		.thumb_func
+ 207              	configure_watchpoint:
+ 208              	.LFB70:
+ 162:Src/main.c    ****     /* This is an example of how to configure DWT to monitor a watchpoint.
+ 209              		.loc 1 162 0
+ 210              		.cfi_startproc
+ 211              		@ args = 0, pretend = 0, frame = 0
+ 212              		@ frame_needed = 0, uses_anonymous_args = 0
+ 213              		@ link register save eliminated.
+ 178:Src/main.c    ****     DWT->MASK1 = 2;
+ARM GAS  /tmp/ccwNXzWM.s 			page 12
+
+
+ 214              		.loc 1 178 0
+ 215 0000 034B     		ldr	r3, .L10
+ 216 0002 044A     		ldr	r2, .L10+4
+ 217 0004 1A63     		str	r2, [r3, #48]
+ 179:Src/main.c    ****     DWT->FUNCTION1 = (3 << DWT_FUNCTION_FUNCTION_Pos); // Report data and PC on watchpoint hit
+ 218              		.loc 1 179 0
+ 219 0006 0222     		movs	r2, #2
+ 220 0008 5A63     		str	r2, [r3, #52]
+ 180:Src/main.c    **** }
+ 221              		.loc 1 180 0
+ 222 000a 0322     		movs	r2, #3
+ 223 000c 9A63     		str	r2, [r3, #56]
+ 224 000e 7047     		bx	lr
+ 225              	.L11:
+ 226              		.align	2
+ 227              	.L10:
+ 228 0010 001000E0 		.word	-536866816
+ 229 0014 00000000 		.word	.LANCHOR0
+ 230              		.cfi_endproc
+ 231              	.LFE70:
+ 233              		.section	.text.ITM_Print,"ax",%progbits
+ 234              		.align	2
+ 235              		.global	ITM_Print
+ 236              		.thumb
+ 237              		.thumb_func
+ 239              	ITM_Print:
+ 240              	.LFB71:
+ 184:Src/main.c    ****     globalCounter = 0x0C;
+ 241              		.loc 1 184 0
+ 242              		.cfi_startproc
+ 243              		@ args = 0, pretend = 0, frame = 0
+ 244              		@ frame_needed = 0, uses_anonymous_args = 0
+ 245              		@ link register save eliminated.
+ 246              	.LVL2:
+ 185:Src/main.c    ****     if ((ITM->TCR & ITM_TCR_ITMENA_Msk) && (ITM->TER & (1UL << port)))
+ 247              		.loc 1 185 0
+ 248 0000 0C22     		movs	r2, #12
+ 249 0002 104B     		ldr	r3, .L16
+ 250 0004 1A60     		str	r2, [r3]
+ 186:Src/main.c    ****     {
+ 251              		.loc 1 186 0
+ 252 0006 4FF06043 		mov	r3, #-536870912
+ 253 000a D3F8803E 		ldr	r3, [r3, #3712]
+ 254 000e 13F0010F 		tst	r3, #1
+ 255 0012 16D0     		beq	.L12
+ 186:Src/main.c    ****     {
+ 256              		.loc 1 186 0 is_stmt 0 discriminator 1
+ 257 0014 4FF06043 		mov	r3, #-536870912
+ 258 0018 D3F8003E 		ldr	r3, [r3, #3584]
+ 259 001c C340     		lsrs	r3, r3, r0
+ 260 001e 13F0010F 		tst	r3, #1
+ 261 0022 0BD1     		bne	.L14
+ 262 0024 7047     		bx	lr
+ 263              	.L15:
+ 190:Src/main.c    ****             ITM->PORT[port].u8 = *p++;
+ 264              		.loc 1 190 0 is_stmt 1 discriminator 1
+ 265 0026 4FF06043 		mov	r3, #-536870912
+ARM GAS  /tmp/ccwNXzWM.s 			page 13
+
+
+ 266 002a 53F82030 		ldr	r3, [r3, r0, lsl #2]
+ 267 002e 002B     		cmp	r3, #0
+ 268 0030 F9D0     		beq	.L15
+ 191:Src/main.c    ****         }   
+ 269              		.loc 1 191 0
+ 270 0032 0131     		adds	r1, r1, #1
+ 271              	.LVL3:
+ 272 0034 4FF06043 		mov	r3, #-536870912
+ 273 0038 03F82020 		strb	r2, [r3, r0, lsl #2]
+ 274              	.L14:
+ 188:Src/main.c    ****         {
+ 275              		.loc 1 188 0
+ 276 003c 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 277 003e 002A     		cmp	r2, #0
+ 278 0040 F1D1     		bne	.L15
+ 279              	.L12:
+ 280 0042 7047     		bx	lr
+ 281              	.L17:
+ 282              		.align	2
+ 283              	.L16:
+ 284 0044 00000000 		.word	.LANCHOR0
+ 285              		.cfi_endproc
+ 286              	.LFE71:
+ 288              		.global	__aeabi_i2d
+ 289              		.global	__aeabi_dmul
+ 290              		.section	.text.Func_LED0,"ax",%progbits
+ 291              		.align	2
+ 292              		.global	Func_LED0
+ 293              		.thumb
+ 294              		.thumb_func
+ 296              	Func_LED0:
+ 297              	.LFB77:
  396:Src/main.c    **** 
  397:Src/main.c    **** /* USER CODE BEGIN 4 */
  398:Src/main.c    **** 
@@ -532,1055 +761,868 @@ ARM GAS  /tmp/cckrPKnk.s 			page 1
  401:Src/main.c    **** /* Func_LED0 function */
  402:Src/main.c    **** void Func_LED0(void const * argument)
  403:Src/main.c    **** {
+ 298              		.loc 1 403 0
+ 299              		.cfi_startproc
+ 300              		@ args = 0, pretend = 0, frame = 32
+ 301              		@ frame_needed = 0, uses_anonymous_args = 0
+ 302              	.LVL4:
+ 303 0000 70B5     		push	{r4, r5, r6, lr}
+ 304              	.LCFI3:
+ 305              		.cfi_def_cfa_offset 16
+ 306              		.cfi_offset 4, -16
+ 307              		.cfi_offset 5, -12
+ 308              		.cfi_offset 6, -8
+ 309              		.cfi_offset 14, -4
+ 310 0002 88B0     		sub	sp, sp, #32
+ 311              	.LCFI4:
+ 312              		.cfi_def_cfa_offset 48
+ 313              	.LVL5:
+ 314              	.LBB4:
+ARM GAS  /tmp/ccwNXzWM.s 			page 14
+
+
  404:Src/main.c    **** 
  405:Src/main.c    ****   /* USER CODE BEGIN 5 */
- 406:Src/main.c    ****   /* Infinite loop */
- 407:Src/main.c    ****   for(;;)
- 408:Src/main.c    ****   {
- 409:Src/main.c    ****     //globalCounter = 0x0A;//0x0A表示Func_LED0
-ARM GAS  /tmp/cckrPKnk.s 			page 10
+ 406:Src/main.c    ****   for(int i=0; i<N; i++)//制造FFT输入序列   
+ 315              		.loc 1 406 0
+ 316 0004 0024     		movs	r4, #0
+ 317 0006 14E0     		b	.L19
+ 318              	.LVL6:
+ 319              	.L20:
+ 407:Src/main.c    ****   {
+ 408:Src/main.c    ****     data[i].real = sin(2*PI*i/N); 
+ 320              		.loc 1 408 0 discriminator 3
+ 321 0008 2046     		mov	r0, r4
+ 322 000a FFF7FEFF 		bl	__aeabi_i2d
+ 323              	.LVL7:
+ 324 000e 28A3     		adr	r3, .L23
+ 325 0010 D3E90023 		ldrd	r2, [r3]
+ 326 0014 FFF7FEFF 		bl	__aeabi_dmul
+ 327              	.LVL8:
+ 328 0018 0022     		movs	r2, #0
+ 329 001a 4FF07F53 		mov	r3, #1069547520
+ 330 001e FFF7FEFF 		bl	__aeabi_dmul
+ 331              	.LVL9:
+ 332 0022 FFF7FEFF 		bl	sin
+ 333              	.LVL10:
+ 334 0026 244B     		ldr	r3, .L23+8
+ 335 0028 03EB0413 		add	r3, r3, r4, lsl #4
+ 336 002c C3E90001 		strd	r0, [r3]
+ 406:Src/main.c    ****   {
+ 337              		.loc 1 406 0 discriminator 3
+ 338 0030 0134     		adds	r4, r4, #1
+ 339              	.LVL11:
+ 340              	.L19:
+ 406:Src/main.c    ****   {
+ 341              		.loc 1 406 0 is_stmt 0 discriminator 1
+ 342 0032 072C     		cmp	r4, #7
+ 343 0034 E8DD     		ble	.L20
+ 344              	.LVL12:
+ 345              	.L21:
+ 346              	.LBE4:
+ 409:Src/main.c    ****   }
+ 410:Src/main.c    ****   /* Infinite loop */
+ 411:Src/main.c    ****   for(;;)
+ 412:Src/main.c    ****   {
+ 413:Src/main.c    ****     //globalCounter = 0x0A;//0x0A表示Func_LED0
+ 414:Src/main.c    ****     osDelay(5);
+ 347              		.loc 1 414 0 is_stmt 1 discriminator 1
+ 348 0036 0520     		movs	r0, #5
+ 349 0038 FFF7FEFF 		bl	osDelay
+ 350              	.LVL13:
+ 415:Src/main.c    ****     HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_RESET);
+ 351              		.loc 1 415 0 discriminator 1
+ 352 003c 1F4C     		ldr	r4, .L23+12
+ 353 003e 0022     		movs	r2, #0
+ 354 0040 0821     		movs	r1, #8
+ 355 0042 2046     		mov	r0, r4
+ 356 0044 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 357              	.LVL14:
+ARM GAS  /tmp/ccwNXzWM.s 			page 15
 
 
- 410:Src/main.c    ****     osDelay(15);
- 411:Src/main.c    ****     HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_RESET);
- 412:Src/main.c    ****     osDelay(15);
- 413:Src/main.c    ****     HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_SET);
- 414:Src/main.c    **** 
- 415:Src/main.c    ****     //用来测量运行时间的PC6翻转，抓取这一次翻转到下一次翻转的时间
- 416:Src/main.c    ****     HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_RESET);
- 417:Src/main.c    ****     //osDelay(10);
- 418:Src/main.c    ****     HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_SET);
- 419:Src/main.c    **** 
- 420:Src/main.c    ****     ITM_Print(0,"LED0");
- 421:Src/main.c    ****   }
- 422:Src/main.c    ****   /* USER CODE END 5 */ 
- 423:Src/main.c    **** }
- 424:Src/main.c    **** 
- 425:Src/main.c    **** /* Func_LED1 function */
- 426:Src/main.c    **** void Func_LED1(void const * argument)
- 427:Src/main.c    **** {
- 108              		.loc 1 427 0
- 109              		.cfi_startproc
- 110              		@ args = 0, pretend = 0, frame = 24
- 111              		@ frame_needed = 0, uses_anonymous_args = 0
- 112              	.LVL2:
- 113 0000 30B5     		push	{r4, r5, lr}
- 114              	.LCFI3:
- 115              		.cfi_def_cfa_offset 12
- 116              		.cfi_offset 4, -12
- 117              		.cfi_offset 5, -8
- 118              		.cfi_offset 14, -4
- 119 0002 87B0     		sub	sp, sp, #28
- 120              	.LCFI4:
- 121              		.cfi_def_cfa_offset 40
- 428:Src/main.c    ****   /* USER CODE BEGIN Func_LED1 */
- 429:Src/main.c    ****   int values[5] = {35,2,235,11,2};
- 122              		.loc 1 429 0
- 123 0004 01AC     		add	r4, sp, #4
- 124 0006 204D     		ldr	r5, .L10+8
- 125 0008 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
- 126              	.LVL3:
- 127 000a 0FC4     		stmia	r4!, {r0, r1, r2, r3}
- 128 000c 2B68     		ldr	r3, [r5]
- 129 000e 2360     		str	r3, [r4]
- 130              	.LVL4:
- 131              	.L8:
- 430:Src/main.c    ****   int i = 0;
- 431:Src/main.c    ****   /* Infinite loop */
- 432:Src/main.c    ****   for(;;)
- 433:Src/main.c    ****   {
- 434:Src/main.c    ****     //globalCounter = 0x0B;//0x0B表示Func_LED1
- 435:Src/main.c    ****     osDelay(10);
- 132              		.loc 1 435 0
- 133 0010 0A20     		movs	r0, #10
- 134 0012 FFF7FEFF 		bl	osDelay
- 135              	.LVL5:
- 436:Src/main.c    ****     HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
- 136              		.loc 1 436 0
- 137 0016 1D4C     		ldr	r4, .L10+12
-ARM GAS  /tmp/cckrPKnk.s 			page 11
-
-
- 138 0018 0022     		movs	r2, #0
- 139 001a 1021     		movs	r1, #16
- 140 001c 2046     		mov	r0, r4
- 141 001e FFF7FEFF 		bl	HAL_GPIO_WritePin
- 142              	.LVL6:
- 437:Src/main.c    ****     osDelay(10);
- 143              		.loc 1 437 0
- 144 0022 0A20     		movs	r0, #10
- 145 0024 FFF7FEFF 		bl	osDelay
- 146              	.LVL7:
- 438:Src/main.c    ****     HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
- 147              		.loc 1 438 0
- 148 0028 0122     		movs	r2, #1
- 149 002a 1021     		movs	r1, #16
- 150 002c 2046     		mov	r0, r4
- 151 002e FFF7FEFF 		bl	HAL_GPIO_WritePin
- 152              	.LVL8:
- 439:Src/main.c    ****     //ITM_Print(0,"LED1");
- 440:Src/main.c    ****     //ETM_TraceMode();
- 441:Src/main.c    ****     //bubble_sort(values, 5);
- 442:Src/main.c    ****     //ETM_SetupMode();
- 443:Src/main.c    **** 
- 444:Src/main.c    ****     for(i=0; i<N; i++)//制造FFT输入序列   
- 153              		.loc 1 444 0
- 154 0032 0024     		movs	r4, #0
- 155 0034 14E0     		b	.L6
- 156              	.LVL9:
- 157              	.L7:
- 445:Src/main.c    ****     {
- 446:Src/main.c    ****         data[i].real = sin(2*PI*i/N); 
- 158              		.loc 1 446 0 discriminator 3
- 159 0036 2046     		mov	r0, r4
- 160 0038 FFF7FEFF 		bl	__aeabi_i2d
- 161              	.LVL10:
- 162 003c 10A3     		adr	r3, .L10
- 163 003e D3E90023 		ldrd	r2, [r3]
- 164 0042 FFF7FEFF 		bl	__aeabi_dmul
- 165              	.LVL11:
- 166 0046 0022     		movs	r2, #0
- 167 0048 4FF07F53 		mov	r3, #1069547520
- 168 004c FFF7FEFF 		bl	__aeabi_dmul
- 169              	.LVL12:
- 170 0050 FFF7FEFF 		bl	sin
- 171              	.LVL13:
- 172 0054 0E4B     		ldr	r3, .L10+16
- 173 0056 03EB0413 		add	r3, r3, r4, lsl #4
- 174 005a C3E90001 		strd	r0, [r3]
- 444:Src/main.c    ****     {
- 175              		.loc 1 444 0 discriminator 3
- 176 005e 0134     		adds	r4, r4, #1
- 177              	.LVL14:
- 178              	.L6:
- 444:Src/main.c    ****     {
- 179              		.loc 1 444 0 is_stmt 0 discriminator 1
- 180 0060 072C     		cmp	r4, #7
- 181 0062 E8DD     		ble	.L7
- 447:Src/main.c    ****     }
-ARM GAS  /tmp/cckrPKnk.s 			page 12
-
-
- 448:Src/main.c    ****     ETM_TraceMode();
- 182              		.loc 1 448 0 is_stmt 1
- 183 0064 0B4C     		ldr	r4, .L10+20
- 184              	.LVL15:
- 185 0066 2368     		ldr	r3, [r4]
- 186 0068 23F48063 		bic	r3, r3, #1024
- 187 006c 2360     		str	r3, [r4]
- 449:Src/main.c    ****     //FFT();
- 450:Src/main.c    ****     BinaryInsertSort(values, 5);
- 188              		.loc 1 450 0
- 189 006e 0521     		movs	r1, #5
- 190 0070 01A8     		add	r0, sp, #4
- 191 0072 FFF7FEFF 		bl	BinaryInsertSort
- 192              	.LVL16:
- 451:Src/main.c    ****     ETM_SetupMode();
- 193              		.loc 1 451 0
- 194 0076 2368     		ldr	r3, [r4]
- 195 0078 43F48063 		orr	r3, r3, #1024
- 196 007c 2360     		str	r3, [r4]
- 452:Src/main.c    **** 
- 453:Src/main.c    ****   }
- 197              		.loc 1 453 0
- 198 007e C7E7     		b	.L8
- 199              	.L11:
- 200              		.align	3
- 201              	.L10:
- 202 0080 1E264454 		.word	1413752350
- 203 0084 FB211940 		.word	1075388923
- 204 0088 00000000 		.word	.LANCHOR0
- 205 008c 00100140 		.word	1073811456
- 206 0090 00000000 		.word	data
- 207 0094 001004E0 		.word	-536604672
- 208              		.cfi_endproc
- 209              	.LFE78:
- 211              		.section	.text.configure_tracing,"ax",%progbits
- 212              		.align	2
- 213              		.global	configure_tracing
- 214              		.thumb
- 215              		.thumb_func
- 217              	configure_tracing:
- 218              	.LFB69:
-  86:Src/main.c    ****     /* STM32 specific configuration to enable the TRACESWO IO pin */
- 219              		.loc 1 86 0
- 220              		.cfi_startproc
- 221              		@ args = 0, pretend = 0, frame = 0
- 222              		@ frame_needed = 0, uses_anonymous_args = 0
- 223              		@ link register save eliminated.
-  88:Src/main.c    ****     AFIO->MAPR |= (2 << 24); // Disable JTAG to release TRACESWO
- 224              		.loc 1 88 0
- 225 0000 284A     		ldr	r2, .L14
- 226 0002 9369     		ldr	r3, [r2, #24]
- 227 0004 43F00103 		orr	r3, r3, #1
- 228 0008 9361     		str	r3, [r2, #24]
-  89:Src/main.c    ****     DBGMCU->CR |= DBGMCU_CR_TRACE_IOEN; // Enable IO trace pins
- 229              		.loc 1 89 0
- 230 000a A2F58832 		sub	r2, r2, #69632
- 231 000e 5368     		ldr	r3, [r2, #4]
-ARM GAS  /tmp/cckrPKnk.s 			page 13
-
-
- 232 0010 43F00073 		orr	r3, r3, #33554432
- 233 0014 5360     		str	r3, [r2, #4]
-  90:Src/main.c    ****     
- 234              		.loc 1 90 0
- 235 0016 244B     		ldr	r3, .L14+4
- 236 0018 5A68     		ldr	r2, [r3, #4]
- 237 001a 42F02002 		orr	r2, r2, #32
- 238 001e 5A60     		str	r2, [r3, #4]
-  92:Src/main.c    ****     {
- 239              		.loc 1 92 0
- 240 0020 5B68     		ldr	r3, [r3, #4]
- 241 0022 13F0200F 		tst	r3, #32
- 242 0026 3BD0     		beq	.L12
- 102:Src/main.c    ****     TPI->ACPR = 8; // Trace clock = HCLK/(x+1) = 8MHz    这里HCLK是处理器时钟,这个值的�
- 243              		.loc 1 102 0
- 244 0028 204A     		ldr	r2, .L14+8
- 245 002a D368     		ldr	r3, [r2, #12]
- 246 002c 43F08073 		orr	r3, r3, #16777216
- 247 0030 D360     		str	r3, [r2, #12]
- 103:Src/main.c    ****     TPI->SPPR = 2; // Pin protocol = NRZ/USART
- 248              		.loc 1 103 0
- 249 0032 1F4B     		ldr	r3, .L14+12
- 250 0034 0822     		movs	r2, #8
- 251 0036 1A61     		str	r2, [r3, #16]
- 104:Src/main.c    ****     
- 252              		.loc 1 104 0
- 253 0038 0221     		movs	r1, #2
- 254 003a C3F8F010 		str	r1, [r3, #240]
- 106:Src/main.c    ****     //TPI->FFCR = 0x100; //为什么设置102开启ETM后，ITM输出就不对了？？,在博客ht
- 255              		.loc 1 106 0
- 256 003e 4FF48172 		mov	r2, #258
- 257 0042 C3F80423 		str	r2, [r3, #772]
- 113:Src/main.c    ****                                            // 0 = x32, 1 = x512  //
- 258              		.loc 1 113 0
- 259 0046 1B4A     		ldr	r2, .L14+16
- 260 0048 A3F57C33 		sub	r3, r3, #258048
- 261 004c 1A60     		str	r2, [r3]
- 126:Src/main.c    ****     ITM->TCR = (1 << ITM_TCR_TraceBusID_Pos) // Trace bus ID for TPIU
- 262              		.loc 1 126 0
- 263 004e 4FF06043 		mov	r3, #-536870912
- 264 0052 A2F16952 		sub	r2, r2, #977272832
- 265 0056 A2F5A212 		sub	r2, r2, #1327104
- 266 005a A2F6AC32 		subw	r2, r2, #2988
- 267 005e C3F8B02F 		str	r2, [r3, #4016]
- 127:Src/main.c    ****              | (1 << ITM_TCR_DWTENA_Pos) // Enable events from DWT
- 268              		.loc 1 127 0
- 269 0062 1548     		ldr	r0, .L14+20
- 270 0064 C3F8800E 		str	r0, [r3, #3712]
- 131:Src/main.c    **** 
- 271              		.loc 1 131 0
- 272 0068 4FF0FF30 		mov	r0, #-1
- 273 006c C3F8000E 		str	r0, [r3, #3584]
- 142:Src/main.c    ****     ETM_SetupMode();
- 274              		.loc 1 142 0
- 275 0070 03F58223 		add	r3, r3, #266240
- 276 0074 C3F8B02F 		str	r2, [r3, #4016]
- 143:Src/main.c    ****     ETM->CR = ETM_CR_ETMEN // Enable ETM output port
-ARM GAS  /tmp/cckrPKnk.s 			page 14
-
-
- 277              		.loc 1 143 0
- 278 0078 1A68     		ldr	r2, [r3]
- 279 007a 42F48062 		orr	r2, r2, #1024
- 280 007e 1A60     		str	r2, [r3]
- 144:Src/main.c    ****             | ETM_CR_STALL_PROCESSOR // Stall processor when fifo is full
- 281              		.loc 1 144 0
- 282 0080 4FF41962 		mov	r2, #2448
- 283 0084 1A60     		str	r2, [r3]
- 148:Src/main.c    ****     ETM->TECR1 = ETM_TECR1_EXCLUDE; // Trace always enabled
- 284              		.loc 1 148 0
- 285 0086 C3F80012 		str	r1, [r3, #512]
- 149:Src/main.c    ****     ETM->FFRR = ETM_FFRR_EXCLUDE; // Stalling always enabled
- 286              		.loc 1 149 0
- 287 008a 4FF08072 		mov	r2, #16777216
- 288 008e 5A62     		str	r2, [r3, #36]
- 150:Src/main.c    ****     ETM->FFLR = 24; // Stall when less than N bytes free in FIFO (range 1..24)
- 289              		.loc 1 150 0
- 290 0090 9A62     		str	r2, [r3, #40]
- 151:Src/main.c    ****                     // Larger values mean less latency in trace, but more stalls.
- 291              		.loc 1 151 0
- 292 0092 1822     		movs	r2, #24
- 293 0094 DA62     		str	r2, [r3, #44]
- 155:Src/main.c    ****     ETM->TEEVR = 0x0000006F;
- 294              		.loc 1 155 0
- 295 0096 44F26F02 		movw	r2, #16495
- 296 009a 9A60     		str	r2, [r3, #8]
- 156:Src/main.c    ****     //ETM->TSSCR = 0x00000001;
- 297              		.loc 1 156 0
- 298 009c 6F22     		movs	r2, #111
- 299 009e 1A62     		str	r2, [r3, #32]
- 300              	.L12:
- 301 00a0 7047     		bx	lr
- 302              	.L15:
- 303 00a2 00BF     		.align	2
- 304              	.L14:
- 305 00a4 00100240 		.word	1073876992
- 306 00a8 002004E0 		.word	-536600576
- 307 00ac F0ED00E0 		.word	-536810000
- 308 00b0 000004E0 		.word	-536608768
- 309 00b4 011A0100 		.word	72193
- 310 00b8 0D000100 		.word	65549
- 311              		.cfi_endproc
- 312              	.LFE69:
- 314              		.section	.text.configure_watchpoint,"ax",%progbits
- 315              		.align	2
- 316              		.global	configure_watchpoint
- 317              		.thumb
- 318              		.thumb_func
- 320              	configure_watchpoint:
- 321              	.LFB70:
- 162:Src/main.c    ****     /* This is an example of how to configure DWT to monitor a watchpoint.
- 322              		.loc 1 162 0
- 323              		.cfi_startproc
- 324              		@ args = 0, pretend = 0, frame = 0
- 325              		@ frame_needed = 0, uses_anonymous_args = 0
- 326              		@ link register save eliminated.
- 178:Src/main.c    ****     DWT->MASK1 = 2;
-ARM GAS  /tmp/cckrPKnk.s 			page 15
-
-
- 327              		.loc 1 178 0
- 328 0000 034B     		ldr	r3, .L17
- 329 0002 044A     		ldr	r2, .L17+4
- 330 0004 1A63     		str	r2, [r3, #48]
- 179:Src/main.c    ****     DWT->FUNCTION1 = (3 << DWT_FUNCTION_FUNCTION_Pos); // Report data and PC on watchpoint hit
- 331              		.loc 1 179 0
- 332 0006 0222     		movs	r2, #2
- 333 0008 5A63     		str	r2, [r3, #52]
- 180:Src/main.c    **** }
- 334              		.loc 1 180 0
- 335 000a 0322     		movs	r2, #3
- 336 000c 9A63     		str	r2, [r3, #56]
- 337 000e 7047     		bx	lr
- 338              	.L18:
- 339              		.align	2
- 340              	.L17:
- 341 0010 001000E0 		.word	-536866816
- 342 0014 00000000 		.word	.LANCHOR1
- 343              		.cfi_endproc
- 344              	.LFE70:
- 346              		.section	.text.ITM_Print,"ax",%progbits
- 347              		.align	2
- 348              		.global	ITM_Print
- 349              		.thumb
- 350              		.thumb_func
- 352              	ITM_Print:
- 353              	.LFB71:
- 184:Src/main.c    ****     globalCounter = 0x0C;
- 354              		.loc 1 184 0
- 355              		.cfi_startproc
- 356              		@ args = 0, pretend = 0, frame = 0
- 357              		@ frame_needed = 0, uses_anonymous_args = 0
- 358              		@ link register save eliminated.
- 359              	.LVL17:
- 185:Src/main.c    ****     if ((ITM->TCR & ITM_TCR_ITMENA_Msk) && (ITM->TER & (1UL << port)))
- 360              		.loc 1 185 0
- 361 0000 0C22     		movs	r2, #12
- 362 0002 104B     		ldr	r3, .L23
- 363 0004 1A60     		str	r2, [r3]
- 186:Src/main.c    ****     {
- 364              		.loc 1 186 0
- 365 0006 4FF06043 		mov	r3, #-536870912
- 366 000a D3F8803E 		ldr	r3, [r3, #3712]
- 367 000e 13F0010F 		tst	r3, #1
- 368 0012 16D0     		beq	.L19
- 186:Src/main.c    ****     {
- 369              		.loc 1 186 0 is_stmt 0 discriminator 1
- 370 0014 4FF06043 		mov	r3, #-536870912
- 371 0018 D3F8003E 		ldr	r3, [r3, #3584]
- 372 001c C340     		lsrs	r3, r3, r0
- 373 001e 13F0010F 		tst	r3, #1
- 374 0022 0BD1     		bne	.L21
- 375 0024 7047     		bx	lr
- 376              	.L22:
- 190:Src/main.c    ****             ITM->PORT[port].u8 = *p++;
- 377              		.loc 1 190 0 is_stmt 1 discriminator 1
- 378 0026 4FF06043 		mov	r3, #-536870912
-ARM GAS  /tmp/cckrPKnk.s 			page 16
-
-
- 379 002a 53F82030 		ldr	r3, [r3, r0, lsl #2]
- 380 002e 002B     		cmp	r3, #0
- 381 0030 F9D0     		beq	.L22
- 191:Src/main.c    ****         }   
- 382              		.loc 1 191 0
- 383 0032 0131     		adds	r1, r1, #1
- 384              	.LVL18:
- 385 0034 4FF06043 		mov	r3, #-536870912
- 386 0038 03F82020 		strb	r2, [r3, r0, lsl #2]
- 387              	.L21:
- 188:Src/main.c    ****         {
- 388              		.loc 1 188 0
- 389 003c 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
- 390 003e 002A     		cmp	r2, #0
- 391 0040 F1D1     		bne	.L22
- 392              	.L19:
- 393 0042 7047     		bx	lr
- 394              	.L24:
- 395              		.align	2
- 396              	.L23:
- 397 0044 00000000 		.word	.LANCHOR1
- 398              		.cfi_endproc
- 399              	.LFE71:
- 401              		.section	.text.Func_LED0,"ax",%progbits
- 402              		.align	2
- 403              		.global	Func_LED0
- 404              		.thumb
- 405              		.thumb_func
- 407              	Func_LED0:
- 408              	.LFB77:
- 403:Src/main.c    **** 
- 409              		.loc 1 403 0
- 410              		.cfi_startproc
- 411              		@ Volatile: function does not return.
- 412              		@ args = 0, pretend = 0, frame = 0
- 413              		@ frame_needed = 0, uses_anonymous_args = 0
- 414              	.LVL19:
- 415 0000 08B5     		push	{r3, lr}
- 416              	.LCFI5:
- 417              		.cfi_def_cfa_offset 8
- 418              		.cfi_offset 3, -8
- 419              		.cfi_offset 14, -4
- 420              	.LVL20:
- 421              	.L26:
- 410:Src/main.c    ****     HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_RESET);
- 422              		.loc 1 410 0 discriminator 1
- 423 0002 0F20     		movs	r0, #15
- 424 0004 FFF7FEFF 		bl	osDelay
- 425              	.LVL21:
- 411:Src/main.c    ****     osDelay(15);
- 426              		.loc 1 411 0 discriminator 1
- 427 0008 0E4C     		ldr	r4, .L28
- 428 000a 0022     		movs	r2, #0
- 429 000c 0821     		movs	r1, #8
- 430 000e 2046     		mov	r0, r4
- 431 0010 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 432              	.LVL22:
-ARM GAS  /tmp/cckrPKnk.s 			page 17
-
-
- 412:Src/main.c    ****     HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_SET);
- 433              		.loc 1 412 0 discriminator 1
- 434 0014 0F20     		movs	r0, #15
- 435 0016 FFF7FEFF 		bl	osDelay
- 436              	.LVL23:
- 413:Src/main.c    **** 
- 437              		.loc 1 413 0 discriminator 1
- 438 001a 0122     		movs	r2, #1
- 439 001c 0821     		movs	r1, #8
- 440 001e 2046     		mov	r0, r4
- 441 0020 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 442              	.LVL24:
- 416:Src/main.c    ****     //osDelay(10);
- 443              		.loc 1 416 0 discriminator 1
- 444 0024 0022     		movs	r2, #0
- 445 0026 4021     		movs	r1, #64
- 446 0028 2046     		mov	r0, r4
- 447 002a FFF7FEFF 		bl	HAL_GPIO_WritePin
- 448              	.LVL25:
+ 416:Src/main.c    ****     osDelay(5);
+ 358              		.loc 1 416 0 discriminator 1
+ 359 0048 0520     		movs	r0, #5
+ 360 004a FFF7FEFF 		bl	osDelay
+ 361              	.LVL15:
+ 417:Src/main.c    ****     HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_SET);
+ 362              		.loc 1 417 0 discriminator 1
+ 363 004e 0122     		movs	r2, #1
+ 364 0050 0821     		movs	r1, #8
+ 365 0052 2046     		mov	r0, r4
+ 366 0054 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 367              	.LVL16:
  418:Src/main.c    **** 
- 449              		.loc 1 418 0 discriminator 1
- 450 002e 0122     		movs	r2, #1
- 451 0030 4021     		movs	r1, #64
- 452 0032 2046     		mov	r0, r4
- 453 0034 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 454              	.LVL26:
- 420:Src/main.c    ****   }
- 455              		.loc 1 420 0 discriminator 1
- 456 0038 0349     		ldr	r1, .L28+4
- 457 003a 0020     		movs	r0, #0
- 458 003c FFF7FEFF 		bl	ITM_Print
- 459              	.LVL27:
- 460 0040 DFE7     		b	.L26
- 461              	.L29:
- 462 0042 00BF     		.align	2
- 463              	.L28:
- 464 0044 00100140 		.word	1073811456
- 465 0048 00000000 		.word	.LC5
- 466              		.cfi_endproc
- 467              	.LFE77:
- 469              		.section	.text.ITM_SendValue,"ax",%progbits
- 470              		.align	2
- 471              		.global	ITM_SendValue
- 472              		.thumb
- 473              		.thumb_func
- 475              	ITM_SendValue:
- 476              	.LFB72:
+ 419:Src/main.c    ****     //用来测量运行时间的PC6翻转，抓取这一次翻转到下一次翻转的时间
+ 420:Src/main.c    ****     HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_RESET);
+ 368              		.loc 1 420 0 discriminator 1
+ 369 0058 0022     		movs	r2, #0
+ 370 005a 4021     		movs	r1, #64
+ 371 005c 2046     		mov	r0, r4
+ 372 005e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 373              	.LVL17:
+ 421:Src/main.c    ****     //osDelay(10);
+ 422:Src/main.c    ****     HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_SET);
+ 374              		.loc 1 422 0 discriminator 1
+ 375 0062 0122     		movs	r2, #1
+ 376 0064 4021     		movs	r1, #64
+ 377 0066 2046     		mov	r0, r4
+ 378 0068 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 379              	.LVL18:
+ 423:Src/main.c    ****     
+ 424:Src/main.c    ****     ETM_TraceMode();
+ 380              		.loc 1 424 0 discriminator 1
+ 381 006c 144D     		ldr	r5, .L23+16
+ 382 006e 2B68     		ldr	r3, [r5]
+ 383 0070 23F48063 		bic	r3, r3, #1024
+ 384 0074 2B60     		str	r3, [r5]
+ 425:Src/main.c    ****     FFT(ChangeSeat(data));
+ 385              		.loc 1 425 0 discriminator 1
+ 386 0076 104E     		ldr	r6, .L23+8
+ 387 0078 3146     		mov	r1, r6
+ 388 007a 6846     		mov	r0, sp
+ 389 007c FFF7FEFF 		bl	ChangeSeat
+ 390              	.LVL19:
+ 391 0080 9DE80F00 		ldmia	sp, {r0, r1, r2, r3}
+ 392 0084 FFF7FEFF 		bl	FFT
+ 393              	.LVL20:
+ 426:Src/main.c    ****     IFFT(ChangeSeat(data));
+ 394              		.loc 1 426 0 discriminator 1
+ 395 0088 04AC     		add	r4, sp, #16
+ 396 008a 3146     		mov	r1, r6
+ 397 008c 2046     		mov	r0, r4
+ 398 008e FFF7FEFF 		bl	ChangeSeat
+ 399              	.LVL21:
+ 400 0092 94E80F00 		ldmia	r4, {r0, r1, r2, r3}
+ 401 0096 FFF7FEFF 		bl	IFFT
+ 402              	.LVL22:
+ 427:Src/main.c    ****     ETM_SetupMode();
+ARM GAS  /tmp/ccwNXzWM.s 			page 16
+
+
+ 403              		.loc 1 427 0 discriminator 1
+ 404 009a 2B68     		ldr	r3, [r5]
+ 405 009c 43F48063 		orr	r3, r3, #1024
+ 406 00a0 2B60     		str	r3, [r5]
+ 428:Src/main.c    **** 
+ 429:Src/main.c    ****     ITM_Print(0,"LED0");
+ 407              		.loc 1 429 0 discriminator 1
+ 408 00a2 0849     		ldr	r1, .L23+20
+ 409 00a4 0020     		movs	r0, #0
+ 410 00a6 FFF7FEFF 		bl	ITM_Print
+ 411              	.LVL23:
+ 412 00aa C4E7     		b	.L21
+ 413              	.L24:
+ 414 00ac AFF30080 		.align	3
+ 415              	.L23:
+ 416 00b0 1E264454 		.word	1413752350
+ 417 00b4 FB211940 		.word	1075388923
+ 418 00b8 00000000 		.word	data
+ 419 00bc 00100140 		.word	1073811456
+ 420 00c0 001004E0 		.word	-536604672
+ 421 00c4 00000000 		.word	.LC6
+ 422              		.cfi_endproc
+ 423              	.LFE77:
+ 425              		.section	.text.ITM_SendValue,"ax",%progbits
+ 426              		.align	2
+ 427              		.global	ITM_SendValue
+ 428              		.thumb
+ 429              		.thumb_func
+ 431              	ITM_SendValue:
+ 432              	.LFB72:
  197:Src/main.c    ****     if ((ITM->TCR & ITM_TCR_ITMENA_Msk) && (ITM->TER & (1UL << port)))
- 477              		.loc 1 197 0
- 478              		.cfi_startproc
- 479              		@ args = 0, pretend = 0, frame = 0
- 480              		@ frame_needed = 0, uses_anonymous_args = 0
- 481              		@ link register save eliminated.
- 482              	.LVL28:
+ 433              		.loc 1 197 0
+ 434              		.cfi_startproc
+ 435              		@ args = 0, pretend = 0, frame = 0
+ 436              		@ frame_needed = 0, uses_anonymous_args = 0
+ 437              		@ link register save eliminated.
+ 438              	.LVL24:
  198:Src/main.c    ****     {
- 483              		.loc 1 198 0
- 484 0000 4FF06043 		mov	r3, #-536870912
-ARM GAS  /tmp/cckrPKnk.s 			page 18
-
-
- 485 0004 D3F8803E 		ldr	r3, [r3, #3712]
- 486 0008 13F0010F 		tst	r3, #1
- 487 000c 11D0     		beq	.L30
+ 439              		.loc 1 198 0
+ 440 0000 4FF06043 		mov	r3, #-536870912
+ 441 0004 D3F8803E 		ldr	r3, [r3, #3712]
+ 442 0008 13F0010F 		tst	r3, #1
+ 443 000c 11D0     		beq	.L25
  198:Src/main.c    ****     {
- 488              		.loc 1 198 0 is_stmt 0 discriminator 1
- 489 000e 4FF06043 		mov	r3, #-536870912
- 490 0012 D3F8003E 		ldr	r3, [r3, #3584]
- 491 0016 C340     		lsrs	r3, r3, r0
- 492 0018 13F0010F 		tst	r3, #1
- 493 001c 09D0     		beq	.L30
- 494              	.L32:
+ 444              		.loc 1 198 0 is_stmt 0 discriminator 1
+ 445 000e 4FF06043 		mov	r3, #-536870912
+ 446 0012 D3F8003E 		ldr	r3, [r3, #3584]
+ 447 0016 C340     		lsrs	r3, r3, r0
+ 448 0018 13F0010F 		tst	r3, #1
+ 449 001c 09D0     		beq	.L25
+ 450              	.L27:
  200:Src/main.c    ****         ITM->PORT[port].u32 = value;
- 495              		.loc 1 200 0 is_stmt 1 discriminator 1
- 496 001e 4FF06043 		mov	r3, #-536870912
- 497 0022 53F82030 		ldr	r3, [r3, r0, lsl #2]
- 498 0026 002B     		cmp	r3, #0
- 499 0028 F9D0     		beq	.L32
+ 451              		.loc 1 200 0 is_stmt 1 discriminator 1
+ 452 001e 4FF06043 		mov	r3, #-536870912
+ 453 0022 53F82030 		ldr	r3, [r3, r0, lsl #2]
+ 454 0026 002B     		cmp	r3, #0
+ 455 0028 F9D0     		beq	.L27
+ARM GAS  /tmp/ccwNXzWM.s 			page 17
+
+
  201:Src/main.c    ****     }
- 500              		.loc 1 201 0
- 501 002a 4FF06043 		mov	r3, #-536870912
- 502 002e 43F82010 		str	r1, [r3, r0, lsl #2]
- 503              	.L30:
- 504 0032 7047     		bx	lr
- 505              		.cfi_endproc
- 506              	.LFE72:
- 508              		.section	.text.bubble_sort,"ax",%progbits
- 509              		.align	2
- 510              		.global	bubble_sort
- 511              		.thumb
- 512              		.thumb_func
- 514              	bubble_sort:
- 515              	.LFB73:
+ 456              		.loc 1 201 0
+ 457 002a 4FF06043 		mov	r3, #-536870912
+ 458 002e 43F82010 		str	r1, [r3, r0, lsl #2]
+ 459              	.L25:
+ 460 0032 7047     		bx	lr
+ 461              		.cfi_endproc
+ 462              	.LFE72:
+ 464              		.section	.text.bubble_sort,"ax",%progbits
+ 465              		.align	2
+ 466              		.global	bubble_sort
+ 467              		.thumb
+ 468              		.thumb_func
+ 470              	bubble_sort:
+ 471              	.LFB73:
  206:Src/main.c    ****     globalCounter = 0x0D;
- 516              		.loc 1 206 0
- 517              		.cfi_startproc
- 518              		@ args = 0, pretend = 0, frame = 0
- 519              		@ frame_needed = 0, uses_anonymous_args = 0
- 520              		@ link register save eliminated.
- 521              	.LVL29:
- 522 0000 70B4     		push	{r4, r5, r6}
- 523              	.LCFI6:
- 524              		.cfi_def_cfa_offset 12
- 525              		.cfi_offset 4, -12
- 526              		.cfi_offset 5, -8
- 527              		.cfi_offset 6, -4
+ 472              		.loc 1 206 0
+ 473              		.cfi_startproc
+ 474              		@ args = 0, pretend = 0, frame = 0
+ 475              		@ frame_needed = 0, uses_anonymous_args = 0
+ 476              		@ link register save eliminated.
+ 477              	.LVL25:
+ 478 0000 70B4     		push	{r4, r5, r6}
+ 479              	.LCFI5:
+ 480              		.cfi_def_cfa_offset 12
+ 481              		.cfi_offset 4, -12
+ 482              		.cfi_offset 5, -8
+ 483              		.cfi_offset 6, -4
  207:Src/main.c    ****     int i, t, s = 1;
- 528              		.loc 1 207 0
- 529 0002 0D22     		movs	r2, #13
- 530 0004 0D4B     		ldr	r3, .L40
- 531 0006 1A60     		str	r2, [r3]
- 532              	.LVL30:
+ 484              		.loc 1 207 0
+ 485 0002 0D22     		movs	r2, #13
+ 486 0004 0D4B     		ldr	r3, .L35
+ 487 0006 1A60     		str	r2, [r3]
+ 488              	.LVL26:
  208:Src/main.c    ****     while (s) 
- 533              		.loc 1 208 0
- 534 0008 0126     		movs	r6, #1
+ 489              		.loc 1 208 0
+ 490 0008 0126     		movs	r6, #1
  209:Src/main.c    ****     {
- 535              		.loc 1 209 0
- 536 000a 13E0     		b	.L34
-ARM GAS  /tmp/cckrPKnk.s 			page 19
-
-
- 537              	.LVL31:
- 538              	.L36:
+ 491              		.loc 1 209 0
+ 492 000a 13E0     		b	.L29
+ 493              	.LVL27:
+ 494              	.L31:
  214:Src/main.c    ****             {
- 539              		.loc 1 214 0
- 540 000c 50F82340 		ldr	r4, [r0, r3, lsl #2]
- 541 0010 03F18042 		add	r2, r3, #1073741824
- 542 0014 013A     		subs	r2, r2, #1
- 543 0016 50F82250 		ldr	r5, [r0, r2, lsl #2]
- 544 001a AC42     		cmp	r4, r5
- 545 001c 04DA     		bge	.L35
- 546              	.LVL32:
+ 495              		.loc 1 214 0
+ 496 000c 50F82340 		ldr	r4, [r0, r3, lsl #2]
+ 497 0010 03F18042 		add	r2, r3, #1073741824
+ 498 0014 013A     		subs	r2, r2, #1
+ 499 0016 50F82250 		ldr	r5, [r0, r2, lsl #2]
+ 500 001a AC42     		cmp	r4, r5
+ 501 001c 04DA     		bge	.L30
+ 502              	.LVL28:
  217:Src/main.c    ****                 a[i - 1] = t;
- 547              		.loc 1 217 0
- 548 001e 40F82350 		str	r5, [r0, r3, lsl #2]
+ 503              		.loc 1 217 0
+ 504 001e 40F82350 		str	r5, [r0, r3, lsl #2]
  218:Src/main.c    ****                 s = 1;            
- 549              		.loc 1 218 0
- 550 0022 40F82240 		str	r4, [r0, r2, lsl #2]
- 551              	.LVL33:
+ 505              		.loc 1 218 0
+ 506 0022 40F82240 		str	r4, [r0, r2, lsl #2]
+ARM GAS  /tmp/ccwNXzWM.s 			page 18
+
+
+ 507              	.LVL29:
  219:Src/main.c    ****             }
- 552              		.loc 1 219 0
- 553 0026 0126     		movs	r6, #1
- 554              	.LVL34:
- 555              	.L35:
+ 508              		.loc 1 219 0
+ 509 0026 0126     		movs	r6, #1
+ 510              	.LVL30:
+ 511              	.L30:
  212:Src/main.c    ****         {
- 556              		.loc 1 212 0 discriminator 2
- 557 0028 0133     		adds	r3, r3, #1
- 558              	.LVL35:
- 559 002a 01E0     		b	.L37
- 560              	.LVL36:
- 561              	.L38:
- 562 002c 0026     		movs	r6, #0
- 563              	.LVL37:
- 564 002e 0123     		movs	r3, #1
- 565              	.L37:
- 566              	.LVL38:
+ 512              		.loc 1 212 0 discriminator 2
+ 513 0028 0133     		adds	r3, r3, #1
+ 514              	.LVL31:
+ 515 002a 01E0     		b	.L32
+ 516              	.LVL32:
+ 517              	.L33:
+ 518 002c 0026     		movs	r6, #0
+ 519              	.LVL33:
+ 520 002e 0123     		movs	r3, #1
+ 521              	.L32:
+ 522              	.LVL34:
  212:Src/main.c    ****         {
- 567              		.loc 1 212 0 is_stmt 0 discriminator 1
- 568 0030 8B42     		cmp	r3, r1
- 569 0032 EBDB     		blt	.L36
- 570              	.LVL39:
- 571              	.L34:
+ 523              		.loc 1 212 0 is_stmt 0 discriminator 1
+ 524 0030 8B42     		cmp	r3, r1
+ 525 0032 EBDB     		blt	.L31
+ 526              	.LVL35:
+ 527              	.L29:
  209:Src/main.c    ****     {
- 572              		.loc 1 209 0 is_stmt 1
- 573 0034 002E     		cmp	r6, #0
- 574 0036 F9D1     		bne	.L38
+ 528              		.loc 1 209 0 is_stmt 1
+ 529 0034 002E     		cmp	r6, #0
+ 530 0036 F9D1     		bne	.L33
  223:Src/main.c    **** 
- 575              		.loc 1 223 0
- 576 0038 70BC     		pop	{r4, r5, r6}
- 577              	.LCFI7:
- 578              		.cfi_restore 6
- 579              		.cfi_restore 5
- 580              		.cfi_restore 4
- 581              		.cfi_def_cfa_offset 0
- 582              	.LVL40:
- 583 003a 7047     		bx	lr
- 584              	.L41:
- 585              		.align	2
-ARM GAS  /tmp/cckrPKnk.s 			page 20
+ 531              		.loc 1 223 0
+ 532 0038 70BC     		pop	{r4, r5, r6}
+ 533              	.LCFI6:
+ 534              		.cfi_restore 6
+ 535              		.cfi_restore 5
+ 536              		.cfi_restore 4
+ 537              		.cfi_def_cfa_offset 0
+ 538              	.LVL36:
+ 539 003a 7047     		bx	lr
+ 540              	.L36:
+ 541              		.align	2
+ 542              	.L35:
+ 543 003c 00000000 		.word	.LANCHOR0
+ 544              		.cfi_endproc
+ 545              	.LFE73:
+ 547              		.section	.text.Func_LED1,"ax",%progbits
+ 548              		.align	2
+ 549              		.global	Func_LED1
+ 550              		.thumb
+ 551              		.thumb_func
+ 553              	Func_LED1:
+ 554              	.LFB78:
+ 430:Src/main.c    ****   }
+ 431:Src/main.c    ****   /* USER CODE END 5 */ 
+ 432:Src/main.c    **** }
+ 433:Src/main.c    **** 
+ 434:Src/main.c    **** /* Func_LED1 function */
+ 435:Src/main.c    **** void Func_LED1(void const * argument)
+ARM GAS  /tmp/ccwNXzWM.s 			page 19
 
 
- 586              	.L40:
- 587 003c 00000000 		.word	.LANCHOR1
- 588              		.cfi_endproc
- 589              	.LFE73:
- 591              		.section	.text.HAL_TIM_PeriodElapsedCallback,"ax",%progbits
- 592              		.align	2
- 593              		.global	HAL_TIM_PeriodElapsedCallback
- 594              		.thumb
- 595              		.thumb_func
- 597              	HAL_TIM_PeriodElapsedCallback:
- 598              	.LFB79:
- 454:Src/main.c    ****   /* USER CODE END Func_LED1 */
- 455:Src/main.c    **** }
- 456:Src/main.c    **** 
- 457:Src/main.c    **** /**
- 458:Src/main.c    ****   * @brief  Period elapsed callback in non blocking mode
- 459:Src/main.c    ****   * @note   This function is called  when TIM4 interrupt took place, inside
- 460:Src/main.c    ****   * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
- 461:Src/main.c    ****   * a global variable "uwTick" used as application time base.
- 462:Src/main.c    ****   * @param  htim : TIM handle
- 463:Src/main.c    ****   * @retval None
- 464:Src/main.c    ****   */
- 465:Src/main.c    **** void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
- 466:Src/main.c    **** {
- 599              		.loc 1 466 0
- 600              		.cfi_startproc
- 601              		@ args = 0, pretend = 0, frame = 0
- 602              		@ frame_needed = 0, uses_anonymous_args = 0
- 603              	.LVL41:
- 604 0000 08B5     		push	{r3, lr}
- 605              	.LCFI8:
- 606              		.cfi_def_cfa_offset 8
- 607              		.cfi_offset 3, -8
- 608              		.cfi_offset 14, -4
- 467:Src/main.c    ****   /* USER CODE BEGIN Callback 0 */
- 468:Src/main.c    **** 
- 469:Src/main.c    ****   /* USER CODE END Callback 0 */
- 470:Src/main.c    ****   if (htim->Instance == TIM4) {
- 609              		.loc 1 470 0
- 610 0002 0268     		ldr	r2, [r0]
- 611 0004 024B     		ldr	r3, .L45
- 612 0006 9A42     		cmp	r2, r3
- 613 0008 01D1     		bne	.L42
- 471:Src/main.c    ****     HAL_IncTick();
- 614              		.loc 1 471 0
- 615 000a FFF7FEFF 		bl	HAL_IncTick
- 616              	.LVL42:
- 617              	.L42:
- 618 000e 08BD     		pop	{r3, pc}
- 619              	.L46:
- 620              		.align	2
- 621              	.L45:
- 622 0010 00080040 		.word	1073743872
- 623              		.cfi_endproc
- 624              	.LFE79:
- 626              		.section	.text._Error_Handler,"ax",%progbits
- 627              		.align	2
-ARM GAS  /tmp/cckrPKnk.s 			page 21
+ 436:Src/main.c    **** {
+ 555              		.loc 1 436 0
+ 556              		.cfi_startproc
+ 557              		@ args = 0, pretend = 0, frame = 40
+ 558              		@ frame_needed = 0, uses_anonymous_args = 0
+ 559              	.LVL37:
+ 560 0000 70B5     		push	{r4, r5, r6, lr}
+ 561              	.LCFI7:
+ 562              		.cfi_def_cfa_offset 16
+ 563              		.cfi_offset 4, -16
+ 564              		.cfi_offset 5, -12
+ 565              		.cfi_offset 6, -8
+ 566              		.cfi_offset 14, -4
+ 567 0002 8AB0     		sub	sp, sp, #40
+ 568              	.LCFI8:
+ 569              		.cfi_def_cfa_offset 56
+ 437:Src/main.c    ****   /* USER CODE BEGIN Func_LED1 */
+ 438:Src/main.c    ****   int values_1[5] = {35,2,235,11,2};
+ 570              		.loc 1 438 0
+ 571 0004 134C     		ldr	r4, .L40
+ 572 0006 05AD     		add	r5, sp, #20
+ 573 0008 2646     		mov	r6, r4
+ 574 000a 0FCE     		ldmia	r6!, {r0, r1, r2, r3}
+ 575              	.LVL38:
+ 576 000c 0FC5     		stmia	r5!, {r0, r1, r2, r3}
+ 577 000e 3368     		ldr	r3, [r6]
+ 578 0010 2B60     		str	r3, [r5]
+ 439:Src/main.c    ****   int values_2[5] = {30,1,214,10,8};
+ 579              		.loc 1 439 0
+ 580 0012 6D46     		mov	r5, sp
+ 581 0014 1434     		adds	r4, r4, #20
+ 582 0016 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
+ 583 0018 0FC5     		stmia	r5!, {r0, r1, r2, r3}
+ 584 001a 2368     		ldr	r3, [r4]
+ 585 001c 2B60     		str	r3, [r5]
+ 586              	.L38:
+ 440:Src/main.c    ****   /* Infinite loop */
+ 441:Src/main.c    ****   for(;;)
+ 442:Src/main.c    ****   {
+ 443:Src/main.c    ****     //globalCounter = 0x0B;//0x0B表示Func_LED1
+ 444:Src/main.c    ****     osDelay(10);
+ 587              		.loc 1 444 0 discriminator 1
+ 588 001e 0A20     		movs	r0, #10
+ 589 0020 FFF7FEFF 		bl	osDelay
+ 590              	.LVL39:
+ 445:Src/main.c    ****     HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
+ 591              		.loc 1 445 0 discriminator 1
+ 592 0024 0C4C     		ldr	r4, .L40+4
+ 593 0026 0022     		movs	r2, #0
+ 594 0028 1021     		movs	r1, #16
+ 595 002a 2046     		mov	r0, r4
+ 596 002c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 597              	.LVL40:
+ 446:Src/main.c    ****     osDelay(10);
+ 598              		.loc 1 446 0 discriminator 1
+ 599 0030 0A20     		movs	r0, #10
+ 600 0032 FFF7FEFF 		bl	osDelay
+ARM GAS  /tmp/ccwNXzWM.s 			page 20
 
 
- 628              		.global	_Error_Handler
- 629              		.thumb
- 630              		.thumb_func
- 632              	_Error_Handler:
- 633              	.LFB80:
- 472:Src/main.c    ****   }
- 473:Src/main.c    ****   /* USER CODE BEGIN Callback 1 */
- 474:Src/main.c    **** 
- 475:Src/main.c    ****   /* USER CODE END Callback 1 */
- 476:Src/main.c    **** }
- 477:Src/main.c    **** 
- 478:Src/main.c    **** /**
- 479:Src/main.c    ****   * @brief  This function is executed in case of error occurrence.
- 480:Src/main.c    ****   * @param  file: The file name as string.
- 481:Src/main.c    ****   * @param  line: The line in file as a number.
- 482:Src/main.c    ****   * @retval None
- 483:Src/main.c    ****   */
- 484:Src/main.c    **** void _Error_Handler(char *file, int line)
- 485:Src/main.c    **** {
- 634              		.loc 1 485 0
- 635              		.cfi_startproc
- 636              		@ Volatile: function does not return.
+ 601              	.LVL41:
+ 447:Src/main.c    ****     HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
+ 602              		.loc 1 447 0 discriminator 1
+ 603 0036 0122     		movs	r2, #1
+ 604 0038 1021     		movs	r1, #16
+ 605 003a 2046     		mov	r0, r4
+ 606 003c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 607              	.LVL42:
+ 448:Src/main.c    ****     //ITM_Print(0,"LED1");
+ 449:Src/main.c    ****     //ETM_TraceMode();
+ 450:Src/main.c    ****     //bubble_sort(values, 5);
+ 451:Src/main.c    ****     //ETM_SetupMode();
+ 452:Src/main.c    **** 
+ 453:Src/main.c    ****     //ETM_TraceMode();
+ 454:Src/main.c    ****     BinaryInsertSort(values_1, 5);
+ 608              		.loc 1 454 0 discriminator 1
+ 609 0040 0521     		movs	r1, #5
+ 610 0042 05A8     		add	r0, sp, #20
+ 611 0044 FFF7FEFF 		bl	BinaryInsertSort
+ 612              	.LVL43:
+ 455:Src/main.c    ****     bubble_sort(values_2, 5);
+ 613              		.loc 1 455 0 discriminator 1
+ 614 0048 0521     		movs	r1, #5
+ 615 004a 6846     		mov	r0, sp
+ 616 004c FFF7FEFF 		bl	bubble_sort
+ 617              	.LVL44:
+ 618 0050 E5E7     		b	.L38
+ 619              	.L41:
+ 620 0052 00BF     		.align	2
+ 621              	.L40:
+ 622 0054 00000000 		.word	.LANCHOR1
+ 623 0058 00100140 		.word	1073811456
+ 624              		.cfi_endproc
+ 625              	.LFE78:
+ 627              		.section	.text.HAL_TIM_PeriodElapsedCallback,"ax",%progbits
+ 628              		.align	2
+ 629              		.global	HAL_TIM_PeriodElapsedCallback
+ 630              		.thumb
+ 631              		.thumb_func
+ 633              	HAL_TIM_PeriodElapsedCallback:
+ 634              	.LFB79:
+ 456:Src/main.c    ****     //ETM_SetupMode();
+ 457:Src/main.c    **** 
+ 458:Src/main.c    ****   }
+ 459:Src/main.c    ****   /* USER CODE END Func_LED1 */
+ 460:Src/main.c    **** }
+ 461:Src/main.c    **** 
+ 462:Src/main.c    **** /**
+ 463:Src/main.c    ****   * @brief  Period elapsed callback in non blocking mode
+ 464:Src/main.c    ****   * @note   This function is called  when TIM4 interrupt took place, inside
+ 465:Src/main.c    ****   * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+ 466:Src/main.c    ****   * a global variable "uwTick" used as application time base.
+ 467:Src/main.c    ****   * @param  htim : TIM handle
+ 468:Src/main.c    ****   * @retval None
+ 469:Src/main.c    ****   */
+ 470:Src/main.c    **** void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+ 471:Src/main.c    **** {
+ARM GAS  /tmp/ccwNXzWM.s 			page 21
+
+
+ 635              		.loc 1 471 0
+ 636              		.cfi_startproc
  637              		@ args = 0, pretend = 0, frame = 0
  638              		@ frame_needed = 0, uses_anonymous_args = 0
- 639              		@ link register save eliminated.
- 640              	.LVL43:
- 641              	.L48:
- 642 0000 FEE7     		b	.L48
- 643              		.cfi_endproc
- 644              	.LFE80:
- 646 0002 00BF     		.section	.text.SystemClock_Config,"ax",%progbits
- 647              		.align	2
- 648              		.global	SystemClock_Config
- 649              		.thumb
- 650              		.thumb_func
- 652              	SystemClock_Config:
- 653              	.LFB75:
+ 639              	.LVL45:
+ 640 0000 08B5     		push	{r3, lr}
+ 641              	.LCFI9:
+ 642              		.cfi_def_cfa_offset 8
+ 643              		.cfi_offset 3, -8
+ 644              		.cfi_offset 14, -4
+ 472:Src/main.c    ****   /* USER CODE BEGIN Callback 0 */
+ 473:Src/main.c    **** 
+ 474:Src/main.c    ****   /* USER CODE END Callback 0 */
+ 475:Src/main.c    ****   if (htim->Instance == TIM4) {
+ 645              		.loc 1 475 0
+ 646 0002 0268     		ldr	r2, [r0]
+ 647 0004 024B     		ldr	r3, .L45
+ 648 0006 9A42     		cmp	r2, r3
+ 649 0008 01D1     		bne	.L42
+ 476:Src/main.c    ****     HAL_IncTick();
+ 650              		.loc 1 476 0
+ 651 000a FFF7FEFF 		bl	HAL_IncTick
+ 652              	.LVL46:
+ 653              	.L42:
+ 654 000e 08BD     		pop	{r3, pc}
+ 655              	.L46:
+ 656              		.align	2
+ 657              	.L45:
+ 658 0010 00080040 		.word	1073743872
+ 659              		.cfi_endproc
+ 660              	.LFE79:
+ 662              		.section	.text._Error_Handler,"ax",%progbits
+ 663              		.align	2
+ 664              		.global	_Error_Handler
+ 665              		.thumb
+ 666              		.thumb_func
+ 668              	_Error_Handler:
+ 669              	.LFB80:
+ 477:Src/main.c    ****   }
+ 478:Src/main.c    ****   /* USER CODE BEGIN Callback 1 */
+ 479:Src/main.c    **** 
+ 480:Src/main.c    ****   /* USER CODE END Callback 1 */
+ 481:Src/main.c    **** }
+ 482:Src/main.c    **** 
+ 483:Src/main.c    **** /**
+ 484:Src/main.c    ****   * @brief  This function is executed in case of error occurrence.
+ 485:Src/main.c    ****   * @param  file: The file name as string.
+ 486:Src/main.c    ****   * @param  line: The line in file as a number.
+ 487:Src/main.c    ****   * @retval None
+ 488:Src/main.c    ****   */
+ 489:Src/main.c    **** void _Error_Handler(char *file, int line)
+ 490:Src/main.c    **** {
+ 670              		.loc 1 490 0
+ 671              		.cfi_startproc
+ 672              		@ Volatile: function does not return.
+ 673              		@ args = 0, pretend = 0, frame = 0
+ 674              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/ccwNXzWM.s 			page 22
+
+
+ 675              		@ link register save eliminated.
+ 676              	.LVL47:
+ 677              	.L48:
+ 678 0000 FEE7     		b	.L48
+ 679              		.cfi_endproc
+ 680              	.LFE80:
+ 682 0002 00BF     		.section	.text.SystemClock_Config,"ax",%progbits
+ 683              		.align	2
+ 684              		.global	SystemClock_Config
+ 685              		.thumb
+ 686              		.thumb_func
+ 688              	SystemClock_Config:
+ 689              	.LFB75:
  324:Src/main.c    **** 
- 654              		.loc 1 324 0
- 655              		.cfi_startproc
- 656              		@ args = 0, pretend = 0, frame = 64
- 657              		@ frame_needed = 0, uses_anonymous_args = 0
+ 690              		.loc 1 324 0
+ 691              		.cfi_startproc
+ 692              		@ args = 0, pretend = 0, frame = 64
+ 693              		@ frame_needed = 0, uses_anonymous_args = 0
  324:Src/main.c    **** 
- 658              		.loc 1 324 0
- 659 0000 00B5     		push	{lr}
- 660              	.LCFI9:
- 661              		.cfi_def_cfa_offset 4
- 662              		.cfi_offset 14, -4
- 663 0002 91B0     		sub	sp, sp, #68
- 664              	.LCFI10:
- 665              		.cfi_def_cfa_offset 72
+ 694              		.loc 1 324 0
+ 695 0000 00B5     		push	{lr}
+ 696              	.LCFI10:
+ 697              		.cfi_def_cfa_offset 4
+ 698              		.cfi_offset 14, -4
+ 699 0002 91B0     		sub	sp, sp, #68
+ 700              	.LCFI11:
+ 701              		.cfi_def_cfa_offset 72
  331:Src/main.c    ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
- 666              		.loc 1 331 0
- 667 0004 0122     		movs	r2, #1
- 668 0006 0692     		str	r2, [sp, #24]
+ 702              		.loc 1 331 0
+ 703 0004 0122     		movs	r2, #1
+ 704 0006 0692     		str	r2, [sp, #24]
  332:Src/main.c    ****   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
- 669              		.loc 1 332 0
-ARM GAS  /tmp/cckrPKnk.s 			page 22
-
-
- 670 0008 4FF48033 		mov	r3, #65536
- 671 000c 0793     		str	r3, [sp, #28]
+ 705              		.loc 1 332 0
+ 706 0008 4FF48033 		mov	r3, #65536
+ 707 000c 0793     		str	r3, [sp, #28]
  333:Src/main.c    ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
- 672              		.loc 1 333 0
- 673 000e 0021     		movs	r1, #0
- 674 0010 0891     		str	r1, [sp, #32]
+ 708              		.loc 1 333 0
+ 709 000e 0021     		movs	r1, #0
+ 710 0010 0891     		str	r1, [sp, #32]
  334:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
- 675              		.loc 1 334 0
- 676 0012 0A92     		str	r2, [sp, #40]
+ 711              		.loc 1 334 0
+ 712 0012 0A92     		str	r2, [sp, #40]
  335:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
- 677              		.loc 1 335 0
- 678 0014 0222     		movs	r2, #2
- 679 0016 0D92     		str	r2, [sp, #52]
+ 713              		.loc 1 335 0
+ 714 0014 0222     		movs	r2, #2
+ 715 0016 0D92     		str	r2, [sp, #52]
  336:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
- 680              		.loc 1 336 0
- 681 0018 0E93     		str	r3, [sp, #56]
+ 716              		.loc 1 336 0
+ 717 0018 0E93     		str	r3, [sp, #56]
  337:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
- 682              		.loc 1 337 0
- 683 001a 4FF4E013 		mov	r3, #1835008
- 684 001e 0F93     		str	r3, [sp, #60]
+ 718              		.loc 1 337 0
+ 719 001a 4FF4E013 		mov	r3, #1835008
+ 720 001e 0F93     		str	r3, [sp, #60]
  338:Src/main.c    ****   {
- 685              		.loc 1 338 0
- 686 0020 06A8     		add	r0, sp, #24
- 687 0022 FFF7FEFF 		bl	HAL_RCC_OscConfig
- 688              	.LVL44:
- 689 0026 20B1     		cbz	r0, .L50
+ 721              		.loc 1 338 0
+ 722 0020 06A8     		add	r0, sp, #24
+ 723 0022 FFF7FEFF 		bl	HAL_RCC_OscConfig
+ARM GAS  /tmp/ccwNXzWM.s 			page 23
+
+
+ 724              	.LVL48:
+ 725 0026 20B1     		cbz	r0, .L50
  340:Src/main.c    ****   }
- 690              		.loc 1 340 0
- 691 0028 4FF4AA71 		mov	r1, #340
- 692 002c 1448     		ldr	r0, .L53
- 693 002e FFF7FEFF 		bl	_Error_Handler
- 694              	.LVL45:
- 695              	.L50:
+ 726              		.loc 1 340 0
+ 727 0028 4FF4AA71 		mov	r1, #340
+ 728 002c 1448     		ldr	r0, .L53
+ 729 002e FFF7FEFF 		bl	_Error_Handler
+ 730              	.LVL49:
+ 731              	.L50:
  345:Src/main.c    ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
- 696              		.loc 1 345 0
- 697 0032 0F23     		movs	r3, #15
- 698 0034 0193     		str	r3, [sp, #4]
+ 732              		.loc 1 345 0
+ 733 0032 0F23     		movs	r3, #15
+ 734 0034 0193     		str	r3, [sp, #4]
  347:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
- 699              		.loc 1 347 0
- 700 0036 0221     		movs	r1, #2
- 701 0038 0291     		str	r1, [sp, #8]
+ 735              		.loc 1 347 0
+ 736 0036 0221     		movs	r1, #2
+ 737 0038 0291     		str	r1, [sp, #8]
  348:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
- 702              		.loc 1 348 0
- 703 003a 0023     		movs	r3, #0
- 704 003c 0393     		str	r3, [sp, #12]
+ 738              		.loc 1 348 0
+ 739 003a 0023     		movs	r3, #0
+ 740 003c 0393     		str	r3, [sp, #12]
  349:Src/main.c    ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
- 705              		.loc 1 349 0
- 706 003e 4FF48062 		mov	r2, #1024
- 707 0042 0492     		str	r2, [sp, #16]
+ 741              		.loc 1 349 0
+ 742 003e 4FF48062 		mov	r2, #1024
+ 743 0042 0492     		str	r2, [sp, #16]
  350:Src/main.c    **** 
- 708              		.loc 1 350 0
- 709 0044 0593     		str	r3, [sp, #20]
+ 744              		.loc 1 350 0
+ 745 0044 0593     		str	r3, [sp, #20]
  352:Src/main.c    ****   {
- 710              		.loc 1 352 0
- 711 0046 01A8     		add	r0, sp, #4
- 712 0048 FFF7FEFF 		bl	HAL_RCC_ClockConfig
- 713              	.LVL46:
-ARM GAS  /tmp/cckrPKnk.s 			page 23
-
-
- 714 004c 20B1     		cbz	r0, .L51
+ 746              		.loc 1 352 0
+ 747 0046 01A8     		add	r0, sp, #4
+ 748 0048 FFF7FEFF 		bl	HAL_RCC_ClockConfig
+ 749              	.LVL50:
+ 750 004c 20B1     		cbz	r0, .L51
  354:Src/main.c    ****   }
- 715              		.loc 1 354 0
- 716 004e 4FF4B171 		mov	r1, #354
- 717 0052 0B48     		ldr	r0, .L53
- 718 0054 FFF7FEFF 		bl	_Error_Handler
- 719              	.LVL47:
- 720              	.L51:
+ 751              		.loc 1 354 0
+ 752 004e 4FF4B171 		mov	r1, #354
+ 753 0052 0B48     		ldr	r0, .L53
+ 754 0054 FFF7FEFF 		bl	_Error_Handler
+ 755              	.LVL51:
+ 756              	.L51:
  359:Src/main.c    **** 
- 721              		.loc 1 359 0
- 722 0058 FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
- 723              	.LVL48:
- 724 005c 094B     		ldr	r3, .L53+4
- 725 005e A3FB0030 		umull	r3, r0, r3, r0
- 726 0062 8009     		lsrs	r0, r0, #6
- 727 0064 FFF7FEFF 		bl	HAL_SYSTICK_Config
- 728              	.LVL49:
+ 757              		.loc 1 359 0
+ 758 0058 FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
+ 759              	.LVL52:
+ 760 005c 094B     		ldr	r3, .L53+4
+ 761 005e A3FB0030 		umull	r3, r0, r3, r0
+ 762 0062 8009     		lsrs	r0, r0, #6
+ 763 0064 FFF7FEFF 		bl	HAL_SYSTICK_Config
+ 764              	.LVL53:
  363:Src/main.c    **** 
- 729              		.loc 1 363 0
- 730 0068 0420     		movs	r0, #4
- 731 006a FFF7FEFF 		bl	HAL_SYSTICK_CLKSourceConfig
- 732              	.LVL50:
+ 765              		.loc 1 363 0
+ 766 0068 0420     		movs	r0, #4
+ 767 006a FFF7FEFF 		bl	HAL_SYSTICK_CLKSourceConfig
+ 768              	.LVL54:
  366:Src/main.c    **** }
- 733              		.loc 1 366 0
- 734 006e 0022     		movs	r2, #0
- 735 0070 0F21     		movs	r1, #15
- 736 0072 4FF0FF30 		mov	r0, #-1
- 737 0076 FFF7FEFF 		bl	HAL_NVIC_SetPriority
- 738              	.LVL51:
+ 769              		.loc 1 366 0
+ARM GAS  /tmp/ccwNXzWM.s 			page 24
+
+
+ 770 006e 0022     		movs	r2, #0
+ 771 0070 0F21     		movs	r1, #15
+ 772 0072 4FF0FF30 		mov	r0, #-1
+ 773 0076 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 774              	.LVL55:
  367:Src/main.c    **** 
- 739              		.loc 1 367 0
- 740 007a 11B0     		add	sp, sp, #68
- 741              	.LCFI11:
- 742              		.cfi_def_cfa_offset 4
- 743              		@ sp needed
- 744 007c 5DF804FB 		ldr	pc, [sp], #4
- 745              	.L54:
- 746              		.align	2
- 747              	.L53:
- 748 0080 08000000 		.word	.LC6
- 749 0084 D34D6210 		.word	274877907
- 750              		.cfi_endproc
- 751              	.LFE75:
- 753              		.section	.text.main,"ax",%progbits
- 754              		.align	2
- 755              		.global	main
- 756              		.thumb
- 757              		.thumb_func
- 759              	main:
- 760              	.LFB74:
+ 775              		.loc 1 367 0
+ 776 007a 11B0     		add	sp, sp, #68
+ 777              	.LCFI12:
+ 778              		.cfi_def_cfa_offset 4
+ 779              		@ sp needed
+ 780 007c 5DF804FB 		ldr	pc, [sp], #4
+ 781              	.L54:
+ 782              		.align	2
+ 783              	.L53:
+ 784 0080 08000000 		.word	.LC7
+ 785 0084 D34D6210 		.word	274877907
+ 786              		.cfi_endproc
+ 787              	.LFE75:
+ 789              		.section	.text.main,"ax",%progbits
+ 790              		.align	2
+ 791              		.global	main
+ 792              		.thumb
+ 793              		.thumb_func
+ 795              	main:
+ 796              	.LFB74:
  240:Src/main.c    ****   /* USER CODE BEGIN 1 */
- 761              		.loc 1 240 0
- 762              		.cfi_startproc
- 763              		@ args = 0, pretend = 0, frame = 40
- 764              		@ frame_needed = 0, uses_anonymous_args = 0
- 765 0000 70B5     		push	{r4, r5, r6, lr}
- 766              	.LCFI12:
-ARM GAS  /tmp/cckrPKnk.s 			page 24
-
-
- 767              		.cfi_def_cfa_offset 16
- 768              		.cfi_offset 4, -16
- 769              		.cfi_offset 5, -12
- 770              		.cfi_offset 6, -8
- 771              		.cfi_offset 14, -4
- 772 0002 8AB0     		sub	sp, sp, #40
- 773              	.LCFI13:
- 774              		.cfi_def_cfa_offset 56
+ 797              		.loc 1 240 0
+ 798              		.cfi_startproc
+ 799              		@ args = 0, pretend = 0, frame = 40
+ 800              		@ frame_needed = 0, uses_anonymous_args = 0
+ 801 0000 70B5     		push	{r4, r5, r6, lr}
+ 802              	.LCFI13:
+ 803              		.cfi_def_cfa_offset 16
+ 804              		.cfi_offset 4, -16
+ 805              		.cfi_offset 5, -12
+ 806              		.cfi_offset 6, -8
+ 807              		.cfi_offset 14, -4
+ 808 0002 8AB0     		sub	sp, sp, #40
+ 809              	.LCFI14:
+ 810              		.cfi_def_cfa_offset 56
  248:Src/main.c    **** 
- 775              		.loc 1 248 0
- 776 0004 FFF7FEFF 		bl	HAL_Init
- 777              	.LVL52:
+ 811              		.loc 1 248 0
+ 812 0004 FFF7FEFF 		bl	HAL_Init
+ 813              	.LVL56:
  255:Src/main.c    **** 
- 778              		.loc 1 255 0
- 779 0008 FFF7FEFF 		bl	SystemClock_Config
- 780              	.LVL53:
+ 814              		.loc 1 255 0
+ 815 0008 FFF7FEFF 		bl	SystemClock_Config
+ 816              	.LVL57:
  262:Src/main.c    ****   /* USER CODE BEGIN 2 */
- 781              		.loc 1 262 0
- 782 000c FFF7FEFF 		bl	MX_GPIO_Init
- 783              	.LVL54:
+ 817              		.loc 1 262 0
+ 818 000c FFF7FEFF 		bl	MX_GPIO_Init
+ 819              	.LVL58:
  265:Src/main.c    ****   configure_watchpoint();
- 784              		.loc 1 265 0
- 785 0010 FFF7FEFF 		bl	configure_tracing
- 786              	.LVL55:
+ 820              		.loc 1 265 0
+ 821 0010 FFF7FEFF 		bl	configure_tracing
+ 822              	.LVL59:
+ARM GAS  /tmp/ccwNXzWM.s 			page 25
+
+
  266:Src/main.c    **** 
- 787              		.loc 1 266 0
- 788 0014 FFF7FEFF 		bl	configure_watchpoint
- 789              	.LVL56:
+ 823              		.loc 1 266 0
+ 824 0014 FFF7FEFF 		bl	configure_watchpoint
+ 825              	.LVL60:
  284:Src/main.c    ****   Task_LED0Handle = osThreadCreate(osThread(Task_LED0), NULL);
- 790              		.loc 1 284 0
- 791 0018 0E4C     		ldr	r4, .L58
- 792 001a 05AD     		add	r5, sp, #20
- 793 001c 04F11406 		add	r6, r4, #20
- 794 0020 0FCE     		ldmia	r6!, {r0, r1, r2, r3}
- 795 0022 0FC5     		stmia	r5!, {r0, r1, r2, r3}
- 796 0024 3368     		ldr	r3, [r6]
- 797 0026 2B60     		str	r3, [r5]
+ 826              		.loc 1 284 0
+ 827 0018 0E4C     		ldr	r4, .L58
+ 828 001a 05AD     		add	r5, sp, #20
+ 829 001c 04F12806 		add	r6, r4, #40
+ 830 0020 0FCE     		ldmia	r6!, {r0, r1, r2, r3}
+ 831 0022 0FC5     		stmia	r5!, {r0, r1, r2, r3}
+ 832 0024 3368     		ldr	r3, [r6]
+ 833 0026 2B60     		str	r3, [r5]
  285:Src/main.c    **** 
- 798              		.loc 1 285 0
- 799 0028 0021     		movs	r1, #0
- 800 002a 05A8     		add	r0, sp, #20
- 801 002c FFF7FEFF 		bl	osThreadCreate
- 802              	.LVL57:
- 803 0030 094B     		ldr	r3, .L58+4
- 804 0032 1860     		str	r0, [r3]
+ 834              		.loc 1 285 0
+ 835 0028 0021     		movs	r1, #0
+ 836 002a 05A8     		add	r0, sp, #20
+ 837 002c FFF7FEFF 		bl	osThreadCreate
+ 838              	.LVL61:
+ 839 0030 094B     		ldr	r3, .L58+4
+ 840 0032 1860     		str	r0, [r3]
  288:Src/main.c    ****   Task_LED1Handle = osThreadCreate(osThread(Task_LED1), NULL);
- 805              		.loc 1 288 0
- 806 0034 6D46     		mov	r5, sp
- 807 0036 2834     		adds	r4, r4, #40
- 808 0038 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
- 809 003a 0FC5     		stmia	r5!, {r0, r1, r2, r3}
- 810 003c 2368     		ldr	r3, [r4]
- 811 003e 2B60     		str	r3, [r5]
+ 841              		.loc 1 288 0
+ 842 0034 6D46     		mov	r5, sp
+ 843 0036 3C34     		adds	r4, r4, #60
+ 844 0038 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
+ 845 003a 0FC5     		stmia	r5!, {r0, r1, r2, r3}
+ 846 003c 2368     		ldr	r3, [r4]
+ 847 003e 2B60     		str	r3, [r5]
  289:Src/main.c    **** 
- 812              		.loc 1 289 0
- 813 0040 0021     		movs	r1, #0
- 814 0042 6846     		mov	r0, sp
-ARM GAS  /tmp/cckrPKnk.s 			page 25
-
-
- 815 0044 FFF7FEFF 		bl	osThreadCreate
- 816              	.LVL58:
- 817 0048 044B     		ldr	r3, .L58+8
- 818 004a 1860     		str	r0, [r3]
+ 848              		.loc 1 289 0
+ 849 0040 0021     		movs	r1, #0
+ 850 0042 6846     		mov	r0, sp
+ 851 0044 FFF7FEFF 		bl	osThreadCreate
+ 852              	.LVL62:
+ 853 0048 044B     		ldr	r3, .L58+8
+ 854 004a 1860     		str	r0, [r3]
  301:Src/main.c    ****   
- 819              		.loc 1 301 0
- 820 004c FFF7FEFF 		bl	osKernelStart
- 821              	.LVL59:
- 822              	.L56:
- 823 0050 FEE7     		b	.L56
- 824              	.L59:
- 825 0052 00BF     		.align	2
- 826              	.L58:
- 827 0054 00000000 		.word	.LANCHOR0
- 828 0058 00000000 		.word	Task_LED0Handle
- 829 005c 00000000 		.word	Task_LED1Handle
- 830              		.cfi_endproc
- 831              	.LFE74:
- 833              		.global	globalCounter
- 834              		.comm	Task_LED1Handle,4,4
- 835              		.comm	Task_LED0Handle,4,4
- 836              		.comm	result,64,8
- 837              		.comm	data,128,8
- 838              		.section	.rodata
- 839              		.align	2
- 840              		.set	.LANCHOR0,. + 0
- 841              	.LC4:
- 842 0000 23000000 		.word	35
- 843 0004 02000000 		.word	2
- 844 0008 EB000000 		.word	235
- 845 000c 0B000000 		.word	11
- 846 0010 02000000 		.word	2
- 847              	.LC7:
- 848 0014 20000000 		.word	.LC0
- 849 0018 00000000 		.word	Func_LED0
- 850 001c 0000     		.short	0
- 851 001e 0000     		.space	2
- 852 0020 00000000 		.word	0
- 853 0024 80000000 		.word	128
- 854              	.LC8:
- 855 0028 14000000 		.word	.LC2
- 856 002c 00000000 		.word	Func_LED1
- 857 0030 0000     		.short	0
- 858 0032 0000     		.space	2
- 859 0034 00000000 		.word	0
- 860 0038 80000000 		.word	128
- 861              		.section	.rodata.str1.4,"aMS",%progbits,1
- 862              		.align	2
- 863              	.LC5:
- 864 0000 4C454430 		.ascii	"LED0\000"
- 864      00
- 865 0005 000000   		.space	3
- 866              	.LC6:
- 867 0008 5372632F 		.ascii	"Src/main.c\000"
- 867      6D61696E 
- 867      2E6300
- 868 0013 00       		.space	1
-ARM GAS  /tmp/cckrPKnk.s 			page 26
+ 855              		.loc 1 301 0
+ 856 004c FFF7FEFF 		bl	osKernelStart
+ 857              	.LVL63:
+ 858              	.L56:
+ 859 0050 FEE7     		b	.L56
+ 860              	.L59:
+ 861 0052 00BF     		.align	2
+ 862              	.L58:
+ 863 0054 00000000 		.word	.LANCHOR1
+ 864 0058 00000000 		.word	Task_LED0Handle
+ 865 005c 00000000 		.word	Task_LED1Handle
+ 866              		.cfi_endproc
+ 867              	.LFE74:
+ 869              		.global	globalCounter
+ 870              		.comm	Task_LED1Handle,4,4
+ 871              		.comm	Task_LED0Handle,4,4
+ 872              		.comm	result,64,8
+ 873              		.comm	data,128,8
+ 874              		.section	.rodata
+ARM GAS  /tmp/ccwNXzWM.s 			page 26
 
 
- 869              	.LC2:
- 870 0014 5461736B 		.ascii	"Task_LED1\000"
- 870      5F4C4544 
- 870      3100
- 871 001e 0000     		.space	2
- 872              	.LC0:
- 873 0020 5461736B 		.ascii	"Task_LED0\000"
- 873      5F4C4544 
- 873      3000
- 874              		.section	.bss.globalCounter,"aw",%nobits
  875              		.align	2
  876              		.set	.LANCHOR1,. + 0
- 879              	globalCounter:
- 880 0000 00000000 		.space	4
- 881              		.text
- 882              	.Letext0:
- 883              		.file 2 "/usr/include/newlib/machine/_default_types.h"
- 884              		.file 3 "/usr/include/newlib/sys/_stdint.h"
- 885              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
- 886              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
- 887              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
- 888              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
- 889              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h"
- 890              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
- 891              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
- 892              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
- 893              		.file 12 "Middlewares/Third_Party/FreeRTOS/Source/include/task.h"
- 894              		.file 13 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h"
- 895              		.file 14 "Src/arm_etm.h"
- 896              		.file 15 "Inc/FFT.h"
- 897              		.file 16 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
- 898              		.file 17 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
- 899              		.file 18 "/usr/include/newlib/math.h"
-ARM GAS  /tmp/cckrPKnk.s 			page 27
+ 877              	.LC4:
+ 878 0000 23000000 		.word	35
+ 879 0004 02000000 		.word	2
+ 880 0008 EB000000 		.word	235
+ 881 000c 0B000000 		.word	11
+ 882 0010 02000000 		.word	2
+ 883              	.LC5:
+ 884 0014 1E000000 		.word	30
+ 885 0018 01000000 		.word	1
+ 886 001c D6000000 		.word	214
+ 887 0020 0A000000 		.word	10
+ 888 0024 08000000 		.word	8
+ 889              	.LC8:
+ 890 0028 20000000 		.word	.LC0
+ 891 002c 00000000 		.word	Func_LED0
+ 892 0030 0000     		.short	0
+ 893 0032 0000     		.space	2
+ 894 0034 00000000 		.word	0
+ 895 0038 80000000 		.word	128
+ 896              	.LC9:
+ 897 003c 14000000 		.word	.LC2
+ 898 0040 00000000 		.word	Func_LED1
+ 899 0044 0000     		.short	0
+ 900 0046 0000     		.space	2
+ 901 0048 00000000 		.word	0
+ 902 004c 80000000 		.word	128
+ 903              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 904              		.align	2
+ 905              	.LC6:
+ 906 0000 4C454430 		.ascii	"LED0\000"
+ 906      00
+ 907 0005 000000   		.space	3
+ 908              	.LC7:
+ 909 0008 5372632F 		.ascii	"Src/main.c\000"
+ 909      6D61696E 
+ 909      2E6300
+ 910 0013 00       		.space	1
+ 911              	.LC2:
+ 912 0014 5461736B 		.ascii	"Task_LED1\000"
+ 912      5F4C4544 
+ 912      3100
+ 913 001e 0000     		.space	2
+ 914              	.LC0:
+ 915 0020 5461736B 		.ascii	"Task_LED0\000"
+ 915      5F4C4544 
+ 915      3000
+ 916              		.section	.bss.globalCounter,"aw",%nobits
+ 917              		.align	2
+ 918              		.set	.LANCHOR0,. + 0
+ 921              	globalCounter:
+ 922 0000 00000000 		.space	4
+ 923              		.text
+ 924              	.Letext0:
+ 925              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ 926              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+ARM GAS  /tmp/ccwNXzWM.s 			page 27
+
+
+ 927              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 928              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
+ 929              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 930              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
+ 931              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h"
+ 932              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 933              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 934              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 935              		.file 12 "Middlewares/Third_Party/FreeRTOS/Source/include/task.h"
+ 936              		.file 13 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h"
+ 937              		.file 14 "Src/arm_etm.h"
+ 938              		.file 15 "Inc/FFT.h"
+ 939              		.file 16 "/usr/include/newlib/math.h"
+ 940              		.file 17 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 941              		.file 18 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
+ARM GAS  /tmp/ccwNXzWM.s 			page 28
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-     /tmp/cckrPKnk.s:20     .text.MX_GPIO_Init:00000000 $t
-     /tmp/cckrPKnk.s:24     .text.MX_GPIO_Init:00000000 MX_GPIO_Init
-     /tmp/cckrPKnk.s:93     .text.MX_GPIO_Init:00000054 $d
-     /tmp/cckrPKnk.s:101    .text.Func_LED1:00000000 $t
-     /tmp/cckrPKnk.s:106    .text.Func_LED1:00000000 Func_LED1
-     /tmp/cckrPKnk.s:202    .text.Func_LED1:00000080 $d
+     /tmp/ccwNXzWM.s:20     .text.MX_GPIO_Init:00000000 $t
+     /tmp/ccwNXzWM.s:24     .text.MX_GPIO_Init:00000000 MX_GPIO_Init
+     /tmp/ccwNXzWM.s:93     .text.MX_GPIO_Init:00000054 $d
+     /tmp/ccwNXzWM.s:99     .text.configure_tracing:00000000 $t
+     /tmp/ccwNXzWM.s:104    .text.configure_tracing:00000000 configure_tracing
+     /tmp/ccwNXzWM.s:192    .text.configure_tracing:000000a4 $d
+     /tmp/ccwNXzWM.s:202    .text.configure_watchpoint:00000000 $t
+     /tmp/ccwNXzWM.s:207    .text.configure_watchpoint:00000000 configure_watchpoint
+     /tmp/ccwNXzWM.s:228    .text.configure_watchpoint:00000010 $d
+     /tmp/ccwNXzWM.s:234    .text.ITM_Print:00000000 $t
+     /tmp/ccwNXzWM.s:239    .text.ITM_Print:00000000 ITM_Print
+     /tmp/ccwNXzWM.s:284    .text.ITM_Print:00000044 $d
+     /tmp/ccwNXzWM.s:291    .text.Func_LED0:00000000 $t
+     /tmp/ccwNXzWM.s:296    .text.Func_LED0:00000000 Func_LED0
+     /tmp/ccwNXzWM.s:416    .text.Func_LED0:000000b0 $d
                             *COM*:00000080 data
-     /tmp/cckrPKnk.s:212    .text.configure_tracing:00000000 $t
-     /tmp/cckrPKnk.s:217    .text.configure_tracing:00000000 configure_tracing
-     /tmp/cckrPKnk.s:305    .text.configure_tracing:000000a4 $d
-     /tmp/cckrPKnk.s:315    .text.configure_watchpoint:00000000 $t
-     /tmp/cckrPKnk.s:320    .text.configure_watchpoint:00000000 configure_watchpoint
-     /tmp/cckrPKnk.s:341    .text.configure_watchpoint:00000010 $d
-     /tmp/cckrPKnk.s:347    .text.ITM_Print:00000000 $t
-     /tmp/cckrPKnk.s:352    .text.ITM_Print:00000000 ITM_Print
-     /tmp/cckrPKnk.s:397    .text.ITM_Print:00000044 $d
-     /tmp/cckrPKnk.s:402    .text.Func_LED0:00000000 $t
-     /tmp/cckrPKnk.s:407    .text.Func_LED0:00000000 Func_LED0
-     /tmp/cckrPKnk.s:464    .text.Func_LED0:00000044 $d
-     /tmp/cckrPKnk.s:470    .text.ITM_SendValue:00000000 $t
-     /tmp/cckrPKnk.s:475    .text.ITM_SendValue:00000000 ITM_SendValue
-     /tmp/cckrPKnk.s:509    .text.bubble_sort:00000000 $t
-     /tmp/cckrPKnk.s:514    .text.bubble_sort:00000000 bubble_sort
-     /tmp/cckrPKnk.s:587    .text.bubble_sort:0000003c $d
-     /tmp/cckrPKnk.s:592    .text.HAL_TIM_PeriodElapsedCallback:00000000 $t
-     /tmp/cckrPKnk.s:597    .text.HAL_TIM_PeriodElapsedCallback:00000000 HAL_TIM_PeriodElapsedCallback
-     /tmp/cckrPKnk.s:622    .text.HAL_TIM_PeriodElapsedCallback:00000010 $d
-     /tmp/cckrPKnk.s:627    .text._Error_Handler:00000000 $t
-     /tmp/cckrPKnk.s:632    .text._Error_Handler:00000000 _Error_Handler
-     /tmp/cckrPKnk.s:647    .text.SystemClock_Config:00000000 $t
-     /tmp/cckrPKnk.s:652    .text.SystemClock_Config:00000000 SystemClock_Config
-     /tmp/cckrPKnk.s:748    .text.SystemClock_Config:00000080 $d
-     /tmp/cckrPKnk.s:754    .text.main:00000000 $t
-     /tmp/cckrPKnk.s:759    .text.main:00000000 main
-     /tmp/cckrPKnk.s:827    .text.main:00000054 $d
+     /tmp/ccwNXzWM.s:426    .text.ITM_SendValue:00000000 $t
+     /tmp/ccwNXzWM.s:431    .text.ITM_SendValue:00000000 ITM_SendValue
+     /tmp/ccwNXzWM.s:465    .text.bubble_sort:00000000 $t
+     /tmp/ccwNXzWM.s:470    .text.bubble_sort:00000000 bubble_sort
+     /tmp/ccwNXzWM.s:543    .text.bubble_sort:0000003c $d
+     /tmp/ccwNXzWM.s:548    .text.Func_LED1:00000000 $t
+     /tmp/ccwNXzWM.s:553    .text.Func_LED1:00000000 Func_LED1
+     /tmp/ccwNXzWM.s:622    .text.Func_LED1:00000054 $d
+     /tmp/ccwNXzWM.s:628    .text.HAL_TIM_PeriodElapsedCallback:00000000 $t
+     /tmp/ccwNXzWM.s:633    .text.HAL_TIM_PeriodElapsedCallback:00000000 HAL_TIM_PeriodElapsedCallback
+     /tmp/ccwNXzWM.s:658    .text.HAL_TIM_PeriodElapsedCallback:00000010 $d
+     /tmp/ccwNXzWM.s:663    .text._Error_Handler:00000000 $t
+     /tmp/ccwNXzWM.s:668    .text._Error_Handler:00000000 _Error_Handler
+     /tmp/ccwNXzWM.s:683    .text.SystemClock_Config:00000000 $t
+     /tmp/ccwNXzWM.s:688    .text.SystemClock_Config:00000000 SystemClock_Config
+     /tmp/ccwNXzWM.s:784    .text.SystemClock_Config:00000080 $d
+     /tmp/ccwNXzWM.s:790    .text.main:00000000 $t
+     /tmp/ccwNXzWM.s:795    .text.main:00000000 main
+     /tmp/ccwNXzWM.s:863    .text.main:00000054 $d
                             *COM*:00000004 Task_LED0Handle
                             *COM*:00000004 Task_LED1Handle
-     /tmp/cckrPKnk.s:879    .bss.globalCounter:00000000 globalCounter
+     /tmp/ccwNXzWM.s:921    .bss.globalCounter:00000000 globalCounter
                             *COM*:00000040 result
-     /tmp/cckrPKnk.s:839    .rodata:00000000 $d
-     /tmp/cckrPKnk.s:862    .rodata.str1.4:00000000 $d
-     /tmp/cckrPKnk.s:875    .bss.globalCounter:00000000 $d
+     /tmp/ccwNXzWM.s:875    .rodata:00000000 $d
+     /tmp/ccwNXzWM.s:904    .rodata.str1.4:00000000 $d
+     /tmp/ccwNXzWM.s:917    .bss.globalCounter:00000000 $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
@@ -1588,15 +1630,18 @@ HAL_GPIO_WritePin
 HAL_GPIO_Init
 __aeabi_i2d
 __aeabi_dmul
-osDelay
 sin
+osDelay
+ChangeSeat
+FFT
+IFFT
 BinaryInsertSort
+ARM GAS  /tmp/ccwNXzWM.s 			page 29
+
+
 HAL_IncTick
 HAL_RCC_OscConfig
 HAL_RCC_ClockConfig
-ARM GAS  /tmp/cckrPKnk.s 			page 28
-
-
 HAL_RCC_GetHCLKFreq
 HAL_SYSTICK_Config
 HAL_SYSTICK_CLKSourceConfig

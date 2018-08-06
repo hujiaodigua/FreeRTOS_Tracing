@@ -403,19 +403,28 @@ void Func_LED0(void const * argument)
 {
 
   /* USER CODE BEGIN 5 */
+  for(int i=0; i<N; i++)//制造FFT输入序列   
+  {
+    data[i].real = sin(2*PI*i/N); 
+  }
   /* Infinite loop */
   for(;;)
   {
     //globalCounter = 0x0A;//0x0A表示Func_LED0
-    osDelay(15);
+    osDelay(5);
     HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_RESET);
-    osDelay(15);
+    osDelay(5);
     HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_SET);
 
     //用来测量运行时间的PC6翻转，抓取这一次翻转到下一次翻转的时间
     HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_RESET);
     //osDelay(10);
     HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_SET);
+    
+    ETM_TraceMode();
+    FFT(ChangeSeat(data));
+    IFFT(ChangeSeat(data));
+    ETM_SetupMode();
 
     ITM_Print(0,"LED0");
   }
@@ -426,8 +435,8 @@ void Func_LED0(void const * argument)
 void Func_LED1(void const * argument)
 {
   /* USER CODE BEGIN Func_LED1 */
-  int values[5] = {35,2,235,11,2};
-  int i = 0;
+  int values_1[5] = {35,2,235,11,2};
+  int values_2[5] = {30,1,214,10,8};
   /* Infinite loop */
   for(;;)
   {
@@ -441,14 +450,10 @@ void Func_LED1(void const * argument)
     //bubble_sort(values, 5);
     //ETM_SetupMode();
 
-    for(i=0; i<N; i++)//制造FFT输入序列   
-    {
-        data[i].real = sin(2*PI*i/N); 
-    }
-    ETM_TraceMode();
-    //FFT();
-    BinaryInsertSort(values, 5);
-    ETM_SetupMode();
+    //ETM_TraceMode();
+    BinaryInsertSort(values_1, 5);
+    bubble_sort(values_2, 5);
+    //ETM_SetupMode();
 
   }
   /* USER CODE END Func_LED1 */
