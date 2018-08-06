@@ -1342,14 +1342,14 @@ LOAD /usr/lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
                 0x08002010       0x48 build/main.o
                 0x08002010                ITM_Print
  .text.Func_LED0
-                0x08002058       0xc8 build/main.o
+                0x08002058       0xb4 build/main.o
                 0x08002058                Func_LED0
  .text.bubble_sort
-                0x08002120       0x40 build/main.o
-                0x08002120                bubble_sort
+                0x0800210c       0x40 build/main.o
+                0x0800210c                bubble_sort
  .text.Func_LED1
-                0x08002160       0x5c build/main.o
-                0x08002160                Func_LED1
+                0x0800214c       0x70 build/main.o
+                0x0800214c                Func_LED1
  .text.HAL_TIM_PeriodElapsedCallback
                 0x080021bc       0x14 build/main.o
                 0x080021bc                HAL_TIM_PeriodElapsedCallback
@@ -2272,35 +2272,35 @@ OUTPUT(build/FreeRTOS_CreatTask.elf elf32-littlearm)
  .debug_str     0x00004a31       0x32 /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libm.a(lib_a-s_copysign.o)
                                 0x1cc (size before relaxing)
 
-.debug_frame    0x00000000     0x2858
- .debug_frame   0x00000000      0x14c build/main.o
- .debug_frame   0x0000014c      0x138 build/FFT.o
- .debug_frame   0x00000284       0xa8 build/stm32f1xx_it.o
- .debug_frame   0x0000032c       0x30 build/stm32f1xx_hal_msp.o
- .debug_frame   0x0000035c      0xb08 build/stm32f1xx_hal_tim.o
- .debug_frame   0x00000e64      0x420 build/stm32f1xx_hal_tim_ex.o
- .debug_frame   0x00001284      0x1c0 build/stm32f1xx_hal.o
- .debug_frame   0x00001444      0x190 build/stm32f1xx_hal_rcc.o
- .debug_frame   0x000015d4       0xd4 build/stm32f1xx_hal_gpio.o
- .debug_frame   0x000016a8      0x134 build/stm32f1xx_hal_cortex.o
- .debug_frame   0x000017dc       0x30 build/system_stm32f1xx.o
- .debug_frame   0x0000180c       0xb8 build/heap_4.o
- .debug_frame   0x000018c4       0xe8 build/port.o
- .debug_frame   0x000019ac       0x70 build/list.o
- .debug_frame   0x00001a1c      0x57c build/tasks.o
- .debug_frame   0x00001f98      0x608 build/cmsis_os.o
- .debug_frame   0x000025a0       0x4c build/stm32f1xx_hal_timebase_TIM.o
- .debug_frame   0x000025ec       0x2c /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libc_nano.a(lib_a-init.o)
- .debug_frame   0x00002618       0x38 /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libm.a(lib_a-s_cos.o)
- .debug_frame   0x00002650       0x38 /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libm.a(lib_a-s_sin.o)
- .debug_frame   0x00002688       0x48 /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libm.a(lib_a-e_rem_pio2.o)
- .debug_frame   0x000026d0       0x4c /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libm.a(lib_a-k_cos.o)
- .debug_frame   0x0000271c       0x50 /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libm.a(lib_a-k_rem_pio2.o)
- .debug_frame   0x0000276c       0x48 /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libm.a(lib_a-k_sin.o)
- .debug_frame   0x000027b4       0x20 /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libm.a(lib_a-s_fabs.o)
- .debug_frame   0x000027d4       0x34 /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libm.a(lib_a-s_floor.o)
- .debug_frame   0x00002808       0x30 /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libm.a(lib_a-s_scalbn.o)
- .debug_frame   0x00002838       0x20 /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libm.a(lib_a-s_copysign.o)
+.debug_frame    0x00000000     0x2854
+ .debug_frame   0x00000000      0x148 build/main.o
+ .debug_frame   0x00000148      0x138 build/FFT.o
+ .debug_frame   0x00000280       0xa8 build/stm32f1xx_it.o
+ .debug_frame   0x00000328       0x30 build/stm32f1xx_hal_msp.o
+ .debug_frame   0x00000358      0xb08 build/stm32f1xx_hal_tim.o
+ .debug_frame   0x00000e60      0x420 build/stm32f1xx_hal_tim_ex.o
+ .debug_frame   0x00001280      0x1c0 build/stm32f1xx_hal.o
+ .debug_frame   0x00001440      0x190 build/stm32f1xx_hal_rcc.o
+ .debug_frame   0x000015d0       0xd4 build/stm32f1xx_hal_gpio.o
+ .debug_frame   0x000016a4      0x134 build/stm32f1xx_hal_cortex.o
+ .debug_frame   0x000017d8       0x30 build/system_stm32f1xx.o
+ .debug_frame   0x00001808       0xb8 build/heap_4.o
+ .debug_frame   0x000018c0       0xe8 build/port.o
+ .debug_frame   0x000019a8       0x70 build/list.o
+ .debug_frame   0x00001a18      0x57c build/tasks.o
+ .debug_frame   0x00001f94      0x608 build/cmsis_os.o
+ .debug_frame   0x0000259c       0x4c build/stm32f1xx_hal_timebase_TIM.o
+ .debug_frame   0x000025e8       0x2c /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libc_nano.a(lib_a-init.o)
+ .debug_frame   0x00002614       0x38 /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libm.a(lib_a-s_cos.o)
+ .debug_frame   0x0000264c       0x38 /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libm.a(lib_a-s_sin.o)
+ .debug_frame   0x00002684       0x48 /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libm.a(lib_a-e_rem_pio2.o)
+ .debug_frame   0x000026cc       0x4c /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libm.a(lib_a-k_cos.o)
+ .debug_frame   0x00002718       0x50 /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libm.a(lib_a-k_rem_pio2.o)
+ .debug_frame   0x00002768       0x48 /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libm.a(lib_a-k_sin.o)
+ .debug_frame   0x000027b0       0x20 /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libm.a(lib_a-s_fabs.o)
+ .debug_frame   0x000027d0       0x34 /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libm.a(lib_a-s_floor.o)
+ .debug_frame   0x00002804       0x30 /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libm.a(lib_a-s_scalbn.o)
+ .debug_frame   0x00002834       0x20 /usr/lib/gcc/arm-none-eabi/5.4.1/../../../arm-none-eabi/lib/armv7-m/libm.a(lib_a-s_copysign.o)
 
 Cross Reference Table
 

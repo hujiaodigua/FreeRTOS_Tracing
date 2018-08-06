@@ -421,11 +421,9 @@ void Func_LED0(void const * argument)
     //osDelay(10);
     HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_SET);
     
-    ETM_TraceMode();
     FFT(ChangeSeat(data));
     IFFT(ChangeSeat(data));
-    ETM_SetupMode();
-
+    
     ITM_Print(0,"LED0");
   }
   /* USER CODE END 5 */ 
@@ -450,10 +448,10 @@ void Func_LED1(void const * argument)
     //bubble_sort(values, 5);
     //ETM_SetupMode();
 
-    //ETM_TraceMode();
+    ETM_TraceMode();
     BinaryInsertSort(values_1, 5);
     bubble_sort(values_2, 5);
-    //ETM_SetupMode();
+    ETM_SetupMode();
 
   }
   /* USER CODE END Func_LED1 */
