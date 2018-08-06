@@ -35,7 +35,8 @@ build/main.o: Src/main.c Inc/main.h \
  Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h \
  Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
  Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h \
- Middlewares/Third_Party/FreeRTOS/Source/include/timers.h Src/arm_etm.h
+ Middlewares/Third_Party/FreeRTOS/Source/include/timers.h Src/arm_etm.h \
+ Inc/FFT.h
 
 Inc/main.h:
 
@@ -120,3 +121,5 @@ Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h:
 Middlewares/Third_Party/FreeRTOS/Source/include/timers.h:
 
 Src/arm_etm.h:
+
+Inc/FFT.h:

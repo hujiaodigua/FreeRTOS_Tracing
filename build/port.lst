@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc4oyLUf.s 			page 1
+ARM GAS  /tmp/ccllwVSC.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
   30:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c ****      *    is the industry's de facto standard.                               *
   31:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c ****      *                                                                       *
   32:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c ****      *    Help yourself get started quickly while simultaneously helping     *
-ARM GAS  /tmp/cc4oyLUf.s 			page 2
+ARM GAS  /tmp/ccllwVSC.s 			page 2
 
 
   33:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c ****      *    to support the FreeRTOS project by purchasing a FreeRTOS           *
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
   87:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	/* Ensure the SysTick is clocked at the same frequency as the core. */
   88:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	#define portNVIC_SYSTICK_CLK_BIT	( 1UL << 2UL )
   89:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** #else
-ARM GAS  /tmp/cc4oyLUf.s 			page 3
+ARM GAS  /tmp/ccllwVSC.s 			page 3
 
 
   90:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	/* The way the SysTick is clocked is not modified in case it is not the same
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  144:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	#define portTASK_RETURN_ADDRESS	prvTaskExitError
  145:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** #endif
  146:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 
-ARM GAS  /tmp/cc4oyLUf.s 			page 4
+ARM GAS  /tmp/ccllwVSC.s 			page 4
 
 
  147:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** /* Each task maintains its own interrupt status in the critical nesting
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  201:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c ****  * Used by the portASSERT_IF_INTERRUPT_PRIORITY_INVALID() macro to ensure
  202:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c ****  * FreeRTOS API functions are not called from interrupts that have been assigned
  203:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c ****  * a priority above configMAX_SYSCALL_INTERRUPT_PRIORITY.
-ARM GAS  /tmp/cc4oyLUf.s 			page 5
+ARM GAS  /tmp/ccllwVSC.s 			page 5
 
 
  204:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c ****  */
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
    2:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h ****     FreeRTOS V9.0.0 - Copyright (C) 2016 Real Time Engineers Ltd.
    3:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h ****     All rights reserved
    4:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 
-ARM GAS  /tmp/cc4oyLUf.s 			page 6
+ARM GAS  /tmp/ccllwVSC.s 			page 6
 
 
    5:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h ****     VISIT http://www.FreeRTOS.org TO ENSURE YOU ARE USING THE LATEST VERSION.
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
   59:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h ****     http://www.OpenRTOS.com - Real Time Engineers ltd. license FreeRTOS to High
   60:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h ****     Integrity Systems ltd. to sell under the OpenRTOS brand.  Low cost OpenRTOS
   61:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h ****     licenses offer ticketed support, indemnification and commercial middleware.
-ARM GAS  /tmp/cc4oyLUf.s 			page 7
+ARM GAS  /tmp/ccllwVSC.s 			page 7
 
 
   62:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  116:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** #define portTICK_PERIOD_MS			( ( TickType_t ) 1000 / configTICK_RATE_HZ )
  117:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** #define portBYTE_ALIGNMENT			8
  118:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** /*-----------------------------------------------------------*/
-ARM GAS  /tmp/cc4oyLUf.s 			page 8
+ARM GAS  /tmp/ccllwVSC.s 			page 8
 
 
  119:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  173:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 	{
  174:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 	uint8_t ucReturn;
  175:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 
-ARM GAS  /tmp/cc4oyLUf.s 			page 9
+ARM GAS  /tmp/ccllwVSC.s 			page 9
 
 
  176:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 		__asm volatile ( "clz %0, %1" : "=r" ( ucReturn ) : "r" ( ulBitmap ) );
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  230:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 
  231:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** /*-----------------------------------------------------------*/
  232:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 
-ARM GAS  /tmp/cc4oyLUf.s 			page 10
+ARM GAS  /tmp/ccllwVSC.s 			page 10
 
 
  233:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** portFORCE_INLINE static void vPortRaiseBASEPRI( void )
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  246:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** /*-----------------------------------------------------------*/
  247:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 
  248:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** void vPortSVCHandler( void )
-ARM GAS  /tmp/cc4oyLUf.s 			page 11
+ARM GAS  /tmp/ccllwVSC.s 			page 11
 
 
  249:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** {
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  109              		.loc 1 282 0
  110              		.thumb
  111              		.syntax unified
-ARM GAS  /tmp/cc4oyLUf.s 			page 12
+ARM GAS  /tmp/ccllwVSC.s 			page 12
 
 
  112              		.cfi_endproc
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  249:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	__asm volatile (
  164              		.loc 1 249 0
  165              		.cfi_startproc
-ARM GAS  /tmp/cc4oyLUf.s 			page 13
+ARM GAS  /tmp/ccllwVSC.s 			page 13
 
 
  166              		@ Naked Function: prologue and epilogue provided by programmer.
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  302:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 		"FromISR".  FreeRTOS maintains separate thread and ISR API functions to
  303:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 		ensure interrupt entry is as fast and simple as possible.
  304:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 
-ARM GAS  /tmp/cc4oyLUf.s 			page 14
+ARM GAS  /tmp/ccllwVSC.s 			page 14
 
 
  305:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 		Save the interrupt priority value that is about to be clobbered. */
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  359:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	return 0;
  360:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** }
  361:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** /*-----------------------------------------------------------*/
-ARM GAS  /tmp/cc4oyLUf.s 			page 15
+ARM GAS  /tmp/ccllwVSC.s 			page 15
 
 
  362:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  246              		.loc 1 372 0
  247              		.cfi_startproc
  248              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /tmp/cc4oyLUf.s 			page 16
+ARM GAS  /tmp/ccllwVSC.s 			page 16
 
 
  249              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  292              		.syntax unified
  293              	.L19:
  294 0036 FEE7     		b	.L19
-ARM GAS  /tmp/cc4oyLUf.s 			page 17
+ARM GAS  /tmp/ccllwVSC.s 			page 17
 
 
  295              	.L17:
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  343              		.loc 1 391 0
  344 0018 013B     		subs	r3, r3, #1
  345 001a 034A     		ldr	r2, .L26
-ARM GAS  /tmp/cc4oyLUf.s 			page 18
+ARM GAS  /tmp/ccllwVSC.s 			page 18
 
 
  346 001c 1360     		str	r3, [r2]
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  365 0028 00000000 		.word	.LANCHOR0
  366              	.LBE37:
  367              	.LBE36:
-ARM GAS  /tmp/cc4oyLUf.s 			page 19
+ARM GAS  /tmp/ccllwVSC.s 			page 19
 
 
  368              		.cfi_endproc
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  413              	
  414              	@ 0 "" 2
  404:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	(
-ARM GAS  /tmp/cc4oyLUf.s 			page 20
+ARM GAS  /tmp/ccllwVSC.s 			page 20
 
 
  405:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 	"	mrs r0, psp							\n"
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  438              	.LBB38:
  439              	.LBB39:
  237:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 	(
-ARM GAS  /tmp/cc4oyLUf.s 			page 21
+ARM GAS  /tmp/ccllwVSC.s 			page 21
 
 
  440              		.loc 2 237 0
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  482              	.LFE14:
  484              		.section	.text.vPortSetupTimerInterrupt,"ax",%progbits
  485              		.align	2
-ARM GAS  /tmp/cc4oyLUf.s 			page 22
+ARM GAS  /tmp/ccllwVSC.s 			page 22
 
 
  486              		.weak	vPortSetupTimerInterrupt
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  499:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 			portNVIC_SYSTICK_CTRL_REG |= portNVIC_SYSTICK_ENABLE_BIT;
  500:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 
  501:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 			/* Reset the reload register to the value required for normal tick
-ARM GAS  /tmp/cc4oyLUf.s 			page 23
+ARM GAS  /tmp/ccllwVSC.s 			page 23
 
 
  502:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 			periods. */
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  556:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 
  557:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 				/* Don't allow a tiny value, or values that have somehow
  558:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 				underflowed because the post sleep hook did something
-ARM GAS  /tmp/cc4oyLUf.s 			page 24
+ARM GAS  /tmp/ccllwVSC.s 			page 24
 
 
  559:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 				that took too long. */
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  613:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c ****  */
  614:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** __attribute__(( weak )) void vPortSetupTimerInterrupt( void )
  615:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** {
-ARM GAS  /tmp/cc4oyLUf.s 			page 25
+ARM GAS  /tmp/ccllwVSC.s 			page 25
 
 
  492              		.loc 1 615 0
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  535              		.cfi_def_cfa_offset 4
  536              		.cfi_offset 14, -4
  537 0002 83B0     		sub	sp, sp, #12
-ARM GAS  /tmp/cc4oyLUf.s 			page 26
+ARM GAS  /tmp/ccllwVSC.s 			page 26
 
 
  538              	.LCFI2:
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  582 004a 104A     		ldr	r2, .L41+8
  583 004c 1368     		ldr	r3, [r2]
  584 004e 1B02     		lsls	r3, r3, #8
-ARM GAS  /tmp/cc4oyLUf.s 			page 27
+ARM GAS  /tmp/ccllwVSC.s 			page 27
 
 
  330:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  633              	vPortValidateInterruptPriority:
  634              	.LFB16:
  628:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** }
-ARM GAS  /tmp/cc4oyLUf.s 			page 28
+ARM GAS  /tmp/ccllwVSC.s 			page 28
 
 
  629:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** /*-----------------------------------------------------------*/
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  661:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 			which is guaranteed to be above configMAX_SYSCALL_INTERRUPT_PRIORITY,
  662:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 			and	therefore also guaranteed to be invalid.
  663:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 
-ARM GAS  /tmp/cc4oyLUf.s 			page 29
+ARM GAS  /tmp/ccllwVSC.s 			page 29
 
 
  664:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c **** 			FreeRTOS maintains separate thread and ISR API functions to ensure
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  687 0034 9342     		cmp	r3, r2
  688 0036 08D9     		bls	.L43
  689              	.LBB45:
-ARM GAS  /tmp/cc4oyLUf.s 			page 30
+ARM GAS  /tmp/ccllwVSC.s 			page 30
 
 
  690              	.LBB46:
@@ -1791,56 +1791,56 @@ ARM GAS  /tmp/cc4oyLUf.s 			page 1
  743              		.file 5 "Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h"
  744              		.file 6 "Inc/FreeRTOSConfig.h"
  745              		.file 7 "Middlewares/Third_Party/FreeRTOS/Source/include/task.h"
-ARM GAS  /tmp/cc4oyLUf.s 			page 31
+ARM GAS  /tmp/ccllwVSC.s 			page 31
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 port.c
-     /tmp/cc4oyLUf.s:20     .text.prvTaskExitError:00000000 $t
-     /tmp/cc4oyLUf.s:24     .text.prvTaskExitError:00000000 prvTaskExitError
-     /tmp/cc4oyLUf.s:76     .text.prvTaskExitError:00000030 $d
-     /tmp/cc4oyLUf.s:83     .text.prvPortStartFirstTask:00000000 $t
-     /tmp/cc4oyLUf.s:87     .text.prvPortStartFirstTask:00000000 prvPortStartFirstTask
-     /tmp/cc4oyLUf.s:116    .text.pxPortInitialiseStack:00000000 $t
-     /tmp/cc4oyLUf.s:121    .text.pxPortInitialiseStack:00000000 pxPortInitialiseStack
-     /tmp/cc4oyLUf.s:152    .text.pxPortInitialiseStack:00000020 $d
-     /tmp/cc4oyLUf.s:157    .text.SVC_Handler:00000000 $t
-     /tmp/cc4oyLUf.s:162    .text.SVC_Handler:00000000 SVC_Handler
-     /tmp/cc4oyLUf.s:184    .text.SVC_Handler:00000020 pxCurrentTCBConst2
-     /tmp/cc4oyLUf.s:184    .text.SVC_Handler:00000020 $d
-     /tmp/cc4oyLUf.s:194    .text.vPortEndScheduler:00000000 $t
-     /tmp/cc4oyLUf.s:199    .text.vPortEndScheduler:00000000 vPortEndScheduler
-     /tmp/cc4oyLUf.s:232    .text.vPortEndScheduler:00000020 $d
-     /tmp/cc4oyLUf.s:239    .text.vPortEnterCritical:00000000 $t
-     /tmp/cc4oyLUf.s:244    .text.vPortEnterCritical:00000000 vPortEnterCritical
-     /tmp/cc4oyLUf.s:300    .text.vPortEnterCritical:0000003c $d
-     /tmp/cc4oyLUf.s:308    .text.vPortExitCritical:00000000 $t
-     /tmp/cc4oyLUf.s:313    .text.vPortExitCritical:00000000 vPortExitCritical
-     /tmp/cc4oyLUf.s:365    .text.vPortExitCritical:00000028 $d
-     /tmp/cc4oyLUf.s:372    .text.PendSV_Handler:00000000 $t
-     /tmp/cc4oyLUf.s:377    .text.PendSV_Handler:00000000 PendSV_Handler
-     /tmp/cc4oyLUf.s:412    .text.PendSV_Handler:00000040 pxCurrentTCBConst
-     /tmp/cc4oyLUf.s:412    .text.PendSV_Handler:00000040 $d
-     /tmp/cc4oyLUf.s:422    .text.xPortSysTickHandler:00000000 $t
-     /tmp/cc4oyLUf.s:427    .text.xPortSysTickHandler:00000000 xPortSysTickHandler
-     /tmp/cc4oyLUf.s:478    .text.xPortSysTickHandler:00000028 $d
-     /tmp/cc4oyLUf.s:485    .text.vPortSetupTimerInterrupt:00000000 $t
-     /tmp/cc4oyLUf.s:490    .text.vPortSetupTimerInterrupt:00000000 vPortSetupTimerInterrupt
-     /tmp/cc4oyLUf.s:514    .text.vPortSetupTimerInterrupt:0000001c $d
-     /tmp/cc4oyLUf.s:522    .text.xPortStartScheduler:00000000 $t
-     /tmp/cc4oyLUf.s:527    .text.xPortStartScheduler:00000000 xPortStartScheduler
-     /tmp/cc4oyLUf.s:619    .text.xPortStartScheduler:00000084 $d
-     /tmp/cc4oyLUf.s:628    .text.vPortValidateInterruptPriority:00000000 $t
-     /tmp/cc4oyLUf.s:633    .text.vPortValidateInterruptPriority:00000000 vPortValidateInterruptPriority
-     /tmp/cc4oyLUf.s:710    .text.vPortValidateInterruptPriority:0000004c $d
-     /tmp/cc4oyLUf.s:723    .bss.ucMaxSysCallPriority:00000000 ucMaxSysCallPriority
-     /tmp/cc4oyLUf.s:724    .bss.ucMaxSysCallPriority:00000000 $d
-     /tmp/cc4oyLUf.s:726    .bss.ulMaxPRIGROUPValue:00000000 $d
-     /tmp/cc4oyLUf.s:730    .bss.ulMaxPRIGROUPValue:00000000 ulMaxPRIGROUPValue
-     /tmp/cc4oyLUf.s:733    .data.uxCriticalNesting:00000000 $d
-     /tmp/cc4oyLUf.s:737    .data.uxCriticalNesting:00000000 uxCriticalNesting
-     /tmp/cc4oyLUf.s:115    .text.prvPortStartFirstTask:0000001a $d
-     /tmp/cc4oyLUf.s:2235   .text.prvPortStartFirstTask:0000001c $d
+     /tmp/ccllwVSC.s:20     .text.prvTaskExitError:00000000 $t
+     /tmp/ccllwVSC.s:24     .text.prvTaskExitError:00000000 prvTaskExitError
+     /tmp/ccllwVSC.s:76     .text.prvTaskExitError:00000030 $d
+     /tmp/ccllwVSC.s:83     .text.prvPortStartFirstTask:00000000 $t
+     /tmp/ccllwVSC.s:87     .text.prvPortStartFirstTask:00000000 prvPortStartFirstTask
+     /tmp/ccllwVSC.s:116    .text.pxPortInitialiseStack:00000000 $t
+     /tmp/ccllwVSC.s:121    .text.pxPortInitialiseStack:00000000 pxPortInitialiseStack
+     /tmp/ccllwVSC.s:152    .text.pxPortInitialiseStack:00000020 $d
+     /tmp/ccllwVSC.s:157    .text.SVC_Handler:00000000 $t
+     /tmp/ccllwVSC.s:162    .text.SVC_Handler:00000000 SVC_Handler
+     /tmp/ccllwVSC.s:184    .text.SVC_Handler:00000020 pxCurrentTCBConst2
+     /tmp/ccllwVSC.s:184    .text.SVC_Handler:00000020 $d
+     /tmp/ccllwVSC.s:194    .text.vPortEndScheduler:00000000 $t
+     /tmp/ccllwVSC.s:199    .text.vPortEndScheduler:00000000 vPortEndScheduler
+     /tmp/ccllwVSC.s:232    .text.vPortEndScheduler:00000020 $d
+     /tmp/ccllwVSC.s:239    .text.vPortEnterCritical:00000000 $t
+     /tmp/ccllwVSC.s:244    .text.vPortEnterCritical:00000000 vPortEnterCritical
+     /tmp/ccllwVSC.s:300    .text.vPortEnterCritical:0000003c $d
+     /tmp/ccllwVSC.s:308    .text.vPortExitCritical:00000000 $t
+     /tmp/ccllwVSC.s:313    .text.vPortExitCritical:00000000 vPortExitCritical
+     /tmp/ccllwVSC.s:365    .text.vPortExitCritical:00000028 $d
+     /tmp/ccllwVSC.s:372    .text.PendSV_Handler:00000000 $t
+     /tmp/ccllwVSC.s:377    .text.PendSV_Handler:00000000 PendSV_Handler
+     /tmp/ccllwVSC.s:412    .text.PendSV_Handler:00000040 pxCurrentTCBConst
+     /tmp/ccllwVSC.s:412    .text.PendSV_Handler:00000040 $d
+     /tmp/ccllwVSC.s:422    .text.xPortSysTickHandler:00000000 $t
+     /tmp/ccllwVSC.s:427    .text.xPortSysTickHandler:00000000 xPortSysTickHandler
+     /tmp/ccllwVSC.s:478    .text.xPortSysTickHandler:00000028 $d
+     /tmp/ccllwVSC.s:485    .text.vPortSetupTimerInterrupt:00000000 $t
+     /tmp/ccllwVSC.s:490    .text.vPortSetupTimerInterrupt:00000000 vPortSetupTimerInterrupt
+     /tmp/ccllwVSC.s:514    .text.vPortSetupTimerInterrupt:0000001c $d
+     /tmp/ccllwVSC.s:522    .text.xPortStartScheduler:00000000 $t
+     /tmp/ccllwVSC.s:527    .text.xPortStartScheduler:00000000 xPortStartScheduler
+     /tmp/ccllwVSC.s:619    .text.xPortStartScheduler:00000084 $d
+     /tmp/ccllwVSC.s:628    .text.vPortValidateInterruptPriority:00000000 $t
+     /tmp/ccllwVSC.s:633    .text.vPortValidateInterruptPriority:00000000 vPortValidateInterruptPriority
+     /tmp/ccllwVSC.s:710    .text.vPortValidateInterruptPriority:0000004c $d
+     /tmp/ccllwVSC.s:723    .bss.ucMaxSysCallPriority:00000000 ucMaxSysCallPriority
+     /tmp/ccllwVSC.s:724    .bss.ucMaxSysCallPriority:00000000 $d
+     /tmp/ccllwVSC.s:726    .bss.ulMaxPRIGROUPValue:00000000 $d
+     /tmp/ccllwVSC.s:730    .bss.ulMaxPRIGROUPValue:00000000 ulMaxPRIGROUPValue
+     /tmp/ccllwVSC.s:733    .data.uxCriticalNesting:00000000 $d
+     /tmp/ccllwVSC.s:737    .data.uxCriticalNesting:00000000 uxCriticalNesting
+     /tmp/ccllwVSC.s:115    .text.prvPortStartFirstTask:0000001a $d
+     /tmp/ccllwVSC.s:2235   .text.prvPortStartFirstTask:0000001c $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

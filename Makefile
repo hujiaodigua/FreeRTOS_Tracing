@@ -37,6 +37,7 @@ BUILD_DIR = build
 # C sources
 C_SOURCES =  \
 Src/main.c \
+Src/FFT.c \
 Src/freertos.c \
 Src/stm32f1xx_it.c \
 Src/stm32f1xx_hal_msp.c \

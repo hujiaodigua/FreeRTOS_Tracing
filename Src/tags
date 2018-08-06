@@ -1,0 +1,174 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ACTR	arm_etm.h	/^    __IO uint32_t ACTR[16];     \/* Address Comparator Access Type Registers *\/$/;"	m	struct:__anon1
+ACVR	arm_etm.h	/^    __IO uint32_t ACVR[16];     \/* Address Comparator Value Registers *\/$/;"	m	struct:__anon1
+AHBPrescTable	system_stm32f1xx.c	/^const uint8_t AHBPrescTable[16U] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};$/;"	v
+APBPrescTable	system_stm32f1xx.c	/^const uint8_t APBPrescTable[8U] =  {0, 0, 0, 0, 1, 2, 3, 4};$/;"	v
+ARM_ETM_H	arm_etm.h	5;"	d
+ASICCR	arm_etm.h	/^    __IO uint32_t ASICCR;       \/* ASIC Control Register *\/$/;"	m	struct:__anon1
+AUTHSTATUS	arm_etm.h	/^    __IO uint32_t AUTHSTATUS;   \/* Authentication Status Register *\/$/;"	m	struct:__anon1
+AUXCR	arm_etm.h	/^    __IO uint32_t AUXCR;        \/* Auxiliary Control Register, ETMv3.5 *\/$/;"	m	struct:__anon1
+BinaryInsertSort	main.c	/^void BinaryInsertSort(int* pDataArray, int iDataNum)$/;"	f
+BusFault_Handler	stm32f1xx_it.c	/^void BusFault_Handler(void)$/;"	f
+CCER	arm_etm.h	/^    __IO uint32_t CCER;         \/* Configuration Code Extension Register *\/$/;"	m	struct:__anon1
+CCR	arm_etm.h	/^    __IO uint32_t CCR;          \/* Configuration Code Register *\/$/;"	m	struct:__anon1
+CIDCMR	arm_etm.h	/^    __IO uint32_t CIDCMR;       \/* Context ID Comparator Mask Register *\/$/;"	m	struct:__anon1
+CIDCVR	arm_etm.h	/^    __IO uint32_t CIDCVR[3];    \/* Context ID Comparator Value Registers *\/$/;"	m	struct:__anon1
+CIDR0	arm_etm.h	/^    __IO uint32_t CIDR0;        \/* Component ID0 *\/$/;"	m	struct:__anon1
+CIDR1	arm_etm.h	/^    __IO uint32_t CIDR1;        \/* Component ID1 *\/$/;"	m	struct:__anon1
+CIDR2	arm_etm.h	/^    __IO uint32_t CIDR2;        \/* Component ID2 *\/$/;"	m	struct:__anon1
+CIDR3	arm_etm.h	/^    __IO uint32_t CIDR3;        \/* Component ID3 *\/$/;"	m	struct:__anon1
+CLAIMCLR	arm_etm.h	/^    __IO uint32_t CLAIMCLR;     \/* Claim Tag Clear Register *\/$/;"	m	struct:__anon1
+CLAIMSET	arm_etm.h	/^    __IO uint32_t CLAIMSET;     \/* Claim Tag Set Register *\/$/;"	m	struct:__anon1
+CNTENR	arm_etm.h	/^    __IO uint32_t CNTENR[4];    \/* Counter Enable Registers *\/$/;"	m	struct:__anon1
+CNTRLDEVR	arm_etm.h	/^    __IO uint32_t CNTRLDEVR[4]; \/* Counter Reload Event Registers *\/$/;"	m	struct:__anon1
+CNTRLDVR	arm_etm.h	/^    __IO uint32_t CNTRLDVR[4];  \/* Counter Reload Value Registers *\/$/;"	m	struct:__anon1
+CNTVR	arm_etm.h	/^    __IO uint32_t CNTVR[4];     \/* Counter Value Registers *\/$/;"	m	struct:__anon1
+CR	arm_etm.h	/^    __IO uint32_t CR;           \/* Main Control Register *\/$/;"	m	struct:__anon1
+ChangeSeat	FFT.c	/^void ChangeSeat(complex *DataInput)  $/;"	f
+DCMR	arm_etm.h	/^    __IO uint32_t DCMR[16];     \/* Data Comparator Mask Registers *\/$/;"	m	struct:__anon1
+DCVR	arm_etm.h	/^    __IO uint32_t DCVR[16];     \/* Data Comparator Value Registers *\/$/;"	m	struct:__anon1
+DEVID	arm_etm.h	/^    __IO uint32_t DEVID;        \/* CoreSight Device Configuration Register *\/$/;"	m	struct:__anon1
+DEVTYPE	arm_etm.h	/^    __IO uint32_t DEVTYPE;      \/* CoreSight Device Type Register *\/$/;"	m	struct:__anon1
+DebugMon_Handler	stm32f1xx_it.c	/^void DebugMon_Handler(void)$/;"	f
+EIBCR	arm_etm.h	/^    __IO uint32_t EIBCR;        \/* EmbeddedICE Behavior Control Register *\/$/;"	m	struct:__anon1
+ETM	arm_etm.h	154;"	d
+ETM_BASE	arm_etm.h	153;"	d
+ETM_CR_ACCESS	arm_etm.h	135;"	d
+ETM_CR_BLOCK_DEBUGGER	arm_etm.h	133;"	d
+ETM_CR_BLOCK_SOFTWARE	arm_etm.h	134;"	d
+ETM_CR_BRANCH_OUTPUT	arm_etm.h	114;"	d
+ETM_CR_CONTEXTID_16BIT	arm_etm.h	120;"	d
+ETM_CR_CONTEXTID_32BIT	arm_etm.h	121;"	d
+ETM_CR_CONTEXTID_8BIT	arm_etm.h	119;"	d
+ETM_CR_CONTEXTID_8BIT	arm_etm.h	122;"	d
+ETM_CR_CYCLETRACE	arm_etm.h	118;"	d
+ETM_CR_DATA_ONLY	arm_etm.h	132;"	d
+ETM_CR_DEBUGREQ	arm_etm.h	115;"	d
+ETM_CR_ETMEN	arm_etm.h	117;"	d
+ETM_CR_FILTER_CPRT	arm_etm.h	131;"	d
+ETM_CR_MONITORCPRT	arm_etm.h	105;"	d
+ETM_CR_PORTMODE_1_1	arm_etm.h	126;"	d
+ETM_CR_PORTMODE_1_2	arm_etm.h	127;"	d
+ETM_CR_PORTMODE_1_3	arm_etm.h	128;"	d
+ETM_CR_PORTMODE_1_4	arm_etm.h	129;"	d
+ETM_CR_PORTMODE_2_1	arm_etm.h	124;"	d
+ETM_CR_PORTMODE_IMPL	arm_etm.h	125;"	d
+ETM_CR_PORTMODE_ONCHIP	arm_etm.h	123;"	d
+ETM_CR_PORTSIZE_16BIT	arm_etm.h	112;"	d
+ETM_CR_PORTSIZE_1BIT	arm_etm.h	108;"	d
+ETM_CR_PORTSIZE_2BIT	arm_etm.h	109;"	d
+ETM_CR_PORTSIZE_4BIT	arm_etm.h	110;"	d
+ETM_CR_PORTSIZE_8BIT	arm_etm.h	111;"	d
+ETM_CR_POWERDOWN	arm_etm.h	104;"	d
+ETM_CR_PROCSEL_Pos	arm_etm.h	136;"	d
+ETM_CR_PROGRAMMING	arm_etm.h	116;"	d
+ETM_CR_STALL_PROCESSOR	arm_etm.h	113;"	d
+ETM_CR_SUPPRESS_DATA	arm_etm.h	130;"	d
+ETM_CR_TIMESTAMP	arm_etm.h	137;"	d
+ETM_CR_TRACE_ADDR	arm_etm.h	107;"	d
+ETM_CR_TRACE_DATA	arm_etm.h	106;"	d
+ETM_CR_VMID	arm_etm.h	138;"	d
+ETM_FFRR_EXCLUDE	arm_etm.h	146;"	d
+ETM_LAR_KEY	arm_etm.h	148;"	d
+ETM_SR_PROGSTATUS	arm_etm.h	140;"	d
+ETM_SR_TRIGSTATUS	arm_etm.h	141;"	d
+ETM_SetupMode	arm_etm.h	151;"	d
+ETM_TECR1_EXCLUDE	arm_etm.h	143;"	d
+ETM_TECR1_TSSEN	arm_etm.h	144;"	d
+ETM_TraceMode	arm_etm.h	150;"	d
+ETM_Type	arm_etm.h	/^} ETM_Type;$/;"	t	typeref:struct:__anon1
+EXTINSELR	arm_etm.h	/^    __IO uint32_t EXTINSELR;    \/* Extended External Input Selection Register *\/$/;"	m	struct:__anon1
+EXTOUTEVR	arm_etm.h	/^    __IO uint32_t EXTOUTEVR[4]; \/* External Output Event Registers *\/$/;"	m	struct:__anon1
+FFLR	arm_etm.h	/^    __IO uint32_t FFLR;         \/* FIFOFULL Level Register *\/$/;"	m	struct:__anon1
+FFRR	arm_etm.h	/^    __IO uint32_t FFRR;         \/* FIFOFULL Region Register *\/$/;"	m	struct:__anon1
+FFT	FFT.c	/^void FFT(void)  $/;"	f
+FindInsertIndex	main.c	/^int FindInsertIndex(int *pDataArray, int iLen, int iData)$/;"	f
+Func_LED0	main.c	/^void Func_LED0(void const * argument)$/;"	f
+Func_LED1	main.c	/^void Func_LED1(void const * argument)$/;"	f
+HAL_InitTick	stm32f1xx_hal_timebase_TIM.c	/^HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)$/;"	f
+HAL_MspInit	stm32f1xx_hal_msp.c	/^void HAL_MspInit(void)$/;"	f
+HAL_ResumeTick	stm32f1xx_hal_timebase_TIM.c	/^void HAL_ResumeTick(void)$/;"	f
+HAL_SuspendTick	stm32f1xx_hal_timebase_TIM.c	/^void HAL_SuspendTick(void)$/;"	f
+HAL_TIM_PeriodElapsedCallback	main.c	/^void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)$/;"	f
+HSE_VALUE	system_stm32f1xx.c	96;"	d	file:
+HSI_VALUE	system_stm32f1xx.c	101;"	d	file:
+HardFault_Handler	stm32f1xx_it.c	/^void HardFault_Handler(void)$/;"	f
+IDR	arm_etm.h	/^    __IO uint32_t IDR;          \/* ETM ID Register *\/$/;"	m	struct:__anon1
+IDR2	arm_etm.h	/^    __IO uint32_t IDR2;         \/* ETM ID Register 2 *\/$/;"	m	struct:__anon1
+IFFT	FFT.c	/^void IFFT(void)  $/;"	f
+IMPL	arm_etm.h	/^    __IO uint32_t IMPL[8];      \/* Implementation specific registers *\/$/;"	m	struct:__anon1
+ITCTRL	arm_etm.h	/^    __IO uint32_t ITCTRL;       \/* Integration Mode Control Register *\/$/;"	m	struct:__anon1
+ITM_Print	main.c	/^void ITM_Print(int port, const char *p)$/;"	f
+ITM_SendValue	main.c	/^void ITM_SendValue (int port, uint32_t value)$/;"	f
+LAR	arm_etm.h	/^    __IO uint32_t LAR;          \/* Lock Access Register *\/$/;"	m	struct:__anon1
+LSR	arm_etm.h	/^    __IO uint32_t LSR;          \/* Lock Status Register *\/$/;"	m	struct:__anon1
+MX_GPIO_Init	main.c	/^static void MX_GPIO_Init(void)$/;"	f	file:
+MemManage_Handler	stm32f1xx_it.c	/^void MemManage_Handler(void)$/;"	f
+NMI_Handler	stm32f1xx_it.c	/^void NMI_Handler(void)$/;"	f
+OSLAR	arm_etm.h	/^    __IO uint32_t OSLAR;        \/* OS Lock Access Register *\/$/;"	m	struct:__anon1
+OSLSR	arm_etm.h	/^    __IO uint32_t OSLSR;        \/* OS Lock Status Register *\/$/;"	m	struct:__anon1
+OSSRR	arm_etm.h	/^    __IO uint32_t OSSRR;        \/* OS Save and Restore Register *\/$/;"	m	struct:__anon1
+PDCR	arm_etm.h	/^    __IO uint32_t PDCR;         \/* Power Down Control Register, ETMv3.5 *\/$/;"	m	struct:__anon1
+PDSR	arm_etm.h	/^    __IO uint32_t PDSR;         \/* Device Power-Down Status Register *\/$/;"	m	struct:__anon1
+PIDR0	arm_etm.h	/^    __IO uint32_t PIDR0;        \/* Peripheral ID0 *\/$/;"	m	struct:__anon1
+PIDR1	arm_etm.h	/^    __IO uint32_t PIDR1;        \/* Peripheral ID1 *\/$/;"	m	struct:__anon1
+PIDR2	arm_etm.h	/^    __IO uint32_t PIDR2;        \/* Peripheral ID2 *\/$/;"	m	struct:__anon1
+PIDR3	arm_etm.h	/^    __IO uint32_t PIDR3;        \/* Peripheral ID3 *\/$/;"	m	struct:__anon1
+PIDR4	arm_etm.h	/^    __IO uint32_t PIDR4;        \/* Peripheral ID4 *\/$/;"	m	struct:__anon1
+PIDR5	arm_etm.h	/^    __IO uint32_t PIDR5;        \/* Peripheral ID5 *\/$/;"	m	struct:__anon1
+PIDR6	arm_etm.h	/^    __IO uint32_t PIDR6;        \/* Peripheral ID6 *\/$/;"	m	struct:__anon1
+PIDR7	arm_etm.h	/^    __IO uint32_t PIDR7;        \/* Peripheral ID7 *\/$/;"	m	struct:__anon1
+RESERVED0	arm_etm.h	/^    __IO uint32_t RESERVED0;$/;"	m	struct:__anon1
+RESERVED1	arm_etm.h	/^    __IO uint32_t RESERVED1;$/;"	m	struct:__anon1
+RESERVED2	arm_etm.h	/^    __IO uint32_t RESERVED2[13];$/;"	m	struct:__anon1
+RESERVED3	arm_etm.h	/^    __IO uint32_t RESERVED3[47];$/;"	m	struct:__anon1
+RESERVED4	arm_etm.h	/^    __IO uint32_t RESERVED4;$/;"	m	struct:__anon1
+RESERVED5	arm_etm.h	/^    __IO uint32_t RESERVED5[762];$/;"	m	struct:__anon1
+RESERVED6	arm_etm.h	/^    __IO uint32_t RESERVED6[39];$/;"	m	struct:__anon1
+RESERVED7	arm_etm.h	/^    __IO uint32_t RESERVED7[2];$/;"	m	struct:__anon1
+RESERVED8	arm_etm.h	/^    __IO uint32_t RESERVED8[3];$/;"	m	struct:__anon1
+SCR	arm_etm.h	/^    __IO uint32_t SCR;          \/* System Configuration Register *\/$/;"	m	struct:__anon1
+SQR	arm_etm.h	/^    __IO uint32_t SQR;          \/* Current Sequencer State Register *\/$/;"	m	struct:__anon1
+SQabEVR	arm_etm.h	/^    __IO uint32_t SQabEVR[6];   \/* Sequencer State Transition Event Registers *\/$/;"	m	struct:__anon1
+SR	arm_etm.h	/^    __IO uint32_t SR;           \/* ETM Status Register *\/$/;"	m	struct:__anon1
+SYNCFR	arm_etm.h	/^    __IO uint32_t SYNCFR;       \/* Synchronization Frequency Register *\/$/;"	m	struct:__anon1
+SysTick_Handler	stm32f1xx_it.c	/^void SysTick_Handler(void)$/;"	f
+SystemClock_Config	main.c	/^void SystemClock_Config(void)$/;"	f
+SystemCoreClock	system_stm32f1xx.c	/^  uint32_t SystemCoreClock         = 24000000U;        \/*!< System Clock Frequency (Core Clock) *\/$/;"	v
+SystemCoreClock	system_stm32f1xx.c	/^  uint32_t SystemCoreClock         = 72000000U;        \/*!< System Clock Frequency (Core Clock) *\/$/;"	v
+SystemCoreClockUpdate	system_stm32f1xx.c	/^void SystemCoreClockUpdate (void)$/;"	f
+SystemInit	system_stm32f1xx.c	/^void SystemInit (void)$/;"	f
+SystemInit_ExtMemCtl	system_stm32f1xx.c	/^void SystemInit_ExtMemCtl(void) $/;"	f
+TECR1	arm_etm.h	/^    __IO uint32_t TECR1;        \/* TraceEnable Control 1 *\/$/;"	m	struct:__anon1
+TECR2	arm_etm.h	/^    __IO uint32_t TECR2;        \/* TraceEnable Control 2 *\/$/;"	m	struct:__anon1
+TEEVR	arm_etm.h	/^    __IO uint32_t TEEVR;        \/* TraceEnable Event Register *\/$/;"	m	struct:__anon1
+TESSEICR	arm_etm.h	/^    __IO uint32_t TESSEICR;     \/* TraceEnable Start\/Stop EmbeddedICE Control Register *\/$/;"	m	struct:__anon1
+TIM4_IRQHandler	stm32f1xx_it.c	/^void TIM4_IRQHandler(void)$/;"	f
+TRACEIDR	arm_etm.h	/^    __IO uint32_t TRACEIDR;     \/* CoreSight Trace ID Register *\/$/;"	m	struct:__anon1
+TRIGGER	arm_etm.h	/^    __IO uint32_t TRIGGER;      \/* Trigger Event *\/$/;"	m	struct:__anon1
+TSEVR	arm_etm.h	/^    __IO uint32_t TSEVR;        \/* Timestamp Event Register, ETMv3.5 *\/$/;"	m	struct:__anon1
+TSSCR	arm_etm.h	/^    __IO uint32_t TSSCR;        \/* TraceEnable Start\/Stop Control Register *\/$/;"	m	struct:__anon1
+Task_LED0Handle	main.c	/^osThreadId Task_LED0Handle;$/;"	v
+Task_LED1Handle	main.c	/^osThreadId Task_LED1Handle;$/;"	v
+UsageFault_Handler	stm32f1xx_it.c	/^void UsageFault_Handler(void)$/;"	f
+VDCR1	arm_etm.h	/^    __IO uint32_t VDCR1;        \/* ViewData Control 1 *\/$/;"	m	struct:__anon1
+VDCR2	arm_etm.h	/^    __IO uint32_t VDCR2;        \/* ViewData Control 2 *\/$/;"	m	struct:__anon1
+VDCR3	arm_etm.h	/^    __IO uint32_t VDCR3;        \/* ViewData Control 3 *\/$/;"	m	struct:__anon1
+VDEVR	arm_etm.h	/^    __IO uint32_t VDEVR;        \/* ViewData Event Register *\/$/;"	m	struct:__anon1
+VECT_TAB_OFFSET	system_stm32f1xx.c	113;"	d	file:
+VMIDCVR	arm_etm.h	/^    __IO uint32_t VMIDCVR;      \/* VMID Comparator Value Register, ETMv3.5 *\/$/;"	m	struct:__anon1
+XX_complex	FFT.c	/^complex XX_complex(complex a, complex b)  $/;"	f
+_Error_Handler	main.c	/^void _Error_Handler(char *file, int line)$/;"	f
+assert_failed	main.c	/^void assert_failed(uint8_t* file, uint32_t line)$/;"	f
+bubble_sort	main.c	/^void bubble_sort (int *a, int n) $/;"	f
+configure_tracing	main.c	/^void configure_tracing()$/;"	f
+configure_watchpoint	main.c	/^void configure_watchpoint()$/;"	f
+globalCounter	main.c	/^int globalCounter = 0;\/\/int类型最大值是255可以追踪1-255个入口地址$/;"	v
+htim4	stm32f1xx_hal_timebase_TIM.c	/^TIM_HandleTypeDef        htim4; $/;"	v
+main	main.c	/^int main(void)$/;"	f
+uwIncrementState	stm32f1xx_hal_timebase_TIM.c	/^uint32_t                 uwIncrementState = 0;$/;"	v

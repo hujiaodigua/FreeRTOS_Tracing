@@ -52,6 +52,7 @@
 #include "cmsis_os.h"
 
 #include "arm_etm.h"
+#include "FFT.h"
 
 /* USER CODE BEGIN Includes */
 
@@ -65,6 +66,9 @@ osThreadId Task_LED1Handle;
 int globalCounter = 0;//int类型最大值是255可以追踪1-255个入口地址
                       //0x0A表示Func_LED0,0x0B表示Func_LED1
                       //0x0B表示ITM_Print，0x0C表示bubble_sort
+                      
+extern complex data[N];
+extern ElemType result[N];   
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE END PV */
@@ -74,6 +78,7 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 void Func_LED0(void const * argument);
 void Func_LED1(void const * argument);
+
 
 /* USER CODE BEGIN PFP */
 
@@ -422,6 +427,7 @@ void Func_LED1(void const * argument)
 {
   /* USER CODE BEGIN Func_LED1 */
   int values[5] = {35,2,235,11,2};
+  int i = 0;
   /* Infinite loop */
   for(;;)
   {
@@ -431,8 +437,17 @@ void Func_LED1(void const * argument)
     osDelay(10);
     HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
     //ITM_Print(0,"LED1");
+    //ETM_TraceMode();
+    //bubble_sort(values, 5);
+    //ETM_SetupMode();
+
+    for(i=0; i<N; i++)//制造FFT输入序列   
+    {
+        data[i].real = sin(2*PI*i/N); 
+    }
     ETM_TraceMode();
-    bubble_sort(values, 5);
+    //FFT();
+    BinaryInsertSort(values, 5);
     ETM_SetupMode();
 
   }
