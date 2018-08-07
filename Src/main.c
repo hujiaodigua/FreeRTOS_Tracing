@@ -411,14 +411,14 @@ void Func_LED0(void const * argument)
   for(;;)
   {
     //globalCounter = 0x0A;//0x0A表示Func_LED0
-    osDelay(5);
+    //osDelay(5);
     HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_RESET);
-    osDelay(5);
+    //osDelay(5);
     HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_SET);
 
     //用来测量运行时间的PC6翻转，抓取这一次翻转到下一次翻转的时间
     HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_RESET);
-    //osDelay(10);
+    osDelay(1);
     HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_SET);
     
     FFT(ChangeSeat(data));
@@ -439,14 +439,19 @@ void Func_LED1(void const * argument)
   for(;;)
   {
     //globalCounter = 0x0B;//0x0B表示Func_LED1
-    osDelay(10);
+    //osDelay(5);
     HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
-    osDelay(10);
+    //osDelay(5);
     HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
     //ITM_Print(0,"LED1");
     //ETM_TraceMode();
     //bubble_sort(values, 5);
     //ETM_SetupMode();
+
+    //用来测量运行时间的PC7翻转，抓取这一次翻转到下一次翻转的时间
+    HAL_GPIO_WritePin(LED3_GPIO_Port, LED3_Pin, GPIO_PIN_RESET);
+    osDelay(1);
+    HAL_GPIO_WritePin(LED3_GPIO_Port, LED3_Pin, GPIO_PIN_SET);
 
     ETM_TraceMode();
     BinaryInsertSort(values_1, 5);
