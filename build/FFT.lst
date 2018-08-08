@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccuPVm6T.s 			page 1
+ARM GAS  /tmp/ccZLpviN.s 			page 1
 
 
    1              		.syntax unified
@@ -29,9 +29,11 @@ ARM GAS  /tmp/ccuPVm6T.s 			page 1
   27              		.file 1 "Src/FFT.c"
    1:Src/FFT.c     **** #include "FFT.h"
    2:Src/FFT.c     **** 
-   3:Src/FFT.c     **** complex ChangeSeat(complex *DataInput)  
-   4:Src/FFT.c     **** {  
-  28              		.loc 1 4 0
+   3:Src/FFT.c     **** extern int globalCounter;
+   4:Src/FFT.c     **** 
+   5:Src/FFT.c     **** complex ChangeSeat(complex *DataInput)  
+   6:Src/FFT.c     **** {  
+  28              		.loc 1 6 0
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 0
   31              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -47,90 +49,90 @@ ARM GAS  /tmp/ccuPVm6T.s 			page 1
   41 0002 8646     		mov	lr, r0
   42 0004 8C46     		mov	ip, r1
   43              	.LVL1:
-   5:Src/FFT.c     ****     int nextValue,nextM,i,k,j=0;  
-  44              		.loc 1 5 0
+   7:Src/FFT.c     ****     int nextValue,nextM,i,k,j=0;  
+  44              		.loc 1 7 0
   45 0006 0024     		movs	r4, #0
-   6:Src/FFT.c     ****     complex temp;  
-   7:Src/FFT.c     ****       
-   8:Src/FFT.c     ****     nextValue=N/2;                  //变址运算，即把自然顺序变成倒位序，采用雷�
-   9:Src/FFT.c     ****     nextM=N-1;  
-  10:Src/FFT.c     ****     for (i=0;i<nextM;i++)  
-  46              		.loc 1 10 0
+   8:Src/FFT.c     ****     complex temp;  
+   9:Src/FFT.c     ****       
+  10:Src/FFT.c     ****     nextValue=N/2;                  //变址运算，即把自然顺序变成倒位序，采用雷�
+  11:Src/FFT.c     ****     nextM=N-1;  
+  12:Src/FFT.c     ****     for (i=0;i<nextM;i++)  
+  46              		.loc 1 12 0
+ARM GAS  /tmp/ccZLpviN.s 			page 2
+
+
   47 0008 2546     		mov	r5, r4
   48 000a 1BE0     		b	.L2
-ARM GAS  /tmp/ccuPVm6T.s 			page 2
-
-
   49              	.LVL2:
   50              	.L6:
-  11:Src/FFT.c     ****     {  
-  12:Src/FFT.c     ****         if (i<j)                 //如果i<j,即进行变址  
-  51              		.loc 1 12 0
+  13:Src/FFT.c     ****     {  
+  14:Src/FFT.c     ****         if (i<j)                 //如果i<j,即进行变址  
+  51              		.loc 1 14 0
   52 000c A542     		cmp	r5, r4
   53 000e 0FDA     		bge	.L3
-  13:Src/FFT.c     ****         {  
-  14:Src/FFT.c     ****             temp=DataInput[j];  
-  54              		.loc 1 14 0
+  15:Src/FFT.c     ****         {  
+  16:Src/FFT.c     ****             temp=DataInput[j];  
+  54              		.loc 1 16 0
   55 0010 0CEB0417 		add	r7, ip, r4, lsl #4
   56 0014 97E80F00 		ldmia	r7, {r0, r1, r2, r3}
   57 0018 8EE80F00 		stmia	lr, {r0, r1, r2, r3}
-  15:Src/FFT.c     ****             DataInput[j]=DataInput[i];  
-  58              		.loc 1 15 0
+  17:Src/FFT.c     ****             DataInput[j]=DataInput[i];  
+  58              		.loc 1 17 0
   59 001c 0CEB0516 		add	r6, ip, r5, lsl #4
   60 0020 96E80F00 		ldmia	r6, {r0, r1, r2, r3}
   61 0024 87E80F00 		stmia	r7, {r0, r1, r2, r3}
-  16:Src/FFT.c     ****             DataInput[i]=temp;  
-  62              		.loc 1 16 0
+  18:Src/FFT.c     ****             DataInput[i]=temp;  
+  62              		.loc 1 18 0
   63 0028 9EE80F00 		ldmia	lr, {r0, r1, r2, r3}
   64 002c 86E80F00 		stmia	r6, {r0, r1, r2, r3}
   65              	.L3:
   66              	.LVL3:
-  17:Src/FFT.c     ****         }  
-  18:Src/FFT.c     ****         k=nextValue;                //求j的下一个倒位序  
-  67              		.loc 1 18 0
+  19:Src/FFT.c     ****         }  
+  20:Src/FFT.c     ****         k=nextValue;                //求j的下一个倒位序  
+  67              		.loc 1 20 0
   68 0030 0423     		movs	r3, #4
-  19:Src/FFT.c     ****         while (k<=j)             //如果k<=j,表示j的最高位为1  
-  69              		.loc 1 19 0
+  21:Src/FFT.c     ****         while (k<=j)             //如果k<=j,表示j的最高位为1  
+  69              		.loc 1 21 0
   70 0032 03E0     		b	.L4
   71              	.LVL4:
   72              	.L5:
-  20:Src/FFT.c     ****         {  
-  21:Src/FFT.c     ****             j=j-k;                  //把最高位变成0  
-  73              		.loc 1 21 0
+  22:Src/FFT.c     ****         {  
+  23:Src/FFT.c     ****             j=j-k;                  //把最高位变成0  
+  73              		.loc 1 23 0
   74 0034 E41A     		subs	r4, r4, r3
   75              	.LVL5:
-  22:Src/FFT.c     ****             k=k/2;                  //k/2，比较次高位，依次类推，逐个比较，直到�
-  76              		.loc 1 22 0
+  24:Src/FFT.c     ****             k=k/2;                  //k/2，比较次高位，依次类推，逐个比较，直到�
+  76              		.loc 1 24 0
   77 0036 03EBD373 		add	r3, r3, r3, lsr #31
   78              	.LVL6:
   79 003a 5B10     		asrs	r3, r3, #1
   80              	.LVL7:
   81              	.L4:
-  19:Src/FFT.c     ****         while (k<=j)             //如果k<=j,表示j的最高位为1  
-  82              		.loc 1 19 0
+  21:Src/FFT.c     ****         while (k<=j)             //如果k<=j,表示j的最高位为1  
+  82              		.loc 1 21 0
   83 003c A342     		cmp	r3, r4
   84 003e F9DD     		ble	.L5
-  23:Src/FFT.c     ****         }  
-  24:Src/FFT.c     ****         j=j+k;                      //把0改为1  
-  85              		.loc 1 24 0 discriminator 2
+  25:Src/FFT.c     ****         }  
+  26:Src/FFT.c     ****         j=j+k;                      //把0改为1  
+  85              		.loc 1 26 0 discriminator 2
   86 0040 1C44     		add	r4, r4, r3
   87              	.LVL8:
-  10:Src/FFT.c     ****     {  
-  88              		.loc 1 10 0 discriminator 2
+  12:Src/FFT.c     ****     {  
+ARM GAS  /tmp/ccZLpviN.s 			page 3
+
+
+  88              		.loc 1 12 0 discriminator 2
   89 0042 0135     		adds	r5, r5, #1
-ARM GAS  /tmp/ccuPVm6T.s 			page 3
-
-
   90              	.LVL9:
   91              	.L2:
-  10:Src/FFT.c     ****     {  
-  92              		.loc 1 10 0 is_stmt 0 discriminator 1
+  12:Src/FFT.c     ****     {  
+  92              		.loc 1 12 0 is_stmt 0 discriminator 1
   93 0044 062D     		cmp	r5, #6
   94 0046 E1DD     		ble	.L6
-  25:Src/FFT.c     ****     }
-  26:Src/FFT.c     ****     return temp;
-  27:Src/FFT.c     **** }  
-  95              		.loc 1 27 0 is_stmt 1
+  27:Src/FFT.c     ****     }
+  28:Src/FFT.c     ****     return temp;
+  29:Src/FFT.c     **** }  
+  95              		.loc 1 29 0 is_stmt 1
   96 0048 7046     		mov	r0, lr
   97 004a F0BD     		pop	{r4, r5, r6, r7, pc}
   98              		.cfi_endproc
@@ -145,11 +147,11 @@ ARM GAS  /tmp/ccuPVm6T.s 			page 1
  108              		.thumb_func
  110              	XX_complex:
  111              	.LFB2:
-  28:Src/FFT.c     **** 
-  29:Src/FFT.c     **** //复数乘法   
-  30:Src/FFT.c     **** complex XX_complex(complex a, complex b)  
-  31:Src/FFT.c     **** {  
- 112              		.loc 1 31 0
+  30:Src/FFT.c     **** 
+  31:Src/FFT.c     **** //复数乘法   
+  32:Src/FFT.c     **** complex XX_complex(complex a, complex b)  
+  33:Src/FFT.c     **** {  
+ 112              		.loc 1 33 0
  113              		.cfi_startproc
  114              		@ args = 32, pretend = 8, frame = 16
  115              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -174,13 +176,13 @@ ARM GAS  /tmp/ccuPVm6T.s 			page 1
  134 0008 8246     		mov	r10, r0
  135 000a 0CA9     		add	r1, sp, #48
  136 000c 81E80C00 		stmia	r1, {r2, r3}
-  32:Src/FFT.c     ****     complex temp;  
-  33:Src/FFT.c     ****       
-  34:Src/FFT.c     ****     temp.real = a.real * b.real-a.imag*b.imag;  
- 137              		.loc 1 34 0
-ARM GAS  /tmp/ccuPVm6T.s 			page 4
+  34:Src/FFT.c     ****     complex temp;  
+  35:Src/FFT.c     ****       
+ARM GAS  /tmp/ccZLpviN.s 			page 4
 
 
+  36:Src/FFT.c     ****     temp.real = a.real * b.real-a.imag*b.imag;  
+ 137              		.loc 1 36 0
  138 0010 DDE90C67 		ldrd	r6, [sp, #48]
  139 0014 DDE91034 		ldrd	r3, [sp, #64]
  140 0018 CDE90034 		strd	r3, [sp]
@@ -206,8 +208,8 @@ ARM GAS  /tmp/ccuPVm6T.s 			page 1
  160 0048 FFF7FEFF 		bl	__aeabi_dsub
  161              	.LVL14:
  162 004c CAE90001 		strd	r0, [r10]
-  35:Src/FFT.c     ****     temp.imag = b.imag*a.real + a.imag*b.real;  
- 163              		.loc 1 35 0
+  37:Src/FFT.c     ****     temp.imag = b.imag*a.real + a.imag*b.real;  
+ 163              		.loc 1 37 0
  164 0050 4246     		mov	r2, r8
  165 0052 4B46     		mov	r3, r9
  166 0054 3046     		mov	r0, r6
@@ -228,19 +230,19 @@ ARM GAS  /tmp/ccuPVm6T.s 			page 1
  181 0074 FFF7FEFF 		bl	__aeabi_dadd
  182              	.LVL17:
  183 0078 CAE90201 		strd	r0, [r10, #8]
-  36:Src/FFT.c     ****       
-  37:Src/FFT.c     ****     return temp;  
-  38:Src/FFT.c     **** }  
- 184              		.loc 1 38 0
+  38:Src/FFT.c     ****       
+  39:Src/FFT.c     ****     return temp;  
+  40:Src/FFT.c     **** }  
+ 184              		.loc 1 40 0
  185 007c 5046     		mov	r0, r10
  186 007e 04B0     		add	sp, sp, #16
  187              	.LCFI4:
  188              		.cfi_def_cfa_offset 40
+ARM GAS  /tmp/ccZLpviN.s 			page 5
+
+
  189              		@ sp needed
  190 0080 BDE8F047 		pop	{r4, r5, r6, r7, r8, r9, r10, lr}
-ARM GAS  /tmp/ccuPVm6T.s 			page 5
-
-
  191              	.LCFI5:
  192              		.cfi_restore 14
  193              		.cfi_restore 10
@@ -266,11 +268,11 @@ ARM GAS  /tmp/ccuPVm6T.s 			page 1
  214              		.thumb_func
  216              	FFT:
  217              	.LFB3:
-  39:Src/FFT.c     ****   
-  40:Src/FFT.c     **** //FFT  
-  41:Src/FFT.c     **** void FFT(complex data_in)  
-  42:Src/FFT.c     **** {  
- 218              		.loc 1 42 0
+  41:Src/FFT.c     ****   
+  42:Src/FFT.c     **** //FFT  
+  43:Src/FFT.c     **** void FFT(complex data_in)  
+  44:Src/FFT.c     **** { 
+ 218              		.loc 1 44 0
  219              		.cfi_startproc
  220              		@ args = 0, pretend = 0, frame = 72
  221              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -291,670 +293,681 @@ ARM GAS  /tmp/ccuPVm6T.s 			page 1
  236              		.cfi_def_cfa_offset 136
  237 0006 0CAC     		add	r4, sp, #48
  238 0008 84E80F00 		stmia	r4, {r0, r1, r2, r3}
- 239              	.LVL19:
-  43:Src/FFT.c     ****     int L=0,B=0,J=0,K=0;  
-  44:Src/FFT.c     ****     int step=0;  
-  45:Src/FFT.c     ****     ElemType P=0,T=0;  
-  46:Src/FFT.c     ****     complex W,Temp_XX;  
-  47:Src/FFT.c     ****     //ElemType TempResult[N];  
-  48:Src/FFT.c     ****       
-ARM GAS  /tmp/ccuPVm6T.s 			page 6
+  45:Src/FFT.c     ****     globalCounter = 0x0E;
+ 239              		.loc 1 45 0
+ 240 000c 0E22     		movs	r2, #14
+ 241 000e 484B     		ldr	r3, .L18+8
+ 242 0010 1A60     		str	r2, [r3]
+ARM GAS  /tmp/ccZLpviN.s 			page 6
 
 
-  49:Src/FFT.c     ****     //ChangeSeat(data);  
-  50:Src/FFT.c     ****     for(L=1; L<=M; L++)  
- 240              		.loc 1 50 0
- 241 000c 0123     		movs	r3, #1
- 242 000e 0B93     		str	r3, [sp, #44]
- 243 0010 7FE0     		b	.L11
- 244              	.LVL20:
- 245              	.L16:
-  51:Src/FFT.c     ****     {  
-  52:Src/FFT.c     ****         B = 1<<(L-1);//B=2^(L-1)  
- 246              		.loc 1 52 0
- 247 0012 0B9B     		ldr	r3, [sp, #44]
- 248              	.LVL21:
- 249 0014 013B     		subs	r3, r3, #1
- 250 0016 0122     		movs	r2, #1
- 251 0018 02FA03F3 		lsl	r3, r2, r3
- 252 001c 0793     		str	r3, [sp, #28]
- 253              	.LVL22:
-  53:Src/FFT.c     ****         for(J=0; J<=B-1; J++)  
- 254              		.loc 1 53 0
- 255 001e 0023     		movs	r3, #0
- 256              	.LVL23:
- 257 0020 0A93     		str	r3, [sp, #40]
- 258 0022 6EE0     		b	.L12
- 259              	.LVL24:
- 260              	.L15:
-  54:Src/FFT.c     ****         {  
-  55:Src/FFT.c     ****             P = (1<<(M-L))*J;//P=2^(M-L) *J   
- 261              		.loc 1 55 0
- 262 0024 0B9C     		ldr	r4, [sp, #44]
- 263 0026 C4F10300 		rsb	r0, r4, #3
- 264 002a 0A9D     		ldr	r5, [sp, #40]
- 265 002c 05FA00F0 		lsl	r0, r5, r0
- 266 0030 FFF7FEFF 		bl	__aeabi_i2d
- 267              	.LVL25:
- 268 0034 CDE90801 		strd	r0, [sp, #32]
- 269              	.LVL26:
-  56:Src/FFT.c     ****             step = 1<<L;//2^L  
- 270              		.loc 1 56 0
- 271 0038 4FF0010B 		mov	fp, #1
- 272 003c 0BFA04FB 		lsl	fp, fp, r4
- 273              	.LVL27:
-  57:Src/FFT.c     ****             for(K=J; K<=N-1; K=K+step)  
- 274              		.loc 1 57 0
- 275 0040 AA46     		mov	r10, r5
- 276 0042 58E0     		b	.L13
- 277              	.LVL28:
- 278              	.L14:
-  58:Src/FFT.c     ****             {  
-  59:Src/FFT.c     ****                 W.real =  cos(2*PI*P/N);  
- 279              		.loc 1 59 0 discriminator 3
- 280 0044 36A3     		adr	r3, .L18
- 281 0046 D3E90023 		ldrd	r2, [r3]
- 282 004a DDE90801 		ldrd	r0, [sp, #32]
- 283 004e FFF7FEFF 		bl	__aeabi_dmul
- 284              	.LVL29:
- 285 0052 0022     		movs	r2, #0
-ARM GAS  /tmp/ccuPVm6T.s 			page 7
+ 243              	.LVL19:
+  46:Src/FFT.c     ****     int L=0,B=0,J=0,K=0;  
+  47:Src/FFT.c     ****     int step=0;  
+  48:Src/FFT.c     ****     ElemType P=0,T=0;  
+  49:Src/FFT.c     ****     complex W,Temp_XX;  
+  50:Src/FFT.c     ****     //ElemType TempResult[N];  
+  51:Src/FFT.c     ****       
+  52:Src/FFT.c     ****     //ChangeSeat(data);  
+  53:Src/FFT.c     ****     for(L=1; L<=M; L++)  
+ 244              		.loc 1 53 0
+ 245 0012 0123     		movs	r3, #1
+ 246 0014 0B93     		str	r3, [sp, #44]
+ 247 0016 7FE0     		b	.L11
+ 248              	.LVL20:
+ 249              	.L16:
+  54:Src/FFT.c     ****     {  
+  55:Src/FFT.c     ****         B = 1<<(L-1);//B=2^(L-1)  
+ 250              		.loc 1 55 0
+ 251 0018 0B9B     		ldr	r3, [sp, #44]
+ 252              	.LVL21:
+ 253 001a 013B     		subs	r3, r3, #1
+ 254 001c 0122     		movs	r2, #1
+ 255 001e 02FA03F3 		lsl	r3, r2, r3
+ 256 0022 0793     		str	r3, [sp, #28]
+ 257              	.LVL22:
+  56:Src/FFT.c     ****         for(J=0; J<=B-1; J++)  
+ 258              		.loc 1 56 0
+ 259 0024 0023     		movs	r3, #0
+ 260              	.LVL23:
+ 261 0026 0A93     		str	r3, [sp, #40]
+ 262 0028 6EE0     		b	.L12
+ 263              	.LVL24:
+ 264              	.L15:
+  57:Src/FFT.c     ****         {  
+  58:Src/FFT.c     ****             P = (1<<(M-L))*J;//P=2^(M-L) *J   
+ 265              		.loc 1 58 0
+ 266 002a 0B9C     		ldr	r4, [sp, #44]
+ 267 002c C4F10300 		rsb	r0, r4, #3
+ 268 0030 0A9D     		ldr	r5, [sp, #40]
+ 269 0032 05FA00F0 		lsl	r0, r5, r0
+ 270 0036 FFF7FEFF 		bl	__aeabi_i2d
+ 271              	.LVL25:
+ 272 003a CDE90801 		strd	r0, [sp, #32]
+ 273              	.LVL26:
+  59:Src/FFT.c     ****             step = 1<<L;//2^L  
+ 274              		.loc 1 59 0
+ 275 003e 4FF0010B 		mov	fp, #1
+ 276 0042 0BFA04FB 		lsl	fp, fp, r4
+ 277              	.LVL27:
+  60:Src/FFT.c     ****             for(K=J; K<=N-1; K=K+step)  
+ 278              		.loc 1 60 0
+ 279 0046 AA46     		mov	r10, r5
+ 280 0048 58E0     		b	.L13
+ 281              	.LVL28:
+ 282              	.L14:
+  61:Src/FFT.c     ****             {  
+  62:Src/FFT.c     ****                 W.real =  cos(2*PI*P/N);  
+ARM GAS  /tmp/ccZLpviN.s 			page 7
 
 
- 286 0054 4FF07F53 		mov	r3, #1069547520
- 287 0058 FFF7FEFF 		bl	__aeabi_dmul
- 288              	.LVL30:
- 289 005c 0446     		mov	r4, r0
- 290 005e 0D46     		mov	r5, r1
- 291 0060 FFF7FEFF 		bl	cos
- 292              	.LVL31:
- 293 0064 CDE91401 		strd	r0, [sp, #80]
-  60:Src/FFT.c     ****                 W.imag = -sin(2*PI*P/N);  
- 294              		.loc 1 60 0 discriminator 3
- 295 0068 2046     		mov	r0, r4
- 296 006a 2946     		mov	r1, r5
- 297 006c FFF7FEFF 		bl	sin
- 298              	.LVL32:
- 299 0070 0246     		mov	r2, r0
- 300 0072 01F10043 		add	r3, r1, #-2147483648
- 301 0076 CDE91623 		strd	r2, [sp, #88]
-  61:Src/FFT.c     ****                   
-  62:Src/FFT.c     ****                 Temp_XX = XX_complex(data[K+B],W);  
- 302              		.loc 1 62 0 discriminator 3
- 303 007a 079B     		ldr	r3, [sp, #28]
- 304 007c 0AEB0305 		add	r5, r10, r3
- 305 0080 294C     		ldr	r4, .L18+8
- 306 0082 04EB0515 		add	r5, r4, r5, lsl #4
- 307 0086 02AE     		add	r6, sp, #8
- 308 0088 18AB     		add	r3, sp, #96
- 309 008a 13E90F00 		ldmdb	r3, {r0, r1, r2, r3}
- 310 008e 86E80F00 		stmia	r6, {r0, r1, r2, r3}
- 311 0092 05F10803 		add	r3, r5, #8
- 312 0096 93E80300 		ldmia	r3, {r0, r1}
- 313 009a 8DE80300 		stmia	sp, {r0, r1}
- 314 009e 95E80C00 		ldmia	r5, {r2, r3}
- 315 00a2 10A8     		add	r0, sp, #64
- 316 00a4 FFF7FEFF 		bl	XX_complex
- 317              	.LVL33:
-  63:Src/FFT.c     ****                 data[K+B].real = data[K].real - Temp_XX.real;  
- 318              		.loc 1 63 0 discriminator 3
- 319 00a8 04EB0A14 		add	r4, r4, r10, lsl #4
- 320 00ac DDE91089 		ldrd	r8, [sp, #64]
- 321 00b0 4246     		mov	r2, r8
- 322 00b2 4B46     		mov	r3, r9
- 323 00b4 D4E90001 		ldrd	r0, [r4]
- 324 00b8 FFF7FEFF 		bl	__aeabi_dsub
- 325              	.LVL34:
- 326 00bc C5E90001 		strd	r0, [r5]
-  64:Src/FFT.c     ****                 data[K+B].imag = data[K].imag - Temp_XX.imag;  
- 327              		.loc 1 64 0 discriminator 3
- 328 00c0 DDE91267 		ldrd	r6, [sp, #72]
- 329 00c4 3246     		mov	r2, r6
- 330 00c6 3B46     		mov	r3, r7
- 331 00c8 D4E90201 		ldrd	r0, [r4, #8]
- 332 00cc FFF7FEFF 		bl	__aeabi_dsub
- 333              	.LVL35:
- 334 00d0 C5E90201 		strd	r0, [r5, #8]
-  65:Src/FFT.c     ****                   
-  66:Src/FFT.c     ****                 data[K].real = data[K].real + Temp_XX.real;  
- 335              		.loc 1 66 0 discriminator 3
-ARM GAS  /tmp/ccuPVm6T.s 			page 8
+ 283              		.loc 1 62 0 discriminator 3
+ 284 004a 37A3     		adr	r3, .L18
+ 285 004c D3E90023 		ldrd	r2, [r3]
+ 286 0050 DDE90801 		ldrd	r0, [sp, #32]
+ 287 0054 FFF7FEFF 		bl	__aeabi_dmul
+ 288              	.LVL29:
+ 289 0058 0022     		movs	r2, #0
+ 290 005a 4FF07F53 		mov	r3, #1069547520
+ 291 005e FFF7FEFF 		bl	__aeabi_dmul
+ 292              	.LVL30:
+ 293 0062 0446     		mov	r4, r0
+ 294 0064 0D46     		mov	r5, r1
+ 295 0066 FFF7FEFF 		bl	cos
+ 296              	.LVL31:
+ 297 006a CDE91401 		strd	r0, [sp, #80]
+  63:Src/FFT.c     ****                 W.imag = -sin(2*PI*P/N);  
+ 298              		.loc 1 63 0 discriminator 3
+ 299 006e 2046     		mov	r0, r4
+ 300 0070 2946     		mov	r1, r5
+ 301 0072 FFF7FEFF 		bl	sin
+ 302              	.LVL32:
+ 303 0076 0246     		mov	r2, r0
+ 304 0078 01F10043 		add	r3, r1, #-2147483648
+ 305 007c CDE91623 		strd	r2, [sp, #88]
+  64:Src/FFT.c     ****                   
+  65:Src/FFT.c     ****                 Temp_XX = XX_complex(data[K+B],W);  
+ 306              		.loc 1 65 0 discriminator 3
+ 307 0080 079B     		ldr	r3, [sp, #28]
+ 308 0082 0AEB0305 		add	r5, r10, r3
+ 309 0086 2B4C     		ldr	r4, .L18+12
+ 310 0088 04EB0515 		add	r5, r4, r5, lsl #4
+ 311 008c 02AE     		add	r6, sp, #8
+ 312 008e 18AB     		add	r3, sp, #96
+ 313 0090 13E90F00 		ldmdb	r3, {r0, r1, r2, r3}
+ 314 0094 86E80F00 		stmia	r6, {r0, r1, r2, r3}
+ 315 0098 05F10803 		add	r3, r5, #8
+ 316 009c 93E80300 		ldmia	r3, {r0, r1}
+ 317 00a0 8DE80300 		stmia	sp, {r0, r1}
+ 318 00a4 95E80C00 		ldmia	r5, {r2, r3}
+ 319 00a8 10A8     		add	r0, sp, #64
+ 320 00aa FFF7FEFF 		bl	XX_complex
+ 321              	.LVL33:
+  66:Src/FFT.c     ****                 data[K+B].real = data[K].real - Temp_XX.real;  
+ 322              		.loc 1 66 0 discriminator 3
+ 323 00ae 04EB0A14 		add	r4, r4, r10, lsl #4
+ 324 00b2 DDE91089 		ldrd	r8, [sp, #64]
+ 325 00b6 4246     		mov	r2, r8
+ 326 00b8 4B46     		mov	r3, r9
+ 327 00ba D4E90001 		ldrd	r0, [r4]
+ 328 00be FFF7FEFF 		bl	__aeabi_dsub
+ 329              	.LVL34:
+ 330 00c2 C5E90001 		strd	r0, [r5]
+  67:Src/FFT.c     ****                 data[K+B].imag = data[K].imag - Temp_XX.imag;  
+ 331              		.loc 1 67 0 discriminator 3
+ 332 00c6 DDE91267 		ldrd	r6, [sp, #72]
+ 333 00ca 3246     		mov	r2, r6
+ 334 00cc 3B46     		mov	r3, r7
+ARM GAS  /tmp/ccZLpviN.s 			page 8
 
 
- 336 00d4 D4E90023 		ldrd	r2, [r4]
- 337 00d8 4046     		mov	r0, r8
- 338 00da 4946     		mov	r1, r9
- 339 00dc FFF7FEFF 		bl	__aeabi_dadd
- 340              	.LVL36:
- 341 00e0 C4E90001 		strd	r0, [r4]
-  67:Src/FFT.c     ****                 data[K].imag = data[K].imag + Temp_XX.imag;  
- 342              		.loc 1 67 0 discriminator 3
- 343 00e4 D4E90223 		ldrd	r2, [r4, #8]
- 344 00e8 3046     		mov	r0, r6
- 345 00ea 3946     		mov	r1, r7
- 346 00ec FFF7FEFF 		bl	__aeabi_dadd
- 347              	.LVL37:
- 348 00f0 C4E90201 		strd	r0, [r4, #8]
-  57:Src/FFT.c     ****             {  
- 349              		.loc 1 57 0 discriminator 3
- 350 00f4 DA44     		add	r10, r10, fp
- 351              	.LVL38:
- 352              	.L13:
-  57:Src/FFT.c     ****             {  
- 353              		.loc 1 57 0 is_stmt 0 discriminator 1
- 354 00f6 BAF1070F 		cmp	r10, #7
- 355 00fa A3DD     		ble	.L14
-  53:Src/FFT.c     ****         {  
- 356              		.loc 1 53 0 is_stmt 1 discriminator 2
- 357 00fc 0A9B     		ldr	r3, [sp, #40]
- 358 00fe 0133     		adds	r3, r3, #1
- 359 0100 0A93     		str	r3, [sp, #40]
- 360              	.LVL39:
- 361              	.L12:
-  53:Src/FFT.c     ****         {  
- 362              		.loc 1 53 0 is_stmt 0 discriminator 1
- 363 0102 079B     		ldr	r3, [sp, #28]
- 364 0104 013B     		subs	r3, r3, #1
- 365 0106 0A9A     		ldr	r2, [sp, #40]
- 366 0108 9A42     		cmp	r2, r3
- 367 010a 8BDD     		ble	.L15
-  50:Src/FFT.c     ****     {  
- 368              		.loc 1 50 0 is_stmt 1 discriminator 2
- 369 010c 0B9B     		ldr	r3, [sp, #44]
- 370 010e 0133     		adds	r3, r3, #1
- 371 0110 0B93     		str	r3, [sp, #44]
- 372              	.LVL40:
- 373              	.L11:
-  50:Src/FFT.c     ****     {  
- 374              		.loc 1 50 0 is_stmt 0 discriminator 1
- 375 0112 0B9B     		ldr	r3, [sp, #44]
- 376 0114 032B     		cmp	r3, #3
- 377 0116 7FF77CAF 		ble	.L16
-  68:Src/FFT.c     ****             }  
-  69:Src/FFT.c     ****         }  
-  70:Src/FFT.c     ****     }  
-  71:Src/FFT.c     **** }  
- 378              		.loc 1 71 0 is_stmt 1
- 379 011a 19B0     		add	sp, sp, #100
- 380              	.LCFI9:
- 381              		.cfi_def_cfa_offset 36
-ARM GAS  /tmp/ccuPVm6T.s 			page 9
+ 335 00ce D4E90201 		ldrd	r0, [r4, #8]
+ 336 00d2 FFF7FEFF 		bl	__aeabi_dsub
+ 337              	.LVL35:
+ 338 00d6 C5E90201 		strd	r0, [r5, #8]
+  68:Src/FFT.c     ****                   
+  69:Src/FFT.c     ****                 data[K].real = data[K].real + Temp_XX.real;  
+ 339              		.loc 1 69 0 discriminator 3
+ 340 00da D4E90023 		ldrd	r2, [r4]
+ 341 00de 4046     		mov	r0, r8
+ 342 00e0 4946     		mov	r1, r9
+ 343 00e2 FFF7FEFF 		bl	__aeabi_dadd
+ 344              	.LVL36:
+ 345 00e6 C4E90001 		strd	r0, [r4]
+  70:Src/FFT.c     ****                 data[K].imag = data[K].imag + Temp_XX.imag;  
+ 346              		.loc 1 70 0 discriminator 3
+ 347 00ea D4E90223 		ldrd	r2, [r4, #8]
+ 348 00ee 3046     		mov	r0, r6
+ 349 00f0 3946     		mov	r1, r7
+ 350 00f2 FFF7FEFF 		bl	__aeabi_dadd
+ 351              	.LVL37:
+ 352 00f6 C4E90201 		strd	r0, [r4, #8]
+  60:Src/FFT.c     ****             {  
+ 353              		.loc 1 60 0 discriminator 3
+ 354 00fa DA44     		add	r10, r10, fp
+ 355              	.LVL38:
+ 356              	.L13:
+  60:Src/FFT.c     ****             {  
+ 357              		.loc 1 60 0 is_stmt 0 discriminator 1
+ 358 00fc BAF1070F 		cmp	r10, #7
+ 359 0100 A3DD     		ble	.L14
+  56:Src/FFT.c     ****         {  
+ 360              		.loc 1 56 0 is_stmt 1 discriminator 2
+ 361 0102 0A9B     		ldr	r3, [sp, #40]
+ 362 0104 0133     		adds	r3, r3, #1
+ 363 0106 0A93     		str	r3, [sp, #40]
+ 364              	.LVL39:
+ 365              	.L12:
+  56:Src/FFT.c     ****         {  
+ 366              		.loc 1 56 0 is_stmt 0 discriminator 1
+ 367 0108 079B     		ldr	r3, [sp, #28]
+ 368 010a 013B     		subs	r3, r3, #1
+ 369 010c 0A9A     		ldr	r2, [sp, #40]
+ 370 010e 9A42     		cmp	r2, r3
+ 371 0110 8BDD     		ble	.L15
+  53:Src/FFT.c     ****     {  
+ 372              		.loc 1 53 0 is_stmt 1 discriminator 2
+ 373 0112 0B9B     		ldr	r3, [sp, #44]
+ 374 0114 0133     		adds	r3, r3, #1
+ 375 0116 0B93     		str	r3, [sp, #44]
+ 376              	.LVL40:
+ 377              	.L11:
+  53:Src/FFT.c     ****     {  
+ 378              		.loc 1 53 0 is_stmt 0 discriminator 1
+ 379 0118 0B9B     		ldr	r3, [sp, #44]
+ 380 011a 032B     		cmp	r3, #3
+ 381 011c 7FF77CAF 		ble	.L16
+  71:Src/FFT.c     ****             }  
+ARM GAS  /tmp/ccZLpviN.s 			page 9
 
 
- 382              		@ sp needed
- 383 011c BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
- 384              	.LVL41:
- 385              	.L19:
- 386              		.align	3
- 387              	.L18:
- 388 0120 1E264454 		.word	1413752350
- 389 0124 FB211940 		.word	1075388923
- 390 0128 00000000 		.word	data
- 391              		.cfi_endproc
- 392              	.LFE3:
- 394              		.section	.text.IFFT,"ax",%progbits
- 395              		.align	2
- 396              		.global	IFFT
- 397              		.thumb
- 398              		.thumb_func
- 400              	IFFT:
- 401              	.LFB4:
-  72:Src/FFT.c     **** void IFFT(complex data_in)  
-  73:Src/FFT.c     **** {  
- 402              		.loc 1 73 0
- 403              		.cfi_startproc
- 404              		@ args = 0, pretend = 0, frame = 72
- 405              		@ frame_needed = 0, uses_anonymous_args = 0
- 406 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
- 407              	.LCFI10:
- 408              		.cfi_def_cfa_offset 36
- 409              		.cfi_offset 4, -36
- 410              		.cfi_offset 5, -32
- 411              		.cfi_offset 6, -28
- 412              		.cfi_offset 7, -24
- 413              		.cfi_offset 8, -20
- 414              		.cfi_offset 9, -16
- 415              		.cfi_offset 10, -12
- 416              		.cfi_offset 11, -8
- 417              		.cfi_offset 14, -4
- 418 0004 99B0     		sub	sp, sp, #100
- 419              	.LCFI11:
- 420              		.cfi_def_cfa_offset 136
- 421 0006 0CAC     		add	r4, sp, #48
- 422 0008 84E80F00 		stmia	r4, {r0, r1, r2, r3}
- 423              	.LVL42:
-  74:Src/FFT.c     ****     int L=0,B=0,J=0,K=0;  
-  75:Src/FFT.c     ****     int step=0;  
-  76:Src/FFT.c     ****     ElemType P=0,T=0;  
-  77:Src/FFT.c     ****     complex W,Temp_XX;  
-  78:Src/FFT.c     ****     //ElemType TempResult[N];  
-  79:Src/FFT.c     ****       
-  80:Src/FFT.c     ****     //ChangeSeat(data);  
-  81:Src/FFT.c     ****     for(L=1; L<=M; L++)  
- 424              		.loc 1 81 0
- 425 000c 0123     		movs	r3, #1
- 426 000e 0B93     		str	r3, [sp, #44]
- 427 0010 7CE0     		b	.L21
- 428              	.LVL43:
- 429              	.L26:
-  82:Src/FFT.c     ****     {  
-ARM GAS  /tmp/ccuPVm6T.s 			page 10
+  72:Src/FFT.c     ****         }  
+  73:Src/FFT.c     ****     }  
+  74:Src/FFT.c     **** }  
+ 382              		.loc 1 74 0 is_stmt 1
+ 383 0120 19B0     		add	sp, sp, #100
+ 384              	.LCFI9:
+ 385              		.cfi_def_cfa_offset 36
+ 386              		@ sp needed
+ 387 0122 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 388              	.LVL41:
+ 389              	.L19:
+ 390 0126 00BF     		.align	3
+ 391              	.L18:
+ 392 0128 1E264454 		.word	1413752350
+ 393 012c FB211940 		.word	1075388923
+ 394 0130 00000000 		.word	globalCounter
+ 395 0134 00000000 		.word	data
+ 396              		.cfi_endproc
+ 397              	.LFE3:
+ 399              		.section	.text.IFFT,"ax",%progbits
+ 400              		.align	2
+ 401              		.global	IFFT
+ 402              		.thumb
+ 403              		.thumb_func
+ 405              	IFFT:
+ 406              	.LFB4:
+  75:Src/FFT.c     **** void IFFT(complex data_in)  
+  76:Src/FFT.c     **** { 
+ 407              		.loc 1 76 0
+ 408              		.cfi_startproc
+ 409              		@ args = 0, pretend = 0, frame = 72
+ 410              		@ frame_needed = 0, uses_anonymous_args = 0
+ 411 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 412              	.LCFI10:
+ 413              		.cfi_def_cfa_offset 36
+ 414              		.cfi_offset 4, -36
+ 415              		.cfi_offset 5, -32
+ 416              		.cfi_offset 6, -28
+ 417              		.cfi_offset 7, -24
+ 418              		.cfi_offset 8, -20
+ 419              		.cfi_offset 9, -16
+ 420              		.cfi_offset 10, -12
+ 421              		.cfi_offset 11, -8
+ 422              		.cfi_offset 14, -4
+ 423 0004 99B0     		sub	sp, sp, #100
+ 424              	.LCFI11:
+ 425              		.cfi_def_cfa_offset 136
+ 426 0006 0CAC     		add	r4, sp, #48
+ 427 0008 84E80F00 		stmia	r4, {r0, r1, r2, r3}
+  77:Src/FFT.c     ****     globalCounter = 0x0F;
+ 428              		.loc 1 77 0
+ 429 000c 0F22     		movs	r2, #15
+ 430 000e 464B     		ldr	r3, .L28+8
+ 431 0010 1A60     		str	r2, [r3]
+ 432              	.LVL42:
+  78:Src/FFT.c     ****     int L=0,B=0,J=0,K=0;  
+  79:Src/FFT.c     ****     int step=0;  
+ARM GAS  /tmp/ccZLpviN.s 			page 10
 
 
-  83:Src/FFT.c     ****         B = 1<<(L-1);//B=2^(L-1)  
- 430              		.loc 1 83 0
- 431 0012 0B9B     		ldr	r3, [sp, #44]
- 432              	.LVL44:
- 433 0014 013B     		subs	r3, r3, #1
- 434 0016 0122     		movs	r2, #1
- 435 0018 02FA03F3 		lsl	r3, r2, r3
- 436 001c 0793     		str	r3, [sp, #28]
- 437              	.LVL45:
-  84:Src/FFT.c     ****         for(J=0; J<=B-1; J++)  
- 438              		.loc 1 84 0
- 439 001e 0023     		movs	r3, #0
- 440              	.LVL46:
- 441 0020 0A93     		str	r3, [sp, #40]
- 442 0022 6BE0     		b	.L22
- 443              	.LVL47:
- 444              	.L25:
-  85:Src/FFT.c     ****         {  
-  86:Src/FFT.c     ****             P = (1<<(M-L))*J;//P=2^(M-L) *J   
- 445              		.loc 1 86 0
- 446 0024 0B9C     		ldr	r4, [sp, #44]
- 447 0026 C4F10300 		rsb	r0, r4, #3
- 448 002a 0A9D     		ldr	r5, [sp, #40]
- 449 002c 05FA00F0 		lsl	r0, r5, r0
- 450 0030 FFF7FEFF 		bl	__aeabi_i2d
- 451              	.LVL48:
- 452 0034 CDE90801 		strd	r0, [sp, #32]
- 453              	.LVL49:
-  87:Src/FFT.c     ****             step = 1<<L;//2^L  
- 454              		.loc 1 87 0
- 455 0038 4FF0010B 		mov	fp, #1
- 456 003c 0BFA04FB 		lsl	fp, fp, r4
- 457              	.LVL50:
-  88:Src/FFT.c     ****             for(K=J; K<=N-1; K=K+step)  
- 458              		.loc 1 88 0
- 459 0040 AA46     		mov	r10, r5
- 460 0042 55E0     		b	.L23
- 461              	.LVL51:
- 462              	.L24:
-  89:Src/FFT.c     ****             {  
-  90:Src/FFT.c     ****                 W.real =  cos(2*PI*P/N);  
- 463              		.loc 1 90 0 discriminator 3
- 464 0044 36A3     		adr	r3, .L28
- 465 0046 D3E90023 		ldrd	r2, [r3]
- 466 004a DDE90801 		ldrd	r0, [sp, #32]
- 467 004e FFF7FEFF 		bl	__aeabi_dmul
- 468              	.LVL52:
- 469 0052 0022     		movs	r2, #0
- 470 0054 4FF07F53 		mov	r3, #1069547520
- 471 0058 FFF7FEFF 		bl	__aeabi_dmul
- 472              	.LVL53:
- 473 005c 0446     		mov	r4, r0
- 474 005e 0D46     		mov	r5, r1
- 475 0060 FFF7FEFF 		bl	cos
- 476              	.LVL54:
- 477 0064 CDE91401 		strd	r0, [sp, #80]
-  91:Src/FFT.c     ****                 W.imag =  sin(2*PI*P/N);//逆运算，这里跟FFT符号相反   
-ARM GAS  /tmp/ccuPVm6T.s 			page 11
+  80:Src/FFT.c     ****     ElemType P=0,T=0;  
+  81:Src/FFT.c     ****     complex W,Temp_XX;  
+  82:Src/FFT.c     ****     //ElemType TempResult[N];  
+  83:Src/FFT.c     ****       
+  84:Src/FFT.c     ****     //ChangeSeat(data);  
+  85:Src/FFT.c     ****     for(L=1; L<=M; L++)  
+ 433              		.loc 1 85 0
+ 434 0012 0123     		movs	r3, #1
+ 435 0014 0B93     		str	r3, [sp, #44]
+ 436 0016 7CE0     		b	.L21
+ 437              	.LVL43:
+ 438              	.L26:
+  86:Src/FFT.c     ****     {  
+  87:Src/FFT.c     ****         B = 1<<(L-1);//B=2^(L-1)  
+ 439              		.loc 1 87 0
+ 440 0018 0B9B     		ldr	r3, [sp, #44]
+ 441              	.LVL44:
+ 442 001a 013B     		subs	r3, r3, #1
+ 443 001c 0122     		movs	r2, #1
+ 444 001e 02FA03F3 		lsl	r3, r2, r3
+ 445 0022 0793     		str	r3, [sp, #28]
+ 446              	.LVL45:
+  88:Src/FFT.c     ****         for(J=0; J<=B-1; J++)  
+ 447              		.loc 1 88 0
+ 448 0024 0023     		movs	r3, #0
+ 449              	.LVL46:
+ 450 0026 0A93     		str	r3, [sp, #40]
+ 451 0028 6BE0     		b	.L22
+ 452              	.LVL47:
+ 453              	.L25:
+  89:Src/FFT.c     ****         {  
+  90:Src/FFT.c     ****             P = (1<<(M-L))*J;//P=2^(M-L) *J   
+ 454              		.loc 1 90 0
+ 455 002a 0B9C     		ldr	r4, [sp, #44]
+ 456 002c C4F10300 		rsb	r0, r4, #3
+ 457 0030 0A9D     		ldr	r5, [sp, #40]
+ 458 0032 05FA00F0 		lsl	r0, r5, r0
+ 459 0036 FFF7FEFF 		bl	__aeabi_i2d
+ 460              	.LVL48:
+ 461 003a CDE90801 		strd	r0, [sp, #32]
+ 462              	.LVL49:
+  91:Src/FFT.c     ****             step = 1<<L;//2^L  
+ 463              		.loc 1 91 0
+ 464 003e 4FF0010B 		mov	fp, #1
+ 465 0042 0BFA04FB 		lsl	fp, fp, r4
+ 466              	.LVL50:
+  92:Src/FFT.c     ****             for(K=J; K<=N-1; K=K+step)  
+ 467              		.loc 1 92 0
+ 468 0046 AA46     		mov	r10, r5
+ 469 0048 55E0     		b	.L23
+ 470              	.LVL51:
+ 471              	.L24:
+  93:Src/FFT.c     ****             {  
+  94:Src/FFT.c     ****                 W.real =  cos(2*PI*P/N);  
+ 472              		.loc 1 94 0 discriminator 3
+ 473 004a 35A3     		adr	r3, .L28
+ 474 004c D3E90023 		ldrd	r2, [r3]
+ARM GAS  /tmp/ccZLpviN.s 			page 11
 
 
- 478              		.loc 1 91 0 discriminator 3
- 479 0068 2046     		mov	r0, r4
- 480 006a 2946     		mov	r1, r5
- 481 006c FFF7FEFF 		bl	sin
- 482              	.LVL55:
- 483 0070 CDE91601 		strd	r0, [sp, #88]
-  92:Src/FFT.c     ****                   
-  93:Src/FFT.c     ****                 Temp_XX = XX_complex(data[K+B],W);  
- 484              		.loc 1 93 0 discriminator 3
- 485 0074 079B     		ldr	r3, [sp, #28]
- 486 0076 0AEB0305 		add	r5, r10, r3
- 487 007a 2B4C     		ldr	r4, .L28+8
- 488 007c 04EB0515 		add	r5, r4, r5, lsl #4
- 489 0080 02AE     		add	r6, sp, #8
- 490 0082 18AB     		add	r3, sp, #96
- 491 0084 13E90F00 		ldmdb	r3, {r0, r1, r2, r3}
- 492 0088 86E80F00 		stmia	r6, {r0, r1, r2, r3}
- 493 008c 05F10803 		add	r3, r5, #8
- 494 0090 93E80300 		ldmia	r3, {r0, r1}
- 495 0094 8DE80300 		stmia	sp, {r0, r1}
- 496 0098 95E80C00 		ldmia	r5, {r2, r3}
- 497 009c 10A8     		add	r0, sp, #64
- 498 009e FFF7FEFF 		bl	XX_complex
- 499              	.LVL56:
-  94:Src/FFT.c     ****                 data[K+B].real = data[K].real - Temp_XX.real;  
- 500              		.loc 1 94 0 discriminator 3
- 501 00a2 04EB0A14 		add	r4, r4, r10, lsl #4
- 502 00a6 DDE91089 		ldrd	r8, [sp, #64]
- 503 00aa 4246     		mov	r2, r8
- 504 00ac 4B46     		mov	r3, r9
- 505 00ae D4E90001 		ldrd	r0, [r4]
- 506 00b2 FFF7FEFF 		bl	__aeabi_dsub
- 507              	.LVL57:
- 508 00b6 C5E90001 		strd	r0, [r5]
-  95:Src/FFT.c     ****                 data[K+B].imag = data[K].imag - Temp_XX.imag;  
- 509              		.loc 1 95 0 discriminator 3
- 510 00ba DDE91267 		ldrd	r6, [sp, #72]
- 511 00be 3246     		mov	r2, r6
- 512 00c0 3B46     		mov	r3, r7
- 513 00c2 D4E90201 		ldrd	r0, [r4, #8]
- 514 00c6 FFF7FEFF 		bl	__aeabi_dsub
- 515              	.LVL58:
- 516 00ca C5E90201 		strd	r0, [r5, #8]
+ 475 0050 DDE90801 		ldrd	r0, [sp, #32]
+ 476 0054 FFF7FEFF 		bl	__aeabi_dmul
+ 477              	.LVL52:
+ 478 0058 0022     		movs	r2, #0
+ 479 005a 4FF07F53 		mov	r3, #1069547520
+ 480 005e FFF7FEFF 		bl	__aeabi_dmul
+ 481              	.LVL53:
+ 482 0062 0446     		mov	r4, r0
+ 483 0064 0D46     		mov	r5, r1
+ 484 0066 FFF7FEFF 		bl	cos
+ 485              	.LVL54:
+ 486 006a CDE91401 		strd	r0, [sp, #80]
+  95:Src/FFT.c     ****                 W.imag =  sin(2*PI*P/N);//逆运算，这里跟FFT符号相反   
+ 487              		.loc 1 95 0 discriminator 3
+ 488 006e 2046     		mov	r0, r4
+ 489 0070 2946     		mov	r1, r5
+ 490 0072 FFF7FEFF 		bl	sin
+ 491              	.LVL55:
+ 492 0076 CDE91601 		strd	r0, [sp, #88]
   96:Src/FFT.c     ****                   
-  97:Src/FFT.c     ****                 data[K].real = data[K].real + Temp_XX.real;  
- 517              		.loc 1 97 0 discriminator 3
- 518 00ce D4E90023 		ldrd	r2, [r4]
- 519 00d2 4046     		mov	r0, r8
- 520 00d4 4946     		mov	r1, r9
- 521 00d6 FFF7FEFF 		bl	__aeabi_dadd
- 522              	.LVL59:
- 523 00da C4E90001 		strd	r0, [r4]
-  98:Src/FFT.c     ****                 data[K].imag = data[K].imag + Temp_XX.imag;  
- 524              		.loc 1 98 0 discriminator 3
- 525 00de D4E90223 		ldrd	r2, [r4, #8]
- 526 00e2 3046     		mov	r0, r6
- 527 00e4 3946     		mov	r1, r7
-ARM GAS  /tmp/ccuPVm6T.s 			page 12
+  97:Src/FFT.c     ****                 Temp_XX = XX_complex(data[K+B],W);  
+ 493              		.loc 1 97 0 discriminator 3
+ 494 007a 079B     		ldr	r3, [sp, #28]
+ 495 007c 0AEB0305 		add	r5, r10, r3
+ 496 0080 2A4C     		ldr	r4, .L28+12
+ 497 0082 04EB0515 		add	r5, r4, r5, lsl #4
+ 498 0086 02AE     		add	r6, sp, #8
+ 499 0088 18AB     		add	r3, sp, #96
+ 500 008a 13E90F00 		ldmdb	r3, {r0, r1, r2, r3}
+ 501 008e 86E80F00 		stmia	r6, {r0, r1, r2, r3}
+ 502 0092 05F10803 		add	r3, r5, #8
+ 503 0096 93E80300 		ldmia	r3, {r0, r1}
+ 504 009a 8DE80300 		stmia	sp, {r0, r1}
+ 505 009e 95E80C00 		ldmia	r5, {r2, r3}
+ 506 00a2 10A8     		add	r0, sp, #64
+ 507 00a4 FFF7FEFF 		bl	XX_complex
+ 508              	.LVL56:
+  98:Src/FFT.c     ****                 data[K+B].real = data[K].real - Temp_XX.real;  
+ 509              		.loc 1 98 0 discriminator 3
+ 510 00a8 04EB0A14 		add	r4, r4, r10, lsl #4
+ 511 00ac DDE91089 		ldrd	r8, [sp, #64]
+ 512 00b0 4246     		mov	r2, r8
+ 513 00b2 4B46     		mov	r3, r9
+ 514 00b4 D4E90001 		ldrd	r0, [r4]
+ 515 00b8 FFF7FEFF 		bl	__aeabi_dsub
+ 516              	.LVL57:
+ 517 00bc C5E90001 		strd	r0, [r5]
+  99:Src/FFT.c     ****                 data[K+B].imag = data[K].imag - Temp_XX.imag;  
+ 518              		.loc 1 99 0 discriminator 3
+ 519 00c0 DDE91267 		ldrd	r6, [sp, #72]
+ 520 00c4 3246     		mov	r2, r6
+ 521 00c6 3B46     		mov	r3, r7
+ 522 00c8 D4E90201 		ldrd	r0, [r4, #8]
+ 523 00cc FFF7FEFF 		bl	__aeabi_dsub
+ 524              	.LVL58:
+ 525 00d0 C5E90201 		strd	r0, [r5, #8]
+ 100:Src/FFT.c     ****                   
+ARM GAS  /tmp/ccZLpviN.s 			page 12
 
 
- 528 00e6 FFF7FEFF 		bl	__aeabi_dadd
- 529              	.LVL60:
- 530 00ea C4E90201 		strd	r0, [r4, #8]
-  88:Src/FFT.c     ****             {  
- 531              		.loc 1 88 0 discriminator 3
- 532 00ee DA44     		add	r10, r10, fp
- 533              	.LVL61:
- 534              	.L23:
-  88:Src/FFT.c     ****             {  
- 535              		.loc 1 88 0 is_stmt 0 discriminator 1
- 536 00f0 BAF1070F 		cmp	r10, #7
- 537 00f4 A6DD     		ble	.L24
-  84:Src/FFT.c     ****         {  
- 538              		.loc 1 84 0 is_stmt 1 discriminator 2
- 539 00f6 0A9B     		ldr	r3, [sp, #40]
- 540 00f8 0133     		adds	r3, r3, #1
- 541 00fa 0A93     		str	r3, [sp, #40]
- 542              	.LVL62:
- 543              	.L22:
-  84:Src/FFT.c     ****         {  
- 544              		.loc 1 84 0 is_stmt 0 discriminator 1
- 545 00fc 079B     		ldr	r3, [sp, #28]
- 546 00fe 013B     		subs	r3, r3, #1
- 547 0100 0A9A     		ldr	r2, [sp, #40]
- 548 0102 9A42     		cmp	r2, r3
- 549 0104 8EDD     		ble	.L25
-  81:Src/FFT.c     ****     {  
- 550              		.loc 1 81 0 is_stmt 1 discriminator 2
- 551 0106 0B9B     		ldr	r3, [sp, #44]
- 552 0108 0133     		adds	r3, r3, #1
- 553 010a 0B93     		str	r3, [sp, #44]
- 554              	.LVL63:
- 555              	.L21:
-  81:Src/FFT.c     ****     {  
- 556              		.loc 1 81 0 is_stmt 0 discriminator 1
- 557 010c 0B9B     		ldr	r3, [sp, #44]
- 558 010e 032B     		cmp	r3, #3
- 559 0110 7FF77FAF 		ble	.L26
-  99:Src/FFT.c     ****             }  
- 100:Src/FFT.c     ****         }  
- 101:Src/FFT.c     ****     }  
- 102:Src/FFT.c     **** }
- 560              		.loc 1 102 0 is_stmt 1
- 561 0114 19B0     		add	sp, sp, #100
- 562              	.LCFI12:
- 563              		.cfi_def_cfa_offset 36
- 564              		@ sp needed
- 565 0116 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
- 566              	.LVL64:
- 567              	.L29:
- 568 011a 00BFAFF3 		.align	3
- 568      0080
- 569              	.L28:
- 570 0120 1E264454 		.word	1413752350
- 571 0124 FB211940 		.word	1075388923
- 572 0128 00000000 		.word	data
- 573              		.cfi_endproc
-ARM GAS  /tmp/ccuPVm6T.s 			page 13
+ 101:Src/FFT.c     ****                 data[K].real = data[K].real + Temp_XX.real;  
+ 526              		.loc 1 101 0 discriminator 3
+ 527 00d4 D4E90023 		ldrd	r2, [r4]
+ 528 00d8 4046     		mov	r0, r8
+ 529 00da 4946     		mov	r1, r9
+ 530 00dc FFF7FEFF 		bl	__aeabi_dadd
+ 531              	.LVL59:
+ 532 00e0 C4E90001 		strd	r0, [r4]
+ 102:Src/FFT.c     ****                 data[K].imag = data[K].imag + Temp_XX.imag;  
+ 533              		.loc 1 102 0 discriminator 3
+ 534 00e4 D4E90223 		ldrd	r2, [r4, #8]
+ 535 00e8 3046     		mov	r0, r6
+ 536 00ea 3946     		mov	r1, r7
+ 537 00ec FFF7FEFF 		bl	__aeabi_dadd
+ 538              	.LVL60:
+ 539 00f0 C4E90201 		strd	r0, [r4, #8]
+  92:Src/FFT.c     ****             {  
+ 540              		.loc 1 92 0 discriminator 3
+ 541 00f4 DA44     		add	r10, r10, fp
+ 542              	.LVL61:
+ 543              	.L23:
+  92:Src/FFT.c     ****             {  
+ 544              		.loc 1 92 0 is_stmt 0 discriminator 1
+ 545 00f6 BAF1070F 		cmp	r10, #7
+ 546 00fa A6DD     		ble	.L24
+  88:Src/FFT.c     ****         {  
+ 547              		.loc 1 88 0 is_stmt 1 discriminator 2
+ 548 00fc 0A9B     		ldr	r3, [sp, #40]
+ 549 00fe 0133     		adds	r3, r3, #1
+ 550 0100 0A93     		str	r3, [sp, #40]
+ 551              	.LVL62:
+ 552              	.L22:
+  88:Src/FFT.c     ****         {  
+ 553              		.loc 1 88 0 is_stmt 0 discriminator 1
+ 554 0102 079B     		ldr	r3, [sp, #28]
+ 555 0104 013B     		subs	r3, r3, #1
+ 556 0106 0A9A     		ldr	r2, [sp, #40]
+ 557 0108 9A42     		cmp	r2, r3
+ 558 010a 8EDD     		ble	.L25
+  85:Src/FFT.c     ****     {  
+ 559              		.loc 1 85 0 is_stmt 1 discriminator 2
+ 560 010c 0B9B     		ldr	r3, [sp, #44]
+ 561 010e 0133     		adds	r3, r3, #1
+ 562 0110 0B93     		str	r3, [sp, #44]
+ 563              	.LVL63:
+ 564              	.L21:
+  85:Src/FFT.c     ****     {  
+ 565              		.loc 1 85 0 is_stmt 0 discriminator 1
+ 566 0112 0B9B     		ldr	r3, [sp, #44]
+ 567 0114 032B     		cmp	r3, #3
+ 568 0116 7FF77FAF 		ble	.L26
+ 103:Src/FFT.c     ****             }  
+ 104:Src/FFT.c     ****         }  
+ 105:Src/FFT.c     ****     }  
+ 106:Src/FFT.c     **** }
+ 569              		.loc 1 106 0 is_stmt 1
+ 570 011a 19B0     		add	sp, sp, #100
+ARM GAS  /tmp/ccZLpviN.s 			page 13
 
 
- 574              	.LFE4:
- 576              		.section	.text.FindInsertIndex,"ax",%progbits
- 577              		.align	2
- 578              		.global	FindInsertIndex
- 579              		.thumb
- 580              		.thumb_func
- 582              	FindInsertIndex:
- 583              	.LFB5:
- 103:Src/FFT.c     **** 
- 104:Src/FFT.c     **** int FindInsertIndex(int *pDataArray, int iLen, int iData)
- 105:Src/FFT.c     **** {
- 584              		.loc 1 105 0
- 585              		.cfi_startproc
- 586              		@ args = 0, pretend = 0, frame = 0
- 587              		@ frame_needed = 0, uses_anonymous_args = 0
- 588              		@ link register save eliminated.
- 589              	.LVL65:
- 590 0000 30B4     		push	{r4, r5}
- 591              	.LCFI13:
- 592              		.cfi_def_cfa_offset 8
- 593              		.cfi_offset 4, -8
- 594              		.cfi_offset 5, -4
- 595              	.LVL66:
- 106:Src/FFT.c     **** 	int iBegin = 0;
- 107:Src/FFT.c     **** 	int iEnd = iLen - 1;
- 596              		.loc 1 107 0
- 597 0002 0139     		subs	r1, r1, #1
- 598              	.LVL67:
- 108:Src/FFT.c     **** 	int index = -1;    //记录插入位置
- 599              		.loc 1 108 0
- 600 0004 4FF0FF33 		mov	r3, #-1
- 106:Src/FFT.c     **** 	int iBegin = 0;
- 601              		.loc 1 106 0
- 602 0008 0024     		movs	r4, #0
- 109:Src/FFT.c     **** 	while (iBegin <= iEnd)
- 603              		.loc 1 109 0
- 604 000a 0AE0     		b	.L31
- 605              	.LVL68:
- 606              	.L34:
- 110:Src/FFT.c     **** 	{
- 111:Src/FFT.c     **** 		index = (iBegin + iEnd) / 2;
- 607              		.loc 1 111 0
- 608 000c 6318     		adds	r3, r4, r1
- 609              	.LVL69:
- 610 000e 03EBD373 		add	r3, r3, r3, lsr #31
- 611 0012 5B10     		asrs	r3, r3, #1
- 612              	.LVL70:
- 112:Src/FFT.c     **** 		if (pDataArray[index] > iData)
- 613              		.loc 1 112 0
- 614 0014 50F82350 		ldr	r5, [r0, r3, lsl #2]
- 615 0018 9542     		cmp	r5, r2
- 616 001a 01DD     		ble	.L32
- 113:Src/FFT.c     **** 			iEnd = index - 1;
- 617              		.loc 1 113 0
- 618 001c 591E     		subs	r1, r3, #1
- 619              	.LVL71:
- 620 001e 00E0     		b	.L31
-ARM GAS  /tmp/ccuPVm6T.s 			page 14
+ 571              	.LCFI12:
+ 572              		.cfi_def_cfa_offset 36
+ 573              		@ sp needed
+ 574 011c BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 575              	.LVL64:
+ 576              	.L29:
+ 577              		.align	3
+ 578              	.L28:
+ 579 0120 1E264454 		.word	1413752350
+ 580 0124 FB211940 		.word	1075388923
+ 581 0128 00000000 		.word	globalCounter
+ 582 012c 00000000 		.word	data
+ 583              		.cfi_endproc
+ 584              	.LFE4:
+ 586              		.section	.text.FindInsertIndex,"ax",%progbits
+ 587              		.align	2
+ 588              		.global	FindInsertIndex
+ 589              		.thumb
+ 590              		.thumb_func
+ 592              	FindInsertIndex:
+ 593              	.LFB5:
+ 107:Src/FFT.c     **** 
+ 108:Src/FFT.c     **** int FindInsertIndex(int *pDataArray, int iLen, int iData)
+ 109:Src/FFT.c     **** {
+ 594              		.loc 1 109 0
+ 595              		.cfi_startproc
+ 596              		@ args = 0, pretend = 0, frame = 0
+ 597              		@ frame_needed = 0, uses_anonymous_args = 0
+ 598              		@ link register save eliminated.
+ 599              	.LVL65:
+ 600 0000 30B4     		push	{r4, r5}
+ 601              	.LCFI13:
+ 602              		.cfi_def_cfa_offset 8
+ 603              		.cfi_offset 4, -8
+ 604              		.cfi_offset 5, -4
+ 605              	.LVL66:
+ 110:Src/FFT.c     **** 	int iBegin = 0;
+ 111:Src/FFT.c     **** 	int iEnd = iLen - 1;
+ 606              		.loc 1 111 0
+ 607 0002 0139     		subs	r1, r1, #1
+ 608              	.LVL67:
+ 112:Src/FFT.c     **** 	int index = -1;    //记录插入位置
+ 609              		.loc 1 112 0
+ 610 0004 4FF0FF33 		mov	r3, #-1
+ 110:Src/FFT.c     **** 	int iBegin = 0;
+ 611              		.loc 1 110 0
+ 612 0008 0024     		movs	r4, #0
+ 113:Src/FFT.c     **** 	while (iBegin <= iEnd)
+ 613              		.loc 1 113 0
+ 614 000a 0AE0     		b	.L31
+ 615              	.LVL68:
+ 616              	.L34:
+ 114:Src/FFT.c     **** 	{
+ 115:Src/FFT.c     **** 		index = (iBegin + iEnd) / 2;
+ 617              		.loc 1 115 0
+ 618 000c 6318     		adds	r3, r4, r1
+ 619              	.LVL69:
+ARM GAS  /tmp/ccZLpviN.s 			page 14
 
 
- 621              	.L32:
- 114:Src/FFT.c     **** 		else
- 115:Src/FFT.c     **** 			iBegin = index + 1; 
- 622              		.loc 1 115 0
- 623 0020 5C1C     		adds	r4, r3, #1
- 624              	.LVL72:
- 625              	.L31:
- 109:Src/FFT.c     **** 	{
- 626              		.loc 1 109 0
- 627 0022 8C42     		cmp	r4, r1
- 628 0024 F2DD     		ble	.L34
- 116:Src/FFT.c     **** 	}
- 117:Src/FFT.c     **** 	if (pDataArray[index] <= iData)
- 629              		.loc 1 117 0
- 630 0026 50F82310 		ldr	r1, [r0, r3, lsl #2]
- 631              	.LVL73:
- 632 002a 8A42     		cmp	r2, r1
- 633 002c 00DB     		blt	.L35
- 118:Src/FFT.c     **** 		index++;
- 634              		.loc 1 118 0
- 635 002e 0133     		adds	r3, r3, #1
- 636              	.LVL74:
- 637              	.L35:
- 119:Src/FFT.c     **** 	return index;
- 120:Src/FFT.c     **** }
- 638              		.loc 1 120 0
- 639 0030 1846     		mov	r0, r3
- 640              	.LVL75:
- 641 0032 30BC     		pop	{r4, r5}
- 642              	.LCFI14:
- 643              		.cfi_restore 5
- 644              		.cfi_restore 4
- 645              		.cfi_def_cfa_offset 0
- 646              	.LVL76:
- 647 0034 7047     		bx	lr
- 648              		.cfi_endproc
- 649              	.LFE5:
- 651 0036 00BF     		.section	.text.BinaryInsertSort,"ax",%progbits
- 652              		.align	2
- 653              		.global	BinaryInsertSort
- 654              		.thumb
- 655              		.thumb_func
- 657              	BinaryInsertSort:
- 658              	.LFB6:
- 121:Src/FFT.c     **** 
- 122:Src/FFT.c     **** void BinaryInsertSort(int* pDataArray, int iDataNum)
- 123:Src/FFT.c     **** {
- 659              		.loc 1 123 0
- 660              		.cfi_startproc
- 661              		@ args = 0, pretend = 0, frame = 0
- 662              		@ frame_needed = 0, uses_anonymous_args = 0
- 663              	.LVL77:
- 664 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
- 665              	.LCFI15:
- 666              		.cfi_def_cfa_offset 24
- 667              		.cfi_offset 3, -24
- 668              		.cfi_offset 4, -20
-ARM GAS  /tmp/ccuPVm6T.s 			page 15
+ 620 000e 03EBD373 		add	r3, r3, r3, lsr #31
+ 621 0012 5B10     		asrs	r3, r3, #1
+ 622              	.LVL70:
+ 116:Src/FFT.c     **** 		if (pDataArray[index] > iData)
+ 623              		.loc 1 116 0
+ 624 0014 50F82350 		ldr	r5, [r0, r3, lsl #2]
+ 625 0018 9542     		cmp	r5, r2
+ 626 001a 01DD     		ble	.L32
+ 117:Src/FFT.c     **** 			iEnd = index - 1;
+ 627              		.loc 1 117 0
+ 628 001c 591E     		subs	r1, r3, #1
+ 629              	.LVL71:
+ 630 001e 00E0     		b	.L31
+ 631              	.L32:
+ 118:Src/FFT.c     **** 		else
+ 119:Src/FFT.c     **** 			iBegin = index + 1; 
+ 632              		.loc 1 119 0
+ 633 0020 5C1C     		adds	r4, r3, #1
+ 634              	.LVL72:
+ 635              	.L31:
+ 113:Src/FFT.c     **** 	{
+ 636              		.loc 1 113 0
+ 637 0022 8C42     		cmp	r4, r1
+ 638 0024 F2DD     		ble	.L34
+ 120:Src/FFT.c     **** 	}
+ 121:Src/FFT.c     **** 	if (pDataArray[index] <= iData)
+ 639              		.loc 1 121 0
+ 640 0026 50F82310 		ldr	r1, [r0, r3, lsl #2]
+ 641              	.LVL73:
+ 642 002a 8A42     		cmp	r2, r1
+ 643 002c 00DB     		blt	.L35
+ 122:Src/FFT.c     **** 		index++;
+ 644              		.loc 1 122 0
+ 645 002e 0133     		adds	r3, r3, #1
+ 646              	.LVL74:
+ 647              	.L35:
+ 123:Src/FFT.c     **** 	return index;
+ 124:Src/FFT.c     **** }
+ 648              		.loc 1 124 0
+ 649 0030 1846     		mov	r0, r3
+ 650              	.LVL75:
+ 651 0032 30BC     		pop	{r4, r5}
+ 652              	.LCFI14:
+ 653              		.cfi_restore 5
+ 654              		.cfi_restore 4
+ 655              		.cfi_def_cfa_offset 0
+ 656              	.LVL76:
+ 657 0034 7047     		bx	lr
+ 658              		.cfi_endproc
+ 659              	.LFE5:
+ 661 0036 00BF     		.section	.text.BinaryInsertSort,"ax",%progbits
+ 662              		.align	2
+ 663              		.global	BinaryInsertSort
+ 664              		.thumb
+ 665              		.thumb_func
+ 667              	BinaryInsertSort:
+ 668              	.LFB6:
+ARM GAS  /tmp/ccZLpviN.s 			page 15
 
 
- 669              		.cfi_offset 5, -16
- 670              		.cfi_offset 6, -12
- 671              		.cfi_offset 7, -8
- 672              		.cfi_offset 14, -4
- 673 0002 0446     		mov	r4, r0
- 674 0004 0F46     		mov	r7, r1
- 675              	.LVL78:
- 676              	.LBB2:
- 124:Src/FFT.c     **** 	for (int i = 1; i < iDataNum; i++)    //从第2个数据开始插入
- 677              		.loc 1 124 0
- 678 0006 0125     		movs	r5, #1
- 679 0008 18E0     		b	.L38
- 680              	.LVL79:
- 681              	.L42:
- 682              	.LBB3:
- 125:Src/FFT.c     **** 	{
- 126:Src/FFT.c     **** 		int index = FindInsertIndex(pDataArray, i, pDataArray[i]);    //二分寻找插入的位置
- 683              		.loc 1 126 0
- 684 000a 54F82560 		ldr	r6, [r4, r5, lsl #2]
- 685 000e 3246     		mov	r2, r6
- 686 0010 2946     		mov	r1, r5
- 687 0012 2046     		mov	r0, r4
- 688 0014 FFF7FEFF 		bl	FindInsertIndex
- 689              	.LVL80:
- 127:Src/FFT.c     **** 		
- 128:Src/FFT.c     **** 		if (i != index)    //插入位置不为i，才挪动、插入
- 690              		.loc 1 128 0
- 691 0018 8542     		cmp	r5, r0
- 692 001a 09D1     		bne	.L43
- 693 001c 0DE0     		b	.L40
- 694              	.LVL81:
- 695              	.L41:
- 696              	.LBB4:
- 129:Src/FFT.c     **** 		{
- 130:Src/FFT.c     **** 			int j = i;
- 131:Src/FFT.c     **** 			int temp = pDataArray[i];
- 132:Src/FFT.c     **** 			while (j > index)    //挪动位置
- 133:Src/FFT.c     **** 			{
- 134:Src/FFT.c     **** 				pDataArray[j] = pDataArray[j-1];
- 697              		.loc 1 134 0
- 698 001e 03F18042 		add	r2, r3, #1073741824
- 699 0022 013A     		subs	r2, r2, #1
- 700 0024 54F82220 		ldr	r2, [r4, r2, lsl #2]
- 701 0028 44F82320 		str	r2, [r4, r3, lsl #2]
- 135:Src/FFT.c     **** 				j--;
- 702              		.loc 1 135 0
- 703 002c 013B     		subs	r3, r3, #1
- 704              	.LVL82:
- 705 002e 00E0     		b	.L39
- 706              	.LVL83:
- 707              	.L43:
- 708              	.LBE4:
- 709 0030 2B46     		mov	r3, r5
- 710              	.L39:
- 711              	.LVL84:
- 712              	.LBB5:
- 132:Src/FFT.c     **** 			{
-ARM GAS  /tmp/ccuPVm6T.s 			page 16
+ 125:Src/FFT.c     **** 
+ 126:Src/FFT.c     **** void BinaryInsertSort(int* pDataArray, int iDataNum)
+ 127:Src/FFT.c     **** {
+ 669              		.loc 1 127 0
+ 670              		.cfi_startproc
+ 671              		@ args = 0, pretend = 0, frame = 0
+ 672              		@ frame_needed = 0, uses_anonymous_args = 0
+ 673              	.LVL77:
+ 674 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 675              	.LCFI15:
+ 676              		.cfi_def_cfa_offset 24
+ 677              		.cfi_offset 3, -24
+ 678              		.cfi_offset 4, -20
+ 679              		.cfi_offset 5, -16
+ 680              		.cfi_offset 6, -12
+ 681              		.cfi_offset 7, -8
+ 682              		.cfi_offset 14, -4
+ 683 0002 0446     		mov	r4, r0
+ 684 0004 0F46     		mov	r7, r1
+ 685              	.LVL78:
+ 686              	.LBB2:
+ 128:Src/FFT.c     **** 	for (int i = 1; i < iDataNum; i++)    //从第2个数据开始插入
+ 687              		.loc 1 128 0
+ 688 0006 0125     		movs	r5, #1
+ 689 0008 18E0     		b	.L38
+ 690              	.LVL79:
+ 691              	.L42:
+ 692              	.LBB3:
+ 129:Src/FFT.c     **** 	{
+ 130:Src/FFT.c     **** 		int index = FindInsertIndex(pDataArray, i, pDataArray[i]);    //二分寻找插入的位置
+ 693              		.loc 1 130 0
+ 694 000a 54F82560 		ldr	r6, [r4, r5, lsl #2]
+ 695 000e 3246     		mov	r2, r6
+ 696 0010 2946     		mov	r1, r5
+ 697 0012 2046     		mov	r0, r4
+ 698 0014 FFF7FEFF 		bl	FindInsertIndex
+ 699              	.LVL80:
+ 131:Src/FFT.c     **** 		
+ 132:Src/FFT.c     **** 		if (i != index)    //插入位置不为i，才挪动、插入
+ 700              		.loc 1 132 0
+ 701 0018 8542     		cmp	r5, r0
+ 702 001a 09D1     		bne	.L43
+ 703 001c 0DE0     		b	.L40
+ 704              	.LVL81:
+ 705              	.L41:
+ 706              	.LBB4:
+ 133:Src/FFT.c     **** 		{
+ 134:Src/FFT.c     **** 			int j = i;
+ 135:Src/FFT.c     **** 			int temp = pDataArray[i];
+ 136:Src/FFT.c     **** 			while (j > index)    //挪动位置
+ 137:Src/FFT.c     **** 			{
+ 138:Src/FFT.c     **** 				pDataArray[j] = pDataArray[j-1];
+ 707              		.loc 1 138 0
+ 708 001e 03F18042 		add	r2, r3, #1073741824
+ 709 0022 013A     		subs	r2, r2, #1
+ 710 0024 54F82220 		ldr	r2, [r4, r2, lsl #2]
+ 711 0028 44F82320 		str	r2, [r4, r3, lsl #2]
+ARM GAS  /tmp/ccZLpviN.s 			page 16
 
 
- 713              		.loc 1 132 0
- 714 0032 8342     		cmp	r3, r0
- 715 0034 F3DC     		bgt	.L41
- 136:Src/FFT.c     **** 			}
- 137:Src/FFT.c     **** 			pDataArray[j] = temp;    //插入
- 716              		.loc 1 137 0
- 717 0036 44F82360 		str	r6, [r4, r3, lsl #2]
- 718              	.LVL85:
- 719              	.L40:
- 720              	.LBE5:
- 721              	.LBE3:
- 124:Src/FFT.c     **** 	{
- 722              		.loc 1 124 0 discriminator 2
- 723 003a 0135     		adds	r5, r5, #1
- 724              	.LVL86:
- 725              	.L38:
- 124:Src/FFT.c     **** 	{
- 726              		.loc 1 124 0 is_stmt 0 discriminator 1
- 727 003c BD42     		cmp	r5, r7
- 728 003e E4DB     		blt	.L42
- 729              	.LBE2:
- 138:Src/FFT.c     **** 		}
- 139:Src/FFT.c     **** 	}
- 140:Src/FFT.c     **** }
- 730              		.loc 1 140 0 is_stmt 1
- 731 0040 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 732              		.cfi_endproc
- 733              	.LFE6:
- 735              		.comm	result,64,8
- 736              		.comm	data,128,8
- 737 0042 00BF     		.text
- 738              	.Letext0:
- 739              		.file 2 "Inc/FFT.h"
- 740              		.file 3 "/usr/include/newlib/math.h"
-ARM GAS  /tmp/ccuPVm6T.s 			page 17
+ 139:Src/FFT.c     **** 				j--;
+ 712              		.loc 1 139 0
+ 713 002c 013B     		subs	r3, r3, #1
+ 714              	.LVL82:
+ 715 002e 00E0     		b	.L39
+ 716              	.LVL83:
+ 717              	.L43:
+ 718              	.LBE4:
+ 719 0030 2B46     		mov	r3, r5
+ 720              	.L39:
+ 721              	.LVL84:
+ 722              	.LBB5:
+ 136:Src/FFT.c     **** 			{
+ 723              		.loc 1 136 0
+ 724 0032 8342     		cmp	r3, r0
+ 725 0034 F3DC     		bgt	.L41
+ 140:Src/FFT.c     **** 			}
+ 141:Src/FFT.c     **** 			pDataArray[j] = temp;    //插入
+ 726              		.loc 1 141 0
+ 727 0036 44F82360 		str	r6, [r4, r3, lsl #2]
+ 728              	.LVL85:
+ 729              	.L40:
+ 730              	.LBE5:
+ 731              	.LBE3:
+ 128:Src/FFT.c     **** 	{
+ 732              		.loc 1 128 0 discriminator 2
+ 733 003a 0135     		adds	r5, r5, #1
+ 734              	.LVL86:
+ 735              	.L38:
+ 128:Src/FFT.c     **** 	{
+ 736              		.loc 1 128 0 is_stmt 0 discriminator 1
+ 737 003c BD42     		cmp	r5, r7
+ 738 003e E4DB     		blt	.L42
+ 739              	.LBE2:
+ 142:Src/FFT.c     **** 		}
+ 143:Src/FFT.c     **** 	}
+ 144:Src/FFT.c     **** }
+ 740              		.loc 1 144 0 is_stmt 1
+ 741 0040 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 742              		.cfi_endproc
+ 743              	.LFE6:
+ 745              		.comm	result,64,8
+ 746              		.comm	data,128,8
+ 747 0042 00BF     		.text
+ 748              	.Letext0:
+ 749              		.file 2 "Inc/FFT.h"
+ 750              		.file 3 "/usr/include/newlib/math.h"
+ARM GAS  /tmp/ccZLpviN.s 			page 17
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 FFT.c
-     /tmp/ccuPVm6T.s:20     .text.ChangeSeat:00000000 $t
-     /tmp/ccuPVm6T.s:25     .text.ChangeSeat:00000000 ChangeSeat
-     /tmp/ccuPVm6T.s:105    .text.XX_complex:00000000 $t
-     /tmp/ccuPVm6T.s:110    .text.XX_complex:00000000 XX_complex
-     /tmp/ccuPVm6T.s:211    .text.FFT:00000000 $t
-     /tmp/ccuPVm6T.s:216    .text.FFT:00000000 FFT
-     /tmp/ccuPVm6T.s:388    .text.FFT:00000120 $d
+     /tmp/ccZLpviN.s:20     .text.ChangeSeat:00000000 $t
+     /tmp/ccZLpviN.s:25     .text.ChangeSeat:00000000 ChangeSeat
+     /tmp/ccZLpviN.s:105    .text.XX_complex:00000000 $t
+     /tmp/ccZLpviN.s:110    .text.XX_complex:00000000 XX_complex
+     /tmp/ccZLpviN.s:211    .text.FFT:00000000 $t
+     /tmp/ccZLpviN.s:216    .text.FFT:00000000 FFT
+     /tmp/ccZLpviN.s:392    .text.FFT:00000128 $d
                             *COM*:00000080 data
-     /tmp/ccuPVm6T.s:395    .text.IFFT:00000000 $t
-     /tmp/ccuPVm6T.s:400    .text.IFFT:00000000 IFFT
-     /tmp/ccuPVm6T.s:570    .text.IFFT:00000120 $d
-     /tmp/ccuPVm6T.s:577    .text.FindInsertIndex:00000000 $t
-     /tmp/ccuPVm6T.s:582    .text.FindInsertIndex:00000000 FindInsertIndex
-     /tmp/ccuPVm6T.s:652    .text.BinaryInsertSort:00000000 $t
-     /tmp/ccuPVm6T.s:657    .text.BinaryInsertSort:00000000 BinaryInsertSort
+     /tmp/ccZLpviN.s:400    .text.IFFT:00000000 $t
+     /tmp/ccZLpviN.s:405    .text.IFFT:00000000 IFFT
+     /tmp/ccZLpviN.s:579    .text.IFFT:00000120 $d
+     /tmp/ccZLpviN.s:587    .text.FindInsertIndex:00000000 $t
+     /tmp/ccZLpviN.s:592    .text.FindInsertIndex:00000000 FindInsertIndex
+     /tmp/ccZLpviN.s:662    .text.BinaryInsertSort:00000000 $t
+     /tmp/ccZLpviN.s:667    .text.BinaryInsertSort:00000000 BinaryInsertSort
                             *COM*:00000040 result
                      .debug_frame:00000010 $d
 
@@ -965,3 +978,4 @@ __aeabi_dadd
 __aeabi_i2d
 cos
 sin
+globalCounter

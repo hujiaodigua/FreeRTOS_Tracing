@@ -410,7 +410,7 @@ void Func_LED0(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-    //globalCounter = 0x0A;//0x0A表示Func_LED0
+    globalCounter = 0x0A;//0x0A表示Func_LED0
     //osDelay(5);
     HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_RESET);
     //osDelay(5);
@@ -438,7 +438,7 @@ void Func_LED1(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-    //globalCounter = 0x0B;//0x0B表示Func_LED1
+    globalCounter = 0x0B;//0x0B表示Func_LED1
     //osDelay(5);
     HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
     //osDelay(5);

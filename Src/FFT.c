@@ -1,5 +1,7 @@
 #include "FFT.h"
 
+extern int globalCounter;
+
 complex ChangeSeat(complex *DataInput)  
 {  
     int nextValue,nextM,i,k,j=0;  
@@ -39,7 +41,8 @@ complex XX_complex(complex a, complex b)
   
 //FFT  
 void FFT(complex data_in)  
-{  
+{ 
+    globalCounter = 0x0E;
     int L=0,B=0,J=0,K=0;  
     int step=0;  
     ElemType P=0,T=0;  
@@ -70,7 +73,8 @@ void FFT(complex data_in)
     }  
 }  
 void IFFT(complex data_in)  
-{  
+{ 
+    globalCounter = 0x0F;
     int L=0,B=0,J=0,K=0;  
     int step=0;  
     ElemType P=0,T=0;  
